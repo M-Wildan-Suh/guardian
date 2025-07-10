@@ -21,6 +21,10 @@ class CekCode
             return redirect()->route('register');
         }
 
+        if (empty($data['template'])) {
+            return redirect()->route('template');
+        }
+
         return $next($request);
     }
 }

@@ -132,6 +132,33 @@ class AdminController extends Controller
 
         return redirect()->route('dashboard');
     }
+    
+    public function template() {
+        $data = json_decode(Storage::get('website.json'), true);
+        $template = $data['template'] ?? null;
+
+        $templates = json_decode(Storage::get('template.json'), true);
+        return view('admin.template', compact('template', 'templates'));
+    }
+
+    public function templatestore(Request $request) {
+        $request->validate([
+            'template' => 'required|string|max:255',
+        ]);
+
+        $existingData = [];
+        if (Storage::exists('website.json')) {
+            $existingData = json_decode(Storage::get('website.json'), true);
+        }
+
+        $newData = ['template' => $request->template];
+
+        $mergedData = array_merge($existingData, $newData);
+
+        Storage::put('website.json', json_encode($mergedData));
+
+        return redirect()->route('dashboard');
+    }
 
     public function login() {
         if (session()->has('logged_in_code') || session('logged_in_code')) {

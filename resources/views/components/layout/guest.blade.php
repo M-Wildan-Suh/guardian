@@ -1,4 +1,4 @@
-@props(['title' => null, 'desc' => null, 'tags' => null, 'footer' => true, 'category' => null])
+@props(['title' => null, 'template' => 'type-a', 'desc' => null, 'tags' => null, 'footer' => true, 'category' => null])
 <!DOCTYPE html>
 <html class=" scroll-smooth" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -81,7 +81,7 @@
             }
         </style>
         <div class=" flex flex-col w-full min-h-[100vh] justify-between bg-neutral-100">
-            @include('components.navbar.type-a')
+            @include('components.navbar.'.$template)
             {{$slot}}
             @if ($footer)
                 @include('components.footer.type-a')
