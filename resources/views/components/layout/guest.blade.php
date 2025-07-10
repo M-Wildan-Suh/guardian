@@ -28,8 +28,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
 
         <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" />
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" /> -->
 
     </head>
     <body class="font-sans antialiased"
@@ -89,7 +89,7 @@
         </div>
     </body>
 
-    <script src="{{ asset('build/assets/app.js') }}"></script>
+    <!-- <script src="{{ asset('build/assets/app.js') }}"></script> -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
