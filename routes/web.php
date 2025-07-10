@@ -59,6 +59,9 @@ Route::middleware(['checkcode'])->group(function () {
     });
 });
 
+Route::get('/admin/template', [AdminController::class, 'template'])->name('template');
+Route::post('/admin/template', [AdminController::class, 'templatestore'])->name('template.store');
+
 Route::get('/admin/register', [AdminController::class, 'register'])->name('register');
 Route::post('/admin/register', [AdminController::class, 'registerstore'])->name('register.store');
 

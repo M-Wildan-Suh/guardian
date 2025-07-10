@@ -7,6 +7,9 @@
             <a href="{{route('code')}}">
                 <button class=" text-sm sm:text-base w-full py-2 border border-neutral-600 text-neutral-600 hover:border-main hover:bg-main hover:text-white duration-300 font-semibold rounded-md">Code</button>
             </a>
+            <a href="{{route('template')}}">
+                <button class=" text-sm sm:text-base w-full py-2 border border-neutral-600 text-neutral-600 hover:border-main hover:bg-main hover:text-white duration-300 font-semibold rounded-md">Template</button>
+            </a>
             <a href="{{route('logout')}}">
                 <button class=" text-sm sm:text-base w-full py-2 border border-neutral-600 text-neutral-600 hover:border-main hover:bg-main hover:text-white duration-300 font-semibold rounded-md">Logout</button>
             </a>

@@ -1,0 +1,16 @@
+[
+    {
+        "name" : "type-a",
+        "background" : "#f5f5f5",
+        "main" : "#A1B57D",
+        "second" : "#B33030",
+        "third" : "#19282F"
+    },
+    {
+        "name" : "rafi-1",
+        "background" : "#f5f5f5",
+        "main" : "#0D5EA6",
+        "second" : "#093FB4",
+        "third" : "#19282F"
+    }
+]
