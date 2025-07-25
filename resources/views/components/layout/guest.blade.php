@@ -1,145 +1,171 @@
-@props(['title' => null, 'template' => 'type-a', 'desc' => null, 'tags' => null, 'footer' => true, 'category' => null])
+@props(['title' => null, 'template' => 'type-a', 'desc' => null, 'tags' => null, 'footer' => true, 'category' => null,])
 <!DOCTYPE html>
 <html class=" scroll-smooth" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="icon" href="{{ optional(json_decode(\Storage::get('website.json'), true))['icon'] ? asset('/storage/images/' . json_decode(\Storage::get('website.json'), true)['icon']) : null }}" type="image/x-icon">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ $title ?? '' }}</title>
+    <link rel="icon"
+        href="{{ optional(json_decode(\Storage::get('website.json'), true))['icon'] ? asset('/storage/images/' . json_decode(\Storage::get('website.json'), true)['icon']) : null }}"
+        type="image/x-icon">
 
-        <meta name="description" content="{{ $desc ?? '' }}">
-        <meta name="keywords" content="{{ collect($tags)->pluck('tag')->implode(', ') }}">
-        <link rel="canonical" href="{{ url()->current() }}">
+    <title>{{ $title ?? '' }}</title>
 
-        <meta property="og:title" content="{{$title ?? ''}}">
-        <meta property="og:description" content="{{ $desc ?? '' }}">
-        <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:site_name" content="{{ optional(json_decode(\Storage::get('website.json'), true))['title'] ?? null }}">
+    <meta name="description" content="{{ $desc ?? '' }}">
+    <meta name="keywords" content="{{ collect($tags)->pluck('tag')->implode(', ') }}">
+    <link rel="canonical" href="{{ url()->current() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" :required="true"/>
+    <meta property="og:title" content="{{ $title ?? '' }}">
+    <meta property="og:description" content="{{ $desc ?? '' }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name"
+        content="{{ optional(json_decode(\Storage::get('website.json'), true))['title'] ?? null }}">
 
-        <!-- CDN -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"
+        :required="true" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <!-- <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" /> -->
+    <!-- CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
-        @if(isset($theme))
-<style>
-    :root {
-        --background: {{ $theme['background'] ?? '#f5f5f5' }};
-        --main: {{ $theme['main'] ?? '#0D5EA6' }};
-        --second: {{ $theme['second'] ?? '#093FB4' }};
-        --third: {{ $theme['third'] ?? '#19282F' }};
-    }
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" /> -->
 
-    .bg-main { background-color: var(--main) !important; }
-    .bg-second { background-color: var(--second) !important; }
-    .bg-third { background-color: var(--third) !important; }
-    .text-main { color: var(--main) !important; }
-    .text-second { color: var(--second) !important; }
-    .text-third { color: var(--third) !important; }
-    .border-main { border-color: var(--main) !important; }
-</style>
-@endif
+    @php
+        $json = \Storage::get('template.json');
+        $name = json_decode(\Storage::get('website.json'))->template;
+        $data = json_decode($json, true);
+        $theme = collect($data)->firstWhere('name', $name);
+    @endphp
 
-    </head>
-    <body class="font-sans antialiased"
-        x-data="{ loading: true }" 
-        x-init="setTimeout(() => loading = false, 1000)"
-        @beforeunload.window="loading = true"
-        @load.window="setTimeout(() => loading = false, 1000)"
-        @pageshow.window="loading = false">
-        <!-- Loading overlay -->
-        <div x-show="loading" 
-            class="fixed inset-0 z-[200] flex items-center justify-center bg-background"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-300"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0">
-            <!-- Animasi tiga titik meloncat -->
-            <div class="flex space-x-2">
-                <div class="dot w-4 h-4 bg-main rounded-full animate-bounce delay-0"></div>
-                <div class="dot w-4 h-4 bg-second rounded-full animate-bounce delay-200"></div>
-                <div class="dot w-4 h-4 bg-third rounded-full animate-bounce delay-400"></div>
-            </div>
-        </div>
-          {{-- Search Overlay Fullscreen --}}
-        <div x-show="searchOpen"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-black/30 px-4"
-            x-cloak>
-            <div class="bg-white w-full max-w-xl rounded-xl shadow-lg p-6 relative">
-                <button @click="searchOpen = false" class="absolute top-3 right-3 text-gray-400 hover:text-main transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-                <form action="{{ route('article') }}" method="get" class="flex items-center gap-3 mt-4">
-                    <input type="text" name="search" placeholder="Cari artikel di sini..."
-                        class="flex-grow px-4 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-main/30 transition"
-                        autofocus />
-                    <button type="submit" class="bg-main text-white px-5 py-3 rounded-full hover:bg-main/90 transition">
-                        Cari
-                    </button>
-                </form>
-            </div>
-        </div>
-
+    @if (isset($theme))
         <style>
-
-            /* Menambahkan delay pada animasi */
-            .animate-bounce {
-                animation: bounce 0.6s infinite alternate;
-            }
-            .delay-0 {
-                animation-delay: 0s;
-            }
-            .delay-200 {
-                animation-delay: 0.2s;
-            }
-            .delay-400 {
-                animation-delay: 0.4s;
+            :root {
+                --background: {{ $theme['background'] ?? '#f5f5f5' }};
+                --main: {{ $theme['main'] ?? '#0D5EA6' }};
+                --second: {{ $theme['second'] ?? '#093FB4' }};
+                --third: {{ $theme['third'] ?? '#19282F' }};
             }
 
-            /* Keyframes untuk animasi bounce */
-            @keyframes bounce {
-                0% {
-                    transform: translateY(0);
-                }
-                100% {
-                    transform: translateY(-8px);
-                }
+            .bg-main {
+                background-color: var(--main) !important;
+            }
+
+            .bg-second {
+                background-color: var(--second) !important;
+            }
+
+            .bg-third {
+                background-color: var(--third) !important;
+            }
+
+            .text-main {
+                color: var(--main) !important;
+            }
+
+            .text-second {
+                color: var(--second) !important;
+            }
+
+            .text-third {
+                color: var(--third) !important;
+            }
+
+            .border-main {
+                border-color: var(--main) !important;
             }
         </style>
-        <div class=" flex flex-col w-full min-h-[100vh] justify-between bg-neutral-100">
-            @include('components.navbar.'.$template)
-            {{$slot}}
-            @if ($footer)
-                @include('components.footer.type-a')
-            @endif
+    @endif
+
+</head>
+
+<body class="font-sans antialiased" x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 1000)"
+    @beforeunload.window="loading = true" @load.window="setTimeout(() => loading = false, 1000)"
+    @pageshow.window="loading = false">
+    <!-- Loading overlay -->
+    <div x-show="loading" class="fixed inset-0 z-[200] flex items-center justify-center bg-background"
+        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <!-- Animasi tiga titik meloncat -->
+        <div class="flex space-x-2">
+            <div class="dot w-4 h-4 bg-main rounded-full animate-bounce delay-0"></div>
+            <div class="dot w-4 h-4 bg-second rounded-full animate-bounce delay-200"></div>
+            <div class="dot w-4 h-4 bg-third rounded-full animate-bounce delay-400"></div>
         </div>
-    </body>
+    </div>
+    {{-- Search Overlay Fullscreen --}}
+    <div x-show="searchOpen" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md bg-black/30 px-4" x-cloak>
+        <div class="bg-white w-full max-w-xl rounded-xl shadow-lg p-6 relative">
+            <button @click="searchOpen = false" class="absolute top-3 right-3 text-gray-400 hover:text-main transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <form action="{{ route('article') }}" method="get" class="flex items-center gap-3 mt-4">
+                <input type="text" name="search" placeholder="Cari artikel di sini..."
+                    class="flex-grow px-4 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-main/30 transition"
+                    autofocus />
+                <button type="submit" class="bg-main text-white px-5 py-3 rounded-full hover:bg-main/90 transition">
+                    Cari
+                </button>
+            </form>
+        </div>
+    </div>
 
-    <!-- <script src="{{ asset('build/assets/app.js') }}"></script> -->
+    <style>
+        /* Menambahkan delay pada animasi */
+        .animate-bounce {
+            animation: bounce 0.6s infinite alternate;
+        }
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        .delay-0 {
+            animation-delay: 0s;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        /* Keyframes untuk animasi bounce */
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+    <div class=" flex flex-col w-full min-h-[100vh] justify-between bg-neutral-100">
+        @include('components.navbar.' . $template)
+        {{ $slot }}
+        @if ($footer)
+            @include('components.footer.type-a')
+        @endif
+    </div>
+</body>
+
+<!-- <script src="{{ asset('build/assets/app.js') }}"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </html>
