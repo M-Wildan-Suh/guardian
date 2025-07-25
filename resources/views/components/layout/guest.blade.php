@@ -31,6 +31,25 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" /> -->
 
+        @if(isset($theme))
+<style>
+    :root {
+        --background: {{ $theme['background'] ?? '#f5f5f5' }};
+        --main: {{ $theme['main'] ?? '#0D5EA6' }};
+        --second: {{ $theme['second'] ?? '#093FB4' }};
+        --third: {{ $theme['third'] ?? '#19282F' }};
+    }
+
+    .bg-main { background-color: var(--main) !important; }
+    .bg-second { background-color: var(--second) !important; }
+    .bg-third { background-color: var(--third) !important; }
+    .text-main { color: var(--main) !important; }
+    .text-second { color: var(--second) !important; }
+    .text-third { color: var(--third) !important; }
+    .border-main { border-color: var(--main) !important; }
+</style>
+@endif
+
     </head>
     <body class="font-sans antialiased"
         x-data="{ loading: true }" 
@@ -82,6 +101,7 @@
         </div>
 
         <style>
+
             /* Menambahkan delay pada animasi */
             .animate-bounce {
                 animation: bounce 0.6s infinite alternate;
