@@ -33,8 +33,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" /> -->
+    <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
+    <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" />
 
     @php
         $json = \Storage::get('template.json');
@@ -44,42 +44,78 @@
     @endphp
 
     @if (isset($theme))
-        <style>
-            :root {
-                --background: {{ $theme['background'] ?? '#f5f5f5' }};
-                --main: {{ $theme['main'] ?? '#0D5EA6' }};
-                --second: {{ $theme['second'] ?? '#093FB4' }};
-                --third: {{ $theme['third'] ?? '#19282F' }};
-            }
+    <style>
+        :root {
+            --background: {{ $theme['background'] ?? '#f5f5f5' }};
+            --main: {{ $theme['main'] ?? '#0D5EA6' }};
+            --second: {{ $theme['second'] ?? '#19282F' }};
+            --third: {{ $theme['third'] ?? '#093FB5' }};
+        }
 
-            .bg-main {
-                background-color: var(--main) !important;
-            }
+        .bg-main {
+            background-color: var(--main) !important;
+        }
+        .hover\:bg-main:hover {
+            background-color: var(--main);
+        }
 
-            .bg-second {
-                background-color: var(--second) !important;
-            }
+        .bg-second {
+            background-color: var(--second) !important;
+        }
+        .hover\:bg-second:hover {
+            background-color: var(--second);
+        }
 
-            .bg-third {
-                background-color: var(--third) !important;
-            }
+        .bg-third {
+            background-color: var(--third) !important;
+        }
+        .hover\:bg-third:hover {
+            background-color: var(--third);
+        }
 
-            .text-main {
-                color: var(--main) !important;
-            }
+        .text-main {
+            color: var(--main) !important;
+        }
+        .hover\:text-main:hover {
+            color: var(--main);
+        }
 
-            .text-second {
-                color: var(--second) !important;
-            }
+        .text-second {
+            color: var(--second) !important;
+        }
+        .hover\:text-second:hover {
+            color: var(--second);
+        }
 
-            .text-third {
-                color: var(--third) !important;
-            }
+        .text-third {
+            color: var(--third) !important;
+        }
+        .hover\:text-third:hover {
+            color: var(--third);
+        }
 
-            .border-main {
-                border-color: var(--main) !important;
-            }
-        </style>
+        .border-main {
+            border-color: var(--main) !important;
+        }
+        .hover\:border-main:hover {
+            border-color: var(--main);
+        }
+
+        .border-second {
+            border-color: var(--second) !important;
+        }
+        .hover\:border-second:hover {
+            border-color: var(--second);
+        }
+
+        .border-third {
+            border-color: var(--third) !important;
+        }
+        .hover\:border-third:hover {
+            border-color: var(--third);
+        }
+    </style>
+
     @endif
 
 </head>
@@ -160,7 +196,7 @@
     </div>
 </body>
 
-<!-- <script src="{{ asset('build/assets/app.js') }}"></script> -->
+<script src="{{ asset('build/assets/app.js') }}"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
