@@ -30,7 +30,6 @@
        Artikel
     </a>
 
-    {{-- Navigasi D --}}
     <div x-show="articleOpen" @click.outside="articleOpen = false"
          x-transition
          class="absolute top-full left-0 bg-white mt-2 rounded-md shadow-md shadow-black/20 py-2 z-50 min-w-[160px]">

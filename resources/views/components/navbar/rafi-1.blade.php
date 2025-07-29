@@ -1,6 +1,6 @@
 {{-- Navigation --}}
 <div class="sticky top-0 z-40 bg-white shadow-md" x-data="{ open: false, article: false }">
-    <div class="max-w-[1080px] mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+    <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex justify-between items-center">
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center space-x-2">
             <div class="h-10 sm:h-12 flex items-center overflow-hidden">
@@ -20,7 +20,7 @@
 
             <div class="relative" x-data="{ open: false }" @click.outside="open = false">
                 <button @click="open = !open"
-                    class="{{ request()->routeIs('article*', 'author*', 'category*', 'tag*', 'detail') ? 'text-white bg-second' : 'text-black hover:text-white hover:bg-second' }} px-5 py-1.5 rounded-full transition duration-300">
+                    class="{{ request()->routeIs('article*', 'author*', 'category*', 'tag*', 'detail') ? 'text-white bg-main' : 'text-black hover:text-white hover:bg-main' }} px-5 py-1.5 rounded-full transition duration-300">
                     Artikel
                 </button>
 
@@ -43,15 +43,15 @@
         </div>
 
         {{-- Search --}}
-        <div class="hidden md:flex items-center w-96">
+        <div class="hidden md:flex items-center w-96 ml-6">
             <form action="{{ route('article') }}" class="w-full" method="get">
-                <div class=" flex items-center px-10 justify-between h-10 bg-white">
+                <div class="flex items-center justify-between h-10 bg-white">
                     <input type="text" name="search" value="{{ request('search') }}"
                         class="flex-grow h-10 text-sm px-4 sm:px-6 border-r-0 rounded-l-full focus:border-main focus:ring-0"
                         placeholder="Cari Artikel....">
-                    <button class=" px-6 bg-main hover:bg-third rounded-r-full text-white duration-300 h-10"
+                    <button class="px-6 bg-main hover:bg-third rounded-r-full text-white duration-300 h-10"
                         aria-label="cari">
-                        <div class=" w-[18px] aspect-square overflow-hidden">
+                        <div class="w-[18px] aspect-square overflow-hidden">
                             <svg aria-hidden="true" class="e-font-icon-svg e-fas-search" viewBox="0 0 512 512"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill="currentColor"
@@ -77,12 +77,12 @@
 
     {{-- Mobile Menu --}}
     <div x-show="open" @click.outside="open = false"
-        class="md:hidden flex flex-col px-4 py-4 bg-white space-y-4 border-t text-sm font-semibold text-gray-700">
+        class="md:hidden flex flex-col px-4 sm:px-6 py-4 bg-white space-y-4 border-t text-sm font-semibold text-gray-700">
         <x-navbar.button.rafi-1 title="Beranda" :route="route('home')" :active="['home']" :mobile="true" />
 
         <div>
             <button @click="article = !article"
-                class="w-full text-center py-2 rounded-full hover:bg-second hover:text-white transition">
+                class="w-full text-center py-2 rounded-full hover:bg-main hover:text-white transition">
                 Artikel
             </button>
             <div x-show="article" class="mt-2 space-y-1">
@@ -97,13 +97,13 @@
         <x-navbar.button.rafi-1 title="Kontak" :route="null" :active="null" :mobile="true" />
 
         <form action="{{ route('article') }}" method="get">
-            <div class=" flex items-center justify-between h-10 bg-white">
+            <div class="flex items-center justify-between h-10 bg-white">
                 <input type="text" name="search" value="{{ request('search') }}"
                     class="flex-grow h-10 text-sm px-4 sm:px-6 border-r-0 rounded-l-full focus:border-main focus:ring-0"
                     placeholder="Cari Artikel....">
-                <button class=" px-6 bg-main hover:bg-third rounded-r-full text-white duration-300 h-10"
+                <button class="px-6 bg-main hover:bg-third rounded-r-full text-white duration-300 h-10"
                     aria-label="cari">
-                    <div class=" w-[18px] aspect-square overflow-hidden">
+                    <div class="w-[18px] aspect-square overflow-hidden">
                         <svg aria-hidden="true" class="e-font-icon-svg e-fas-search" viewBox="0 0 512 512"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor"

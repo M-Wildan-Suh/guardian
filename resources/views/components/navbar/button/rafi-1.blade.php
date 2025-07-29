@@ -3,7 +3,7 @@
     $isActive = request()->routeIs($active);
     $baseClass = $isActive 
         ? 'text-white bg-main' 
-        : 'text-black hover:text-white hover:bg-second';
+        : 'text-black hover:text-white hover:bg-main';
 @endphp
 @if ($mobile)    
     <a href="{{ $route }}">

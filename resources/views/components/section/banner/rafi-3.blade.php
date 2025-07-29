@@ -1,6 +1,4 @@
-<div class="w-full max-w-[1080px] mx-auto">
-  <div class="w-full">
-    <div class="swiper mySwiper w-full max-w-5xl mx-auto rounded-lg overflow-hidden shadow-md">
+<div class="swiper mySwiper w-full max-w-[1080px] mx-auto rounded-lg overflow-hidden shadow-md">
       <div class="swiper-wrapper">
         @foreach (array_slice($trend, 0, 4) as $item)
         <div class="swiper-slide relative w-full  h-[240px] sm:h-[300px] md:h-[400px] ">
@@ -24,11 +22,11 @@
             </div>
 
             <a href="{{ route('detail', ['slug' => $item->slug]) }}"
-              class="font-bold text-xl sm:text-2xl line-clamp-2">
+              class="font-bold text-xl sm:text-2xl line-clamp-1">
               {{ $item->judul }}
             </a>
 
-            <p class="text-sm sm:text-base line-clamp-2">
+            <p class="text-sm sm:text-base line-clamp-1">
               {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
             </p>
 
@@ -43,10 +41,7 @@
 
       </div>
 
-      <div class="swiper-pagination mt-4"></div>
-    </div>
-
-
+      <div class="swiper-pagination flex justify-end mt-4"></div>
   </div>
 
   <style>
