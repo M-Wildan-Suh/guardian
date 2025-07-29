@@ -65,9 +65,9 @@
                                     <div class="marquee-content inline-flex gap-6">
                                         <!-- Duplicate items untuk efek seamless looping -->
                                         @foreach(array_merge($trend, $trend) as $item)
-                                        <div class="inline-block w-[300px]">
-                        @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                                        </div>
+                                            <div class="inline-block w-[300px]">
+                                                @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -80,9 +80,9 @@
                                 <!-- Tetap gunakan swiper untuk mobile -->
                                 <div class="swiper-wrapper">
                                     @forelse (array_slice($trend, 0, 4) as $item)
-                                    <div class="swiper-slide">
-                        @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                                    </div>
+                                        <div class="swiper-slide">
+                                            @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
+                                        </div>
                                     @empty
                                     <div class="swiper-slide w-full flex justify-center text-center">
                                         <p class="text-neutral-600">Article tidak ditemukan</p>

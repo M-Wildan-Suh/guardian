@@ -18,26 +18,24 @@
         <div class="hidden md:flex items-center space-x-6 text-gray-700 font-medium ml-auto">
             <x-navbar.button.rafi-1 title="Beranda" :route="route('home')" :active="['home']" :mobile="false" />
 
-        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-            <button
-                @click="open = !open"
-                class="{{ request()->routeIs('article*', 'author*', 'category*', 'tag*', 'detail') ? 'text-white bg-second' : 'text-black hover:text-white hover:bg-second' }} px-5 py-1.5 rounded-full transition duration-300">
-                Artikel
-            </button>
+            <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                <button @click="open = !open"
+                    class="{{ request()->routeIs('article*', 'author*', 'category*', 'tag*', 'detail') ? 'text-white bg-second' : 'text-black hover:text-white hover:bg-second' }} px-5 py-1.5 rounded-full transition duration-300">
+                    Artikel
+                </button>
 
-        <div
-            x-show="open"
-            x-transition
-            class="absolute left-0 mt-2 bg-white rounded-md shadow-lg py-2 z-30 w-48 text-sm text-gray-700">
-            <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-gray-100 transition">Artikel Terbaru</a>
-            @foreach ($category as $item)
-                <a href="{{ route('category', ['category' => $item->slug]) }}"
-                    class="block px-4 py-2 hover:bg-gray-100 transition">
-                    {{ $item->category }}
-                </a>
-            @endforeach
-        </div>
-    </div>
+                <div x-show="open" x-transition
+                    class="absolute left-0 mt-2 bg-white rounded-md shadow-lg py-2 z-30 w-48 text-sm text-gray-700">
+                    <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-gray-100 transition">Artikel
+                        Terbaru</a>
+                    @foreach ($category as $item)
+                        <a href="{{ route('category', ['category' => $item->slug]) }}"
+                            class="block px-4 py-2 hover:bg-gray-100 transition">
+                            {{ $item->category }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
 
             <x-navbar.button.rafi-1 title="Kontak"
                 route="{{ request()->routeIs('detail') ? route('home') : '' }}#kontak" :active="null"

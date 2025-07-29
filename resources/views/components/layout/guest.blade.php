@@ -52,65 +52,107 @@
             --third: {{ $theme['third'] ?? '#093FB5' }};
         }
 
-        .bg-main {
-            background-color: var(--main) !important;
+        /* Backgroudn */
+
+        .bg-background {
+            background-color: var(--background);
         }
+
+        .hover\:bg-background {
+            background-color: var(--background);
+        }        
+        
+        .text-background {
+            color: var(--second);
+        }
+
+        .hover\:text-background:hover {
+            color: var(--second);
+        }
+
+        .border-background {
+            border-color: var(--second);
+        }
+
+        .hover\:border-background:hover {
+            border-color: var(--second);
+        }
+
+
+        /* Main */
+
+        .bg-main {
+            background-color: var(--main);
+        }
+
         .hover\:bg-main:hover {
             background-color: var(--main);
         }
 
-        .bg-second {
-            background-color: var(--second) !important;
-        }
-        .hover\:bg-second:hover {
-            background-color: var(--second);
-        }
-
-        .bg-third {
-            background-color: var(--third) !important;
-        }
-        .hover\:bg-third:hover {
-            background-color: var(--third);
-        }
-
         .text-main {
-            color: var(--main) !important;
+            color: var(--main);
         }
+
         .hover\:text-main:hover {
             color: var(--main);
         }
 
-        .text-second {
-            color: var(--second) !important;
-        }
-        .hover\:text-second:hover {
-            color: var(--second);
-        }
-
-        .text-third {
-            color: var(--third) !important;
-        }
-        .hover\:text-third:hover {
-            color: var(--third);
-        }
-
         .border-main {
-            border-color: var(--main) !important;
+            border-color: var(--main);
         }
+
         .hover\:border-main:hover {
             border-color: var(--main);
         }
 
-        .border-second {
-            border-color: var(--second) !important;
+        /* Second */
+
+        .bg-second {
+            background-color: var(--second);
         }
+
+        .hover\:bg-second:hover {
+            background-color: var(--second);
+        }
+
+        .text-second {
+            color: var(--second);
+        }
+
+        .hover\:text-second:hover {
+            color: var(--second);
+        }
+
+        .border-second {
+            border-color: var(--second);
+        }
+
         .hover\:border-second:hover {
             border-color: var(--second);
         }
 
-        .border-third {
-            border-color: var(--third) !important;
+        /* Third */
+
+        .bg-third {
+            background-color: var(--third);
         }
+        
+        .hover\:bg-third:hover {
+            background-color: var(--third);
+        }
+
+        .text-third {
+            color: var(--third);
+        }
+
+        .hover\:text-third:hover {
+            color: var(--third);
+        }
+
+        .border-third {
+            border-color: var(--third);
+        }
+
         .hover\:border-third:hover {
             border-color: var(--third);
         }

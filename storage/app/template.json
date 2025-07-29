@@ -14,34 +14,34 @@
         "third" : "#19282F"
     },
     {
-                "name" : "rafi-2",
-                "background" : "#f5f5f5",
-                "main" : "#06923E",
-                "second" : "#F3C623",
-                "third" : "#19282F"
-            },
-                {
-                "name" : "rafi-3",
-                "background": "#F9FAFB",
-                "main": "#2563EB",
-                "second": "#64748B",
-                "third": "#1a202c"
-            },
-             {
-                "name" : "rafi-4",
-                "background": "#F9FAFB",
-                "main": "#2563EB",
-                "second": "#64748B",
-                "third": "#1a202c"
-            },
-            {
-                "name" : "rafi-5",
-                "background" : "#f5f5f5",
-                "main" : "#14532d",
-                "second" : "#F3C623",
-                "third" : "#19282F"
-            },
-            {
+        "name" : "rafi-2",
+        "background" : "#f5f5f5",
+        "main" : "#06923E",
+        "second" : "#F3C623",
+        "third" : "#19282F"
+    },
+        {
+        "name" : "rafi-3",
+        "background": "#F9FAFB",
+        "main": "#2563EB",
+        "second": "#64748B",
+        "third": "#1a202c"
+    },
+        {
+        "name" : "rafi-4",
+        "background": "#F9FAFB",
+        "main": "#2563EB",
+        "second": "#64748B",
+        "third": "#1a202c"
+    },
+    {
+        "name" : "rafi-5",
+        "background" : "#f5f5f5",
+        "main" : "#14532d",
+        "second" : "#F3C623",
+        "third" : "#19282F"
+    },
+    {
         "name" : "rafi-6",
         "background" : "#f5f5f5",
         "main" : "#0D5EA6",
@@ -63,27 +63,27 @@
         "third" : "#19282F"
     },
     {
-                "name" : "rafi-9",
-                "background" : "#f5f5f5",
-                "main" : "#14532d",
-                "second" : "#F3C623",
-                "third" : "#19282F"
-            },
-            {
-                "name" : "rafi-10",
-                "background" : "#f5f5f5",
-                "main" : "#14532d",
-                "second" : "#F3C623",
-                "third" : "#19282F"
-            },
-            {
-                "name" : "rafi-11",
-                "background" : "#f5f5f5",
-                "main" : "#14532d",
-                "second" : "#F3C623",
-                "third" : "#19282F"
-            },
-            {
+        "name" : "rafi-9",
+        "background" : "#f5f5f5",
+        "main" : "#14532d",
+        "second" : "#F3C623",
+        "third" : "#19282F"
+    },
+    {
+        "name" : "rafi-10",
+        "background" : "#f5f5f5",
+        "main" : "#14532d",
+        "second" : "#F3C623",
+        "third" : "#19282F"
+    },
+    {
+        "name" : "rafi-11",
+        "background" : "#f5f5f5",
+        "main" : "#14532d",
+        "second" : "#F3C623",
+        "third" : "#19282F"
+    },
+    {
         "name" : "rafi-12",
         "background" : "#f5f5f5",
         "main" : "#0D5EA6",
