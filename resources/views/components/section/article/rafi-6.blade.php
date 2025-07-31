@@ -28,8 +28,8 @@
                 {{ $item->judul }}
             </h3>
         </a>
-        <p class="mt-2 text-sm text-gray-600 line-clamp-3">
-    {!! Str::limit(strip_tags($item->article), 100) !!}
+        <p class="mt-2 text-sm text-gray-600 line-clamp-2">
+    {!! Str::limit(strip_tags($item->article), 90) !!}
 </p>
 
         {{-- Footer --}}

@@ -1,5 +1,5 @@
 <div class="w-screen relative">
-  <div class="w-full" style="height: calc(100vh - 80px)">
+  <div class="w-full h-[calc(50vh-40px)] sm:h-[calc(100vh-80px)]">
     <div class="swiper heroBannerSwiper w-full h-full">
       <div class="swiper-wrapper">
         @foreach (array_slice($trend, 0, 4) as $item)
@@ -13,7 +13,7 @@
               class="w-full h-full object-cover" />
           </a>
 
-          <div class="absolute inset-0 bg-black/30 flex flex-col justify-center text-center text-white p-4 sm:p-6 space-y-2">
+          <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-center text-white space-y-2">
             <div class="flex flex-wrap gap-2 mx-auto">
               @foreach ($item->articles->articlecategory as $category)
               <a href="{{ route('category', ['category' => $category->slug]) }}"
@@ -52,10 +52,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     new Swiper(".heroBannerSwiper", {
       loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-      },
+      
       pagination: {
         el: ".hero-banner-pagination",
         clickable: true,

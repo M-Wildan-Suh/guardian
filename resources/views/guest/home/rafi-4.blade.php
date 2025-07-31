@@ -4,50 +4,53 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   {{-- Banner --}}
-  <div class="w-screen relative left-1/2 -translate-x-1/2">
-    <div class="swiper homeBannerSwiper w-full" style="height: calc(100vh - 80px)">
-      <div class="swiper-wrapper">
+  <div class="swiper homeBannerSwiper w-full h-[calc(50vh-40px)] sm:h-[calc(100vh-80px)]">
+    <div class="swiper-wrapper">
         @foreach (array_slice($trend, 0, 4) as $item)
         <div class="swiper-slide relative w-full h-full">
-          <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-            <img
-              src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-              alt="{{ $item->judul }}"
-              class="w-full h-full object-cover" />
-          </a>
-
-          <div class="absolute inset-0 bg-black/30 flex flex-col justify-end text-white p-4 sm:p-6 space-y-2">
-            <div class="flex flex-wrap gap-2">
-              @foreach ($item->articles->articlecategory as $category)
-              <a href="{{ route('category', ['category' => $category->slug]) }}"
-                class="bg-white text-gray-700 text-xs px-3 py-1 rounded-full">
-                {{ $category->category }}
-              </a>
-              @endforeach
-            </div>
-
-            <a href="{{ route('detail', ['slug' => $item->slug]) }}"
-              class="font-bold text-xl sm:text-2xl line-clamp-2">
-              {{ $item->judul }}
+            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                <img
+                    src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                    alt="{{ $item->judul }}"
+                    class="w-full h-full object-cover"/>
             </a>
 
-            <p class="text-sm sm:text-base line-clamp-2">
-              {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
-            </p>
+            <div class="w-full absolute inset-0 bg-black opacity-50 z-0"></div>
+            <div class="absolute inset-0 flex flex-col justify-center items-start p-4 sm:p-6 space-y-2 max-w-[1080px] mx-auto">
+                
+                <div class="relative z-10 text-white">
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($item->articles->articlecategory as $category)
+                        <a href="{{ route('category', ['category' => $category->slug]) }}"
+                            class="bg-white text-gray-700 text-xs px-3 py-1 rounded-full">
+                            {{ $category->category }}
+                        </a>
+                        @endforeach
+                    </div>
 
-            <p class="text-xs sm:text-sm font-light pt-2">
-              <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                class="font-semibold">
-                {{ $item->articles->user->name }}
-              </a>, {{ $item->date }}
-            </p>
-          </div>
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                        class="font-bold text-xl sm:text-4xl line-clamp-1 sm:line-clamp-2 mt-1 sm:mt-4">
+                        {{ Str::limit($item->judul, 120) }}
+                    </a>
+
+                    <p class="text-sm sm:text-bases line-clamp-1 sm:line-clamp-2 mt-1 sm:mt-4">
+                        {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
+                    </p>
+
+                    <p class="text-xs sm:text-sm font-light pt-2 mt-1 sm:mt-4">
+                        <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
+                            class="font-semibold">
+                            {{ $item->articles->user->name }}
+                        </a>, {{ $item->date }}
+                    </p>
+                </div>
+            </div>
         </div>
         @endforeach
-      </div>
-      <div class="swiper-pagination banner-pagination absolute bottom-4 left-1/2 -translate-x-1/2 z-10"></div>
     </div>
-  </div>
+    <div class="swiper-pagination banner-pagination absolute bottom-4 left-1/2 -translate-x-1/2 z-10"></div>
+</div>
+
 
   {{-- Artikel Terbaru --}}
   <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-4 sm:space-y-8">
@@ -97,7 +100,7 @@
             <div class="swiper desktopTrendSwiper">
               <div class="swiper-wrapper">
                 @foreach ($trend as $item)
-                <div class="swiper-slide mb-10">
+                <div class="swiper-slide p-4 mb-10">
                   @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
                 </div>
                 @endforeach
@@ -110,7 +113,7 @@
             <div class="swiper trendArticlesSwiper px-4 mb-10">
               <div class="swiper-wrapper">
                 @forelse (array_slice($trend, 0, 4) as $item)
-                <div class="swiper-slide">
+                <div class="swiper-slide p-4">
                   @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
                 </div>
                 @empty
@@ -119,56 +122,61 @@
                 </div>
                 @endforelse
               </div>
-              <div class="swiper-pagination trend-articles-pagination"></div>
             </div>
           </div>
         </div>
-
-        <style>
-          .swiper-slide {
-            background: #f3f4f6;
-            border-radius: 12px;
-          }
-
-          .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            opacity: 0.4;
-            background-color: #6B7280;
-            border-radius: 9999px;
-            transition: all 0.3s;
-          }
-
-          .swiper-pagination-bullet-active {
-            width: 20px;
-            opacity: 1;
-            background-color: #1D4ED8;
-          }
-
-          .desktop-trend-pagination .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            background-color: #6B7280;
-            opacity: 0.5;
-            transition: all 0.3s;
-            border-radius: 9999px;
-          }
-
-          .desktop-trend-pagination .swiper-pagination-bullet-active {
-            width: 24px;
-            background-color: #1D4ED8;
-            opacity: 1;
-          }
-        </style>
       </div>
     </div>
   </div>
 
+  <style>
+    :root {
+        --bg-main: #2563EB;
+        --bg-second: #64748B;
+        --bg-third: #1a202c;
+        --bg-light: #F9FAFB;
+    }
+    .swiper-slide {
+      background: #f3f4f6;
+      border-radius: 12px;
+    }
+
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      opacity: 0.4;
+      border-radius: 9999px;
+      transition: all 0.3s;
+      opacity: 0.20;
+      background-color: var(--bg-light);
+    }
+
+    .swiper-pagination-bullet-active {
+      width: 20px;
+      opacity: 1;
+      background-color: var(--bg-third);
+    }
+
+    .desktop-trend-pagination .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background-color: #6B7280;
+      opacity: 0.5;
+      transition: all 0.3s;
+      border-radius: 9999px;
+    }
+
+    .desktop-trend-pagination .swiper-pagination-bullet-active {
+      width: 24px;
+      background-color: #1D4ED8;
+      opacity: 1;
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     AOS.init();
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       new Swiper('.homeBannerSwiper', {
         loop: true,
         autoplay: {
@@ -190,8 +198,12 @@
           clickable: true,
         },
         breakpoints: {
-          1024: { slidesPerView: 3 },
-          768: { slidesPerView: 2 },
+          1024: {
+            slidesPerView: 3
+          },
+          768: {
+            slidesPerView: 2
+          },
         }
       });
 
@@ -226,7 +238,7 @@
         initMobileSwiper();
       }
 
-      window.addEventListener('resize', function () {
+      window.addEventListener('resize', function() {
         destroyMobileSwiper();
         initMobileSwiper();
       });

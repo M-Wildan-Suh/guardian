@@ -1,13 +1,14 @@
 <x-layout.guest :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
+    {{-- Swiper Assets --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
 
     <div class="w-full overflow-x-hidden">
+
         {{-- Banner --}}
         @include('components.section.banner.' . json_decode(\Storage::get('website.json'))->template)
 
-
-        {{-- Artikel --}}
+        {{-- Artikel Terbaru --}}
         <section class="w-full max-w-[1080px] mx-auto px-4 py-16">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-1.5 h-10 bg-main rounded-full"></div>
@@ -20,10 +21,13 @@
                 </div>
                 @endforeach
             </div>
+
             @if (count($data) > 3)
-            <div class="w-full flex justify-center mt-8">
+            <div class="w-full flex justify-center mt-6">
                 <a href="{{ route('article') }}">
-                    <button class="px-6 py-3 bg-main text-white rounded-full hover:bg-blue-900 transition duration-300">Lihat Semua</button>
+                    <button class="px-4 py-2 text-sm font-semibold md:font-normal bg-main text-white rounded-full hover:bg-blue-900 transition duration-300">
+                        Lihat Lainnya
+                    </button>
                 </a>
             </div>
             @endif
@@ -35,58 +39,70 @@
                 <div class="w-1.5 h-10 bg-main rounded-full"></div>
                 <h2 class="text-2xl sm:text-3xl font-bold">Artikel Populer</h2>
             </div>
-            <div class="swiper desktopTrendSwiper">
-                <div class="swiper-wrapper">
-                    @foreach ($trend as $item)
-                    <div class="swiper-slide max-w-xs">
-                        @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
+            <div class="relative">
+                <div class="swiper desktopTrendSwiper">
+                    <div class="swiper-wrapper">
+                        @foreach (array_slice($data, 0, 5) as $item)
+                        <div class="swiper-slide max-w-xs">
+                            @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-                <div class="swiper-pagination desktop-trend-pagination mt-4 flex justify-center"></div>
             </div>
         </section>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new Swiper(".heroSwiper", {
-                    loop: true,
-                    autoplay: {
-                        delay: 4500,
-                        disableOnInteraction: false,
-                    },
-                    pagination: {
-                        el: ".hero-banner-pagination",
-                        clickable: true,
-                    },
-                });
-
-                new Swiper(".desktopTrendSwiper", {
-                    effect: "coverflow",
-                    grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: "auto",
-                    loop: true,
-                    coverflowEffect: {
-                        rotate: 50,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows: true,
-                    },
-                    pagination: {
-                        el: ".desktop-trend-pagination",
-                        clickable: true,
-                    },
-                });
-            });
-        </script>
-
-        <style>
-            .swiper-slide {
-                background: #f3f4f6;
-                border-radius: 12px;
-            }
-        </style>
     </div>
+
+    {{-- Swiper Init --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Banner Swiper
+            new Swiper(".heroSwiper", {
+                loop: true,
+                autoplay: {
+                    delay: 4500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".hero-banner-pagination",
+                    clickable: true,
+                },
+            });
+
+            // Artikel Populer Swiper
+            new Swiper(".desktopTrendSwiper", {
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                loop: true,
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                spaceBetween: 30,
+                breakpoints: {
+                    640: { slidesPerView: 1 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                },
+            });
+        });
+    </script>
+
+    {{-- Swiper Styles --}}
+    <style>
+        .swiper-slide {
+            border-radius: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .swiper-slide {
+                box-sizing: border-box;
+            }
+        }
+    </style>
 </x-layout.guest>
