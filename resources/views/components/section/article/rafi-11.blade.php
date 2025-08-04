@@ -14,12 +14,7 @@
         <div class="absolute bottom-3 left-3 flex flex-wrap gap-2 z-10">
             @foreach ($item->articles->articlecategory as $category)
             <a href="{{ route('category', ['category' => $category->slug]) }}"
-               class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-full text-white bg-gradient-to-r from-pink-500 to-purple-500 shadow-md hover:from-pink-600 hover:to-purple-600 transition">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M9 5l7 7-7 7" />
-                </svg>
+               class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-full text-white bg-main transition">
                 {{ $category->category }}
             </a>
             @endforeach

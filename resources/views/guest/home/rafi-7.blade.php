@@ -8,11 +8,11 @@
         </div>
 
         {{-- Artikel --}}
-        <section class="w-full bg-gradient-to-b from-gray-50 to-white py-16">
+        <section class="w-full bg-background py-16">
             <div class="w-full max-w-[1200px] mx-auto px-4">
                 <div class="flex items-center gap-3 mb-8">
-                    <div class="w-2 h-12 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-orange-800">
+                    <div class="w-2 h-12 bg-main hover:bg-second rounded-full"></div>
+                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-main">
                         Artikel Populer
                     </h2>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="swiper desktopTrendSwiper pb-12">
                     <div class="swiper-wrapper">
                         @foreach ($trend as $item)
-                        <div class="swiper-slide max-w-xs px-4">
+                        <div class="swiper-slide max-w-[1080px] px-1">
                             <div class="relative overflow-hidden rounded-xl shadow-lg h-full">
                                 @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
                             </div>
@@ -35,25 +35,22 @@
         {{-- Artikel --}}
         <section class="w-full max-w-[1200px] mx-auto px-4 py-16">
             <div class="flex items-center gap-3 mb-8">
-                <div class="w-2 h-12 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full"></div>
-                <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+                <div class="w-2 h-12 bg-main rounded-full"></div>
+                <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-second">
                     Artikel Terbaru
                 </h2>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach (array_slice($data, 0, 3) as $item)
-                <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-700/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
-                </div>
                 @endforeach
             </div>
 
             @if (count($data) > 3)
             <div class="w-full flex justify-center mt-12">
-                <a href="{{ route('article') }}" class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-blue-600 rounded-full group">
-                    <span class="absolute right-0 transition-all duration-300 w-8 h-8 -mt-2 rounded-full bg-blue-700 group-hover:w-full group-hover:-right-4"></span>
+                <a href="{{ route('article') }}" class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-main rounded-full group">
+                    <span class="absolute right-0 transition-all duration-300 w-8 h-8 -mt-2 rounded-full bg-main group-hover:w-full group-hover:-right-4"></span>
                     <span class="relative flex items-center gap-2 text-sm font-medium transition-all duration-300 group-hover:translate-x-2">
                         Lihat Semua Artikel
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,7 +101,7 @@
                         el: ".desktop-trend-pagination",
                         clickable: true,
                         renderBullet: function(index, className) {
-                            return `<span class="${className} w-2.5 h-2.5 bg-orange-500 opacity-30 hover:opacity-100 transition-opacity mx-1 rounded-full"></span>`;
+                            return `<span class="${className} w-2.5 h-2.5 bg-main opacity-30 hover:opacity-100 transition-opacity mx-1 rounded-full"></span>`;
                         },
                     },
                     breakpoints: {

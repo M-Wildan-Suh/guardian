@@ -52,7 +52,10 @@
   document.addEventListener("DOMContentLoaded", () => {
     new Swiper(".heroBannerSwiper", {
       loop: true,
-      
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
       pagination: {
         el: ".hero-banner-pagination",
         clickable: true,

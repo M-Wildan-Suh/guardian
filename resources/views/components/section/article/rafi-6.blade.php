@@ -1,4 +1,4 @@
-<div class="w-full flex flex-col rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-white">
+<div class="w-full flex flex-col rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-white mx-auto max-w-md sm:max-w-full">
     {{-- Image --}}
     <div class="relative">
         <a href="{{ route('detail', ['slug' => $item->slug]) }}" aria-label="{{ $item->judul }}">
@@ -29,8 +29,8 @@
             </h3>
         </a>
         <p class="mt-2 text-sm text-gray-600 line-clamp-2">
-    {!! Str::limit(strip_tags($item->article), 90) !!}
-</p>
+            {!! Str::limit(strip_tags($item->article), 90) !!}
+        </p>
 
         {{-- Footer --}}
         <div class="flex items-center justify-between text-sm text-gray-600">

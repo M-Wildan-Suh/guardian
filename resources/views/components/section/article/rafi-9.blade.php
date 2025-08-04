@@ -21,32 +21,15 @@
     </div>
 
     {{-- Content --}}
-    <div class="p-4 flex flex-col gap-3">
-        {{-- Title --}}
-        <a href="{{ route('detail', ['slug' => $item->slug]) }}" aria-label="{{ $item->judul }}">
-            <h3 class="text-lg font-bold text-gray-900 line-clamp-2 hover:text-blue-600 transition-colors">
-                {{ $item->judul }}
-            </h3>
+    <div class=" py-4 px-2 text-sm flex flex-grow flex-col gap-2 justify-between">
+        <a href="{{ route('detail', ['slug' => $item->slug]) }}" aria-label="{{$item->judul}}">
+            <p class=" line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
         </a>
-        <p class="mt-2 text-sm text-gray-600 line-clamp-3">
-    {!! Str::limit(strip_tags($item->article), 50) !!}
-</p>
-
-        {{-- Footer --}}
-        <div class="flex items-center justify-between text-sm text-gray-600">
-            <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                class="font-medium hover:text-blue-600 transition-colors flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                {{ $item->articles->user->name }}
+        <div class=" grid text-xs sm:text-sm sm:grid-cols-2 gap-2">
+            <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" aria-label="{{$item->judul}}">
+                <p class="font-bold text-neutral-600 hover:text-blue-600 duration-300">{{$item->articles->user->name}}</p>
             </a>
-            <span class="flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                {{ $item->date }}
-            </span>
+            <p class=" text-right text-neutral-600">{{$item->date}}</p>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="w-screen relative">
-  <div class="w-full" style="height: calc(100vh - 80px)">
+  <div class="w-full h-[calc(50vh-40px)] sm:h-[calc(100vh-80px)]">
     <div class="swiper heroBannerSwiper w-full h-full">
       <div class="swiper-wrapper">
         @foreach (array_slice($trend, 0, 4) as $item)

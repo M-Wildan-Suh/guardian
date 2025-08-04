@@ -8,12 +8,12 @@
         </div>
 
         {{-- Artikel Populer --}}
-        <section class="w-full bg-background py-20">
+        <section class="w-full bg-gradient-to-b from-orange-50 to-white py-20">
     <div class="max-w-[1200px] mx-auto px-4">
         {{-- Header --}}
         <div class="flex items-center gap-3 mb-10">
-            <div class="w-2 h-12 bg-second rounded-full"></div>
-            <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-main">
+            <div class="w-2 h-12 bg-gradient-to-b from-orange-500 to-orange-700 rounded-full"></div>
+            <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-orange-800">
                 Artikel Populer
             </h2>
         </div>
@@ -45,7 +45,7 @@
         {{-- Tombol --}}
         <div class="text-center mt-12">
             <a href="{{ route('article') }}"
-               class="inline-block px-6 py-3 text-main hover:text-white bg-second text-base rounded-full font-semibold transition">
+               class="inline-block px-6 py-3 text-white bg-orange-600 hover:bg-orange-700 rounded-full font-medium transition">
                 Lihat Semua Artikel
             </a>
         </div>
@@ -56,8 +56,8 @@
         <section class="w-full bg-gradient-to-b from-gray-100 to-white py-16">
             <div class="w-full max-w-[1200px] mx-auto px-4">
                 <div class="flex items-center gap-3 mb-8">
-                    <div class="w-2 h-12 bg-main rounded-full"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-second">
+                    <div class="w-2 h-12 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full"></div>
+                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
                         Artikel Terbaru
                     </h2>
                 </div>

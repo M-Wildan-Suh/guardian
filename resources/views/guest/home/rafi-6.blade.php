@@ -40,10 +40,10 @@
                 <h2 class="text-2xl sm:text-3xl font-bold">Artikel Populer</h2>
             </div>
             <div class="relative">
-                <div class="swiper desktopTrendSwiper">
+                <div class="swiper desktopTrendSwiper mx-auto max-w-xs sm:max-w-full">
                     <div class="swiper-wrapper">
                         @foreach (array_slice($data, 0, 5) as $item)
-                        <div class="swiper-slide max-w-xs">
+                        <div class="swiper-slide">
                             @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
                         </div>
                         @endforeach
@@ -54,10 +54,9 @@
 
     </div>
 
-    {{-- Swiper Init --}}
+    {{-- Swiper --}}
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Banner Swiper
             new Swiper(".heroSwiper", {
                 loop: true,
                 autoplay: {
@@ -70,7 +69,6 @@
                 },
             });
 
-            // Artikel Populer Swiper
             new Swiper(".desktopTrendSwiper", {
                 effect: "coverflow",
                 grabCursor: true,
@@ -85,15 +83,20 @@
                 },
                 spaceBetween: 30,
                 breakpoints: {
-                    640: { slidesPerView: 1 },
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 },
+                    640: {
+                        slidesPerView: 1
+                    },
+                    768: {
+                        slidesPerView: 2
+                    },
+                    1024: {
+                        slidesPerView: 3
+                    },
                 },
             });
         });
     </script>
 
-    {{-- Swiper Styles --}}
     <style>
         .swiper-slide {
             border-radius: 12px;

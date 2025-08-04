@@ -4,7 +4,7 @@
         {{-- Banner Slider --}}
         <section class="w-full">
             <div class="max-w-6xl mx-auto relative py-6 sm:py-12">
-                <div class="swiper bannerSlider relative w-full h-80 sm:h-[400px] rounded-xl overflow-hidden">
+                <div class="swiper bannerSlider relative w-full h-80 sm:h-[400px] rounded-sm overflow-hidden">
                     <div class="swiper-wrapper">
                         @foreach (array_slice($trend, 0, 4) as $item)
                         <div class="swiper-slide relative w-full h-full">
