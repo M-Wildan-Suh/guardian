@@ -55,106 +55,106 @@
         /* Backgroudn */
 
         .bg-background {
-            background-color: var(--background);
+            background-color: var(--background) !important;
         }
 
         .hover\:bg-background {
-            background-color: var(--background);
+            background-color: var(--background) !important;
         }        
         
         .text-background {
-            color: var(--second);
+            color: var(--second) !important;
         }
 
         .hover\:text-background:hover {
-            color: var(--second);
+            color: var(--second) !important;
         }
 
         .border-background {
-            border-color: var(--second);
+            border-color: var(--second) !important;
         }
 
         .hover\:border-background:hover {
-            border-color: var(--second);
+            border-color: var(--second) !important;
         }
 
 
         /* Main */
 
         .bg-main {
-            background-color: var(--main);
+            background-color: var(--main) !important;
         }
 
         .hover\:bg-main:hover {
-            background-color: var(--main);
+            background-color: var(--main) !important;
         }
 
         .text-main {
-            color: var(--main);
+            color: var(--main) !important;
         }
 
         .hover\:text-main:hover {
-            color: var(--main);
+            color: var(--main) !important;
         }
 
         .border-main {
-            border-color: var(--main);
+            border-color: var(--main) !important;
         }
 
         .hover\:border-main:hover {
-            border-color: var(--main);
+            border-color: var(--main) !important;
         }
 
         /* Second */
 
         .bg-second {
-            background-color: var(--second);
+            background-color: var(--second) !important;
         }
 
         .hover\:bg-second:hover {
-            background-color: var(--second);
+            background-color: var(--second) !important;
         }
 
         .text-second {
-            color: var(--second);
+            color: var(--second) !important;
         }
 
         .hover\:text-second:hover {
-            color: var(--second);
+            color: var(--second) !important;
         }
 
         .border-second {
-            border-color: var(--second);
+            border-color: var(--second) !important;
         }
 
         .hover\:border-second:hover {
-            border-color: var(--second);
+            border-color: var(--second) !important;
         }
 
         /* Third */
 
         .bg-third {
-            background-color: var(--third);
+            background-color: var(--third) !important;
         }
         
         .hover\:bg-third:hover {
-            background-color: var(--third);
+            background-color: var(--third) !important;
         }
 
         .text-third {
-            color: var(--third);
+            color: var(--third) !important;
         }
 
         .hover\:text-third:hover {
-            color: var(--third);
+            color: var(--third) !important;
         }
 
         .border-third {
-            border-color: var(--third);
+            border-color: var(--third) !important;
         }
 
         .hover\:border-third:hover {
-            border-color: var(--third);
+            border-color: var(--third) !important;
         }
     </style>
 
