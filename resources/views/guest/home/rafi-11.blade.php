@@ -1,4 +1,4 @@
-<x-layout.guest :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
+<x-layout.guest :template="json_decode(\Storage::get('website.json'))->template" :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
     <div class="w-full overflow-x-hidden bg-background">
 
         {{-- Banner --}}
@@ -7,118 +7,143 @@
             <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-400 to-transparent"></div>
         </div>
 
-        {{-- Artikel Populer --}}
-        <section class="w-full py-20">
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="flex items-center gap-3 mb-10">
-                    <div class="w-2 h-12 bg-main rounded-full"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-second bg-second">
-                        Artikel Populer
-                    </h2>
-                </div>
+        {{-- Artikel --}}
+        <div class="w-full max-w-[1080px] mx-auto px-5 sm:px-8 pt-4 mt-4">
+            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    @foreach (array_slice($trend, 0, 4) as $item)
-                    <div class="bg-white rounded-2xl hover:shadow-xl transition-all overflow-hidden relative">
-                        <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                            <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                                 alt="{{ $item->judul }}"
-                                 class="w-full h-56 object-cover rounded-t-2xl" />
-                        </a>
-                        <div class="p-5 flex flex-col justify-between h-[220px]">
-                            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                <h3 class="font-semibold text-xl text-gray-800 hover:text-pink-600 transition line-clamp-2">
-                                    {{ $item->judul }}
-                                </h3>
-                            </a>
-                            <p class="text-sm text-gray-600 mt-2 line-clamp-3">
-                                {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
-                            </p>
-                            <p class="text-xs text-gray-400 mt-4 italic">{{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}</p>
+                {{-- Main --}}
+                <div class="w-full col-span-1 md:col-span-3 space-y-4 sm:space-y-8 mb-4">
+
+                    {{-- Title --}}
+                    <div class="w-full flex justify-between items-center mt-1">
+                        <div class="w-full flex items-center gap-2 sm:gap-4">
+                            <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
+                            <p class="text-xl sm:text-3xl font-bold">Artikel Terbaru</p>
                         </div>
                     </div>
-                    @endforeach
-                </div>
 
-                <div class="text-center mt-12">
-                    <a href="{{ route('article') }}"
-                       class="inline-block px-6 py-3 text-third hover:text-white text-base bg-second rounded-full font-semibold transition">
-                        Lihat Semua Artikel
-                    </a>
-                </div>
-            </div>
-        </section>
+                    {{-- Article --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @foreach(array_slice($trend, 0, 4) as $item)
+                        <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                            class="group bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
 
-        {{-- Artikel Terbaru --}}
-        <section class="w-full bg-background py-16">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-2 h-12 bg-main rounded-full"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-second">
-                        Artikel Terbaru
-                    </h2>
-                </div>
-
-                <div class="swiper duplicatedTrendSwiper pb-12">
-                    <div class="swiper-wrapper">
-                        @foreach (array_slice($data, 0, 6) as $item)
-                        <div class="swiper-slide duplicated-slide max-w-xs px-4">
-                            <div class="relative overflow-hidden rounded-2xl bg-white">
-                                @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="{{ $item->banner 
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                    alt="{{ $item->judul }}"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div class="absolute inset-0 bg-black/60 hover:bg-black/30 "></div>
+                                <div class="absolute bottom-0 left-0 p-4">
+                                    <p class="text-white font-bold text-xl group-hover:text-blue-300 transition-colors duration-300">
+                                        {{ $item->judul }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="p-5">
+                                <p class="text-gray-600 line-clamp-3 mb-4">
+                                    {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
+                                </p>
+
+                                <div class="flex items-center justify-between border-t pt-3">
+                                    <span class="text-sm font-semibold text-gray-500 hover:text-blue-800 transition-colors">
+                                        {{ $item->articles->user->name }}
+                                    </span>
+                                    <div class="flex items-center text-xs font-semibold text-gray-500">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        <span>{{ $item->date }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                         @endforeach
                     </div>
-                    <div class="swiper-pagination duplicated-trend-pagination mt-4 flex justify-center gap-2"></div>
+                    <div class="w-full max-w-[1080px] mx-auto rounded-xl shadow-md p-4 sm:p-6">
+                        <div class="flex justify-end items-center mb-4">
+                            <a href="{{ route('article') }}"
+                                class="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors">
+                                <!-- Icon Favicon (contoh: Heroicons eye) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            @foreach(array_slice($trend, 0, 3) as $item)
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="group">
+                                <div class="p-3 border border-gray-200 rounded-lg transition-colors h-full">
+                                    <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-2">
+                                        {{ $item->judul }}
+                                    </h3>
+                                    <div class="flex justify-between mt-1 text-gray-400 text-sm">
+                                        <p>{{ $item->date }}</p>
+                                        <p class="font-bold hover:text-blue-600 duration-300">
+                                            {{ $item->articles->user->name }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
+
+                {{-- Popular --}}
+                <div>
+                    <div class="md:sticky top-24 space-y-4 sm:space-y-6 pb-8">
+                        {{-- Title --}}
+                        <div class="w-full flex items-center gap-2 sm:gap-4 h-7 sm:h-10">
+                            <div class="w-1 h-7 bg-second rounded-full"></div>
+                            <p class="text-xl font-bold">Artikel Populer</p>
+                        </div>
+
+                        {{-- Popular --}}
+                        <div>
+                            <div class="md:sticky top-24 space-y-4 sm:space-y-6 pb-8">
+
+                                {{-- Popular Artikel --}}
+                                <div class="flex flex-col gap-4 w-full md:max-w-md">
+                                    @foreach (collect($data)->shuffle()->take(5) as $item)
+                                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                                        class="block border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-300">
+
+                                        <p class="font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 duration-300">
+                                            {{ $item->judul }}
+                                        </p>
+                                        <p class="text-sm sm:text-base line-clamp-2">
+                                            {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
+                                        </p>
+
+                                        <div class="flex items-center justify-between text-xs text-gray-500 mt-2">
+                                            <span class="truncate hover:text-blue-600 duration-300">
+                                                {{ $item->articles->user->name }}
+                                            </span>
+                                            <span class="whitespace-nowrap">
+                                                {{ $item->date }}
+                                            </span>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                    {{-- Pagination --}}
+                                    @include('components.section.pagination')
+                                </div>
+
+                            </div>
+                        </div>
+                        {{-- End Populer --}}
+
+                    </div>
+                </div>
+                {{-- End popular --}}
             </div>
-        </section>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new Swiper(".duplicatedTrendSwiper", {
-                    effect: "coverflow",
-                    grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: "auto",
-                    loop: true,
-                    spaceBetween: 30,
-                    coverflowEffect: {
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 2,
-                        slideShadows: false,
-                    },
-                    pagination: {
-                        el: ".duplicated-trend-pagination",
-                        clickable: true,
-                        renderBullet: function(index, className) {
-                            return `<span class="${className} w-2.5 h-2.5 bg-purple-500 opacity-30 hover:opacity-100 transition-opacity mx-1 rounded-full"></span>`;
-                        },
-                    },
-                });
-            });
-        </script>
-
-        <style>
-            .duplicated-slide {
-                background: transparent;
-                border-radius: 16px;
-                transition: transform 0.3s ease;
-            }
-
-            .duplicated-slide:hover {
-                transform: translateY(-6px);
-            }
-
-            .swiper-slide-active {
-                transform: scale(1.05);
-            }
-
-            .swiper-slide-active:hover {
-                transform: scale(1.05) translateY(-6px);
-            }
-        </style>
+        </div>
     </div>
 </x-layout.guest>

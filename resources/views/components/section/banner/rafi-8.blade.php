@@ -41,7 +41,6 @@
                 @endforeach
             </div>
 
-            {{-- Swiper --}}
             <div class="hero-banner-pagination swiper-pagination"></div>
             <div class="autoplay-progress">
                 <svg viewBox="0 0 48 48">

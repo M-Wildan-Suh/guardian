@@ -1,4 +1,4 @@
-<x-layout.guest title="Artikel{{$currentPage ? ' - Page ' . $currentPage : ''}}" :category="$category">
+<x-layout.guest :template="json_decode(\Storage::get('website.json'))->template" title="Artikel{{$currentPage ? ' - Page ' . $currentPage : ''}}" :category="$category">
     <div class=" w-full min-h-[calc(100vh-370px)]">
         <div class=" w-full py-6 sm:py-10 px-4 sm:px-6 space-y-8 sm:space-y-12">
             <div class=" w-full max-w-[1080px] mx-auto">
@@ -10,7 +10,7 @@
                     </div>
 
                     {{-- Article --}}
-                <div class="w-full grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class=" w-full grid grid-cols-2 md:grid-cols-4 gap-4">
                         @forelse ($data as $item)
                             @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
                         @empty

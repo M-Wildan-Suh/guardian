@@ -1,4 +1,4 @@
-<x-layout.guest :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
+<x-layout.guest :template="json_decode(\Storage::get('website.json'))->template" :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
 
     <div class="w-full overflow-x-hidden bg-gray-50">
         {{-- Banner --}}
@@ -29,7 +29,7 @@
                 </a>
                 <div class="p-4 flex flex-col justify-between flex-grow">
                     <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                        <h3 class="font-semibold text-lg text-gray-800 hover:text-orange-600 transition line-clamp-2">
+                        <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition line-clamp-2">
                             {{ $item->judul }}
                         </h3>
                     </a>
@@ -45,7 +45,7 @@
         {{-- Tombol --}}
         <div class="text-center mt-12">
             <a href="{{ route('article') }}"
-               class="inline-block px-6 py-3 text-main hover:text-white bg-second text-base rounded-full font-semibold transition">
+               class="inline-block px-6 py-3 text-white bg-second text-base rounded-full font-semibold transition">
                 Lihat Semua Artikel
             </a>
         </div>

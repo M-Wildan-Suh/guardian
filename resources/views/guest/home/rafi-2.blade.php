@@ -1,186 +1,174 @@
-<x-layout.guest :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
-    <div class="w-full px-4 sm:px-8 py-8 sm:py-12 space-y-4 sm:space-y-8 bg-white">
+<x-layout.guest :template="json_decode(\Storage::get('website.json'))->template" :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
+    <div class="w-full px-4 sm:px-8 py-8 sm:py-12 space-y-4 sm:space-y-8">
         {{-- Banner --}}
-        @include('components.section.banner.'.json_decode(\Storage::get('website.json'))->template)
+        @include('components.section.banner.' . json_decode(\Storage::get('website.json'))->template)
 
-        {{-- Article Terbaru --}}
-        <div class="w-full max-w-[1080px] mx-auto">
-            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
-                <div class="w-full col-span-1 md:col-span-4 space-y-4 sm:space-y-8">
-                    {{-- Title --}}
-                    <div class="w-full flex justify-between items-center">
-                        <div class="w-full flex items-center gap-2 sm:gap-4">
-                            <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-main rounded-full"></div>
-                            <p class="text-xl sm:text-3xl font-bold">Artikel Terbaru</p>
+        {{-- Article --}}
+        <div class="w-full max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="md:col-span-3 space-y-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    @foreach (collect($data)->shuffle()->take(4) as $item)
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                        class="relative group rounded-xl overflow-hidden h-64 cursor-pointer">
+
+                        <img src="{{ $item->banner 
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            alt="{{ $item->judul }}"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                        <div class="absolute inset-0 bg-black/60 transition-opacity duration-300 group-hover:bg-black/30"></div>
+
+                        <div class="absolute bottom-4 right-4 text-white flex flex-col space-y-1 max-w-[70%] text-right">
+                            <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
+                            <div class="flex items-center justify-between text-xs text-gray-200">
+                                <span class="truncate hover:text-blue-600 duration-300">
+                                    {{ $item->articles->user->name }}
+                                </span>
+                                <span class="whitespace-nowrap">
+                                    {{ $item->date }}
+                                </span>
+                            </div>
+
                         </div>
+                    </a>
+                    @endforeach
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach(array_slice($data, 4, 3) as $item)
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                        class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col cursor-pointer hover:shadow-xl transition-shadow duration-300">
+
+                        <img src="{{ $item->banner 
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            alt="{{ $item->judul }}"
+                            class="w-full h-44 object-cover rounded-t-xl" />
+
+                        <div class="p-4 flex flex-col flex-grow">
+                            <p class=" line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
+                            <div class="flex justify-between mt-1">
+                                <p class=" text-right text-gray-400">{{ $item->date }}</p>
+                                <p class="font-bold text-gray-400 hover:text-blue-600 duration-300">
+                                    {{ $item->articles->user->name }}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    @endforeach
+                </div>
+
+                {{-- Article --}}
+                {{-- Title --}}
+                <div class=" w-full flex items-center gap-2 sm:gap-4">
+                    <div class=" w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
+                    <p class=" text-xl sm:text-3xl font-bold text-center">Artikel Terbaru</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @foreach(array_slice($trend, 0, 4) as $item)
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                        class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-2xl transition-shadow duration-300">
+
+                        <img src="{{ $item->banner 
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            alt="{{ $item->judul }}"
+                            class="w-full h-60 object-cover rounded-t-xl" />
+
+                        <div class="p-5 flex flex-col flex-grow">
+                            <p class=" line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
+                            <p class=" text-right text-gray-400">{{ $item->date }}</p>
+                            <p class="font-bold text-gray-400 hover:text-blue-600 duration-300">
+                                {{ $item->articles->user->name }}
+                            </p>
+                        </div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Popular Article --}}
+            <div class="">
+                <div class=" md:sticky top-24 space-y-4 sm:space-y-6">
+                    {{-- Title --}}
+                    <div class=" w-full flex items-center gap-2 sm:gap-4 h-7 sm:h-10">
+                        <div class=" w-1 h-7 bg-second rounded-full"></div>
+                        <p class=" text-xl font-bold text-center">Artikel Populer</p>
                     </div>
 
                     {{-- Article --}}
-                    <div class="relative">
-                        <div class="w-full grid grid-cols-2 md:grid-cols-3 gap-4">
-                            @forelse (array_slice($data, 0, 3) as $item)
-                            @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                            @empty
-                            <div class="col-span-2 md:col-span-3 w-full flex justify-center text-center">
-                                <p class="text-neutral-600">Article tidak ditemukan</p>
-                            </div>
-                            @endforelse
-
-                            {{-- Lihat Lainnya --}}
-                            @if (count($data) > 3)
-                            <div class="md:hidden col-span-1 flex items-center justify-center">
-                                <a href="{{ route('article') }}" class="group">
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-10 h-10 bg-main rounded-full flex items-center justify-center shadow-lg group-hover:bg-green-900 transition-all duration-300">
-                                            <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white">
-                                                <path fill="none" d="M0 0h256v256H0z"></path>
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="24" d="m96 48 80 80-80 80"></path>
-                                            </svg>
-                                        </div>
-                                        <span class="text-xs mt-1 text-main group-hover:text-green-900 transition-colors duration-300">Lihat Lainnya</span>
-                                    </div>
-                                </a>
-                            </div>
-                            @endif
-                        </div>
-
-                        {{-- Desktop Button --}}
-                        @if (count($data) > 3)
-                        <div class="hidden md:flex justify-center mt-6">
-                            <a href="{{ route('article') }}">
-                                <button class="px-4 py-2 bg-main text-white rounded-full hover:bg-green-900 transition duration-300 text-sm sm:text-base whitespace-nowrap flex items-center gap-1">
-                                    Lihat Lainnya
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </button>
-                            </a>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Artikel Populer --}}
-        <div class="w-full max-w-[1080px] mx-auto bg-white">
-            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
-                <div class="w-full col-span-1 md:col-span-4 space-y-4 sm:space-y-8">
-                    {{-- Title --}}
-                    <div class="w-full flex justify-between items-center px-4">
-                        <div class="w-full flex items-center gap-2 sm:gap-4">
-                            <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-main rounded-full"></div>
-                            <p class="text-xl sm:text-3xl font-bold">Artikel Populer</p>
-                        </div>
-                    </div>
-
-                    <div class="hidden md:grid md:grid-cols-4 px-4 gap-4">
-                        @forelse (array_slice($trend, 0, 4) as $item)
-                        <div class="w-full">
-                            @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                        </div>
-                        @empty
-                        <div class="col-span-4 w-full flex justify-center text-center">
-                            <p class="text-neutral-600">Article tidak ditemukan</p>
-                        </div>
-                        @endforelse
-                    </div>
-
-                    {{-- Mobile Swiper --}}
-                    <div class="swiper trendArticlesSwiper md:hidden">
-                        <div class="swiper-wrapper px-4">
-                            @forelse (array_slice($trend, 0, 4) as $item)
-                            <div class="swiper-slide">
-                                @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                            </div>
-                            @empty
-                            <div class="swiper-slide w-full flex justify-center text-center">
-                                <p class="text-neutral-600">Article tidak ditemukan</p>
-                            </div>
-                            @endforelse
-                        </div>
+                    <div class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 sm:gap-8">
+                        @include('components.section.popular')
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggleBtn = document.getElementById('popularToggle');
+                const closeBtn = document.getElementById('closePopular');
+                const popularPanel = document.getElementById('popularPanel');
 
-    <style>
-        .banner-pagination .swiper-pagination {
-            right: 1rem;
-            left: auto;
-            width: auto;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 1rem;
-            bottom: 1rem !important;
-            top: auto !important;
-        }
+                if (!toggleBtn || !closeBtn || !popularPanel) return;
 
-        /* Floating Button Animation */
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
+                function togglePanel() {
+                    popularPanel.classList.toggle('hidden');
+                    popularPanel.classList.toggle('translate-x-full');
+                    popularPanel.classList.toggle('fixed');
+                    popularPanel.classList.toggle('right-0');
+                    popularPanel.classList.toggle('top-0');
+                    popularPanel.classList.toggle('h-screen');
+                    popularPanel.classList.toggle('w-72');
+                    popularPanel.classList.toggle('z-20');
+                    popularPanel.classList.toggle('overflow-y-auto');
+                }
 
-            50% {
-                transform: translateY(-5px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .floating-btn {
-            animation: float 3s ease-in-out infinite;
-        }
-    </style>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (document.querySelector('.banner-swiper')) {
-                new Swiper('.banner-swiper', {
-                    pagination: {
-                        el: '.banner-pagination',
-                        clickable: true,
-                    },
+                toggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    togglePanel();
                 });
+
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    togglePanel();
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!popularPanel.contains(e.target) && e.target !== toggleBtn) {
+                        if (!popularPanel.classList.contains('hidden')) {
+                            togglePanel();
+                        }
+                    }
+                });
+
+                popularPanel.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        </script>
+
+        {{-- Styles --}}
+        <style>
+            #popularPanel {
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
             }
 
-            let trendArticlesSwiper;
+            @media (min-width: 768px) {
+                #popularToggle {
+                    display: none !important;
+                }
 
-            function initTrendSwiper() {
-                if (window.innerWidth < 768 && !trendArticlesSwiper) {
-                    trendArticlesSwiper = new Swiper(".trendArticlesSwiper", {
-                        slidesPerView: 1.2,
-                        spaceBetween: 16,
-                        centeredSlides: false,
-                        loop: true,
-                        autoplay: {
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: ".trend-articles-pagination",
-                            clickable: true,
-                            dynamicBullets: true,
-                        },
-                        breakpoints: {
-                            480: {
-                                slidesPerView: 1.5
-                            },
-                            640: {
-                                slidesPerView: 2
-                            }
-                        },
-                    });
+                #popularPanel {
+                    transform: none !important;
+                    position: static !important;
+                    height: auto !important;
+                    width: auto !important;
                 }
             }
+        </style>
 
-            initTrendSwiper();
-            window.addEventListener("resize", initTrendSwiper);
-        });
-    </script>
+    </div>
 </x-layout.guest>

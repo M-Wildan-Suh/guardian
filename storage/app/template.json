@@ -72,9 +72,9 @@
     {
         "name" : "rafi-10",
         "background" : "#f5f5f5",
-        "main" : "#14532d",
-        "second" : "#F3C623",
-        "third" : "#19282F"
+        "main" : "#154D71",
+        "second" : "#8A0000",
+        "third" : "#57564F"
     },
     {
         "name" : "rafi-11",
@@ -85,6 +85,13 @@
     },
     {
         "name" : "rafi-12",
+        "background" : "#f5f5f5",
+        "main" : "#0D5EA6",
+        "second" : "#093FB4",
+        "third" : "#1f2937"
+    },
+    {
+        "name" : "rafi-13",
         "background" : "#f5f5f5",
         "main" : "#0D5EA6",
         "second" : "#093FB4",

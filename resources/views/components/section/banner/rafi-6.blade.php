@@ -1,5 +1,5 @@
 <div class="w-screen relative">
-  <div class="w-full h-[calc(50vh-40px)] sm:h-[calc(100vh-80px)]">
+  <div class="w-full h-screen sm:h-screen">
     <div class="swiper heroBannerSwiper w-full h-full">
       <div class="swiper-wrapper">
         @foreach (array_slice($trend, 0, 4) as $item)
@@ -13,11 +13,11 @@
               class="w-full h-full object-cover" />
           </a>
 
-          <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-center text-white space-y-2">
-            <div class="flex flex-wrap gap-2 mx-auto">
+          <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-center text-white space-y-2 px-4">
+            <div class="flex flex-wrap justify-center gap-2">
               @foreach ($item->articles->articlecategory as $category)
               <a href="{{ route('category', ['category' => $category->slug]) }}"
-                class="bg-white text-gray-700 text-xs px-3 py-1 rounded-full">
+                class="inline-block bg-white/90 hover:bg-white text-gray-800 hover:text-main-dark text-xs font-medium px-3 py-1 rounded-full transition-all duration-200 ease-in-out shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
                 {{ $category->category }}
               </a>
               @endforeach
@@ -42,7 +42,7 @@
         @endforeach
       </div>
 
-      <div class="hero-banner-pagination swiper-pagination "></div>
+      <div class="hero-banner-pagination swiper-pagination"></div>
     </div>
   </div>
 </div>

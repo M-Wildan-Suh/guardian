@@ -1,5 +1,4 @@
-<x-layout.guest :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
-
+<x-layout.guest :template="json_decode(\Storage::get('website.json'))->template" :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
     <div class="w-full overflow-x-hidden bg-gray-50">
         {{-- Banner --}}
         <div class="relative">
@@ -8,136 +7,122 @@
         </div>
 
         {{-- Artikel --}}
-        <section class="w-full bg-background py-16">
-            <div class="w-full max-w-[1200px] mx-auto px-4">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-2 h-12 bg-main hover:bg-second rounded-full"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-main">
-                        Artikel Populer
-                    </h2>
+        <div class="w-full max-w-[1100px] mx-auto p-4 grid grid-cols-1 md:grid-cols-4 gap-6 pb-4 mt-5">
+            <div class="md:col-span-3 space-y-10 md:border-r md:border-gray-300 md:pr-6">
+                {{-- Title --}}
+                <div class=" w-full flex items-center gap-2 sm:gap-4">
+                    <div class=" w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
+                    <p class=" text-xl sm:text-3xl font-bold text-center">Artikel Terbaru</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    @foreach (collect($data)->shuffle()->take(4) as $item)
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                        class="relative group rounded-xl overflow-hidden h-64 cursor-pointer">
+
+                        <img src="{{ $item->banner 
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            alt="{{ $item->judul }}"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                        <div class="absolute inset-0 bg-black/60 transition-opacity duration-300 group-hover:bg-black/30"></div>
+
+                        <div class="absolute bottom-4 right-4 text-white flex flex-col space-y-1 max-w-[70%] text-right">
+                            <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
+                            <div class="flex items-center justify-between text-xs text-gray-200">
+                                <span class="truncate hover:text-blue-600 duration-300">
+                                    {{ $item->articles->user->name }}
+                                </span>
+                                <span class="whitespace-nowrap">
+                                    {{ $item->date }}
+                                </span>
+                            </div>
+
+                        </div>
+                    </a>
+                    @endforeach
                 </div>
 
-                <div class="swiper desktopTrendSwiper pb-12">
-                    <div class="swiper-wrapper">
-                        @foreach ($trend as $item)
-                        <div class="swiper-slide max-w-[1080px] px-1">
-                            <div class="relative overflow-hidden rounded-xl shadow-lg h-full">
-                                @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
+                <div class="grid grid-cols-1 gap-6">
+                    @foreach (array_slice($data, 0, 1) as $item)
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                        class="relative group w-full h-[400px] rounded-xl overflow-hidden cursor-pointer">
+
+                        <img src="{{ $item->banner 
+                        ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                        : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            alt="{{ $item->judul }}"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent 
+                    transition-opacity duration-300 group-hover:from-black/60 group-hover:via-black/30">
+                        </div>
+
+                        @foreach ($item->articles->articlecategory as $category)
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                            {{ $category->category }}
+                        </span>
+                        @endforeach
+
+                        <div class="absolute bottom-0 p-6 text-white space-y-2">
+                            <h2 class="font-bold text-2xl leading-tight hover:text-blue-400 duration-300 line-clamp-2">
+                                {{ $item->judul }}
+                            </h2>
+                            <p class="text-sm text-gray-200 line-clamp-3">
+                                {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
+                            </p>
+                            <div class="flex items-center gap-3 text-xs text-gray-300">
+                                <span class="font-semibold hover:text-blue-400">{{ $item->articles->user->name }}</span>
+                                <span>{{ $item->date }}</span>
                             </div>
                         </div>
+                    </a>
+                    @endforeach
+                </div>
+                {{-- Pagination --}}
+                @include('components.section.pagination')
+            </div>
+
+            {{-- Popular Article --}}
+            <div class="md:pl-6">
+                <div class="md:sticky top-24 space-y-4 sm:space-y-6">
+                    {{-- Title --}}
+                    <div class="w-full flex items-center gap-2 sm:gap-4 h-7 sm:h-10">
+                        <div class="w-1 h-7 bg-second rounded-full"></div>
+                        <p class="text-xl font-bold text-center">Artikel Populer</p>
+                    </div>
+
+                    {{-- Article --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 sm:gap-8">
+                        @include('components.section.popular')
+                    </div>
+
+                    {{-- Grid 4 Card Kecil --}}
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        @foreach (collect($trend)->shuffle()->take(4) as $item)
+                        <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                            class="relative group rounded-lg overflow-hidden aspect-square cursor-pointer">
+
+                            <img src="{{ $item->banner 
+                                ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                alt="{{ $item->judul }}"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                            <div class="absolute inset-0 bg-black/40"></div>
+
+                            <div class="absolute inset-0 flex items-center justify-center px-2">
+                                <p class="text-white text-center text-sm font-bold opacity-70 line-clamp-2">
+                                    {{ $item->judul }}
+                                </p>
+                            </div>
+                        </a>
                         @endforeach
                     </div>
-                    <div class="swiper-pagination desktop-trend-pagination mt-4 flex justify-center gap-2"></div>
                 </div>
             </div>
-        </section>
 
-        {{-- Artikel --}}
-        <section class="w-full max-w-[1200px] mx-auto px-4 py-16">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="w-2 h-12 bg-main rounded-full"></div>
-                <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-second">
-                    Artikel Terbaru
-                </h2>
-            </div>
+        </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach (array_slice($data, 0, 3) as $item)
-                    @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
-                @endforeach
-            </div>
-
-            @if (count($data) > 3)
-            <div class="w-full flex justify-center mt-12">
-                <a href="{{ route('article') }}" class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-main rounded-full group">
-                    <span class="absolute right-0 transition-all duration-300 w-8 h-8 -mt-2 rounded-full bg-main group-hover:w-full group-hover:-right-4"></span>
-                    <span class="relative flex items-center gap-2 text-sm font-medium transition-all duration-300 group-hover:translate-x-2">
-                        Lihat Semua Artikel
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                    </span>
-                </a>
-            </div>
-            @endif
-        </section>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new Swiper(".heroSwiper", {
-                    loop: true,
-                    autoplay: {
-                        delay: 5000,
-                        disableOnInteraction: false,
-                    },
-                    pagination: {
-                        el: ".hero-banner-pagination",
-                        clickable: true,
-                        renderBullet: function(index, className) {
-                            return `<span class="${className} w-3 h-3 bg-white opacity-50 hover:opacity-100 transition-opacity mx-1 rounded-full"></span>`;
-                        },
-                    },
-                });
-
-                new Swiper(".desktopTrendSwiper", {
-                    effect: "coverflow",
-                    grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: "auto",
-                    loop: true,
-                    spaceBetween: 30,
-                    keyboard: {
-                        enabled: true,
-                        onlyInViewport: true,
-                    },
-                    coverflowEffect: {
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 2,
-                        slideShadows: false,
-                    },
-                    pagination: {
-                        el: ".desktop-trend-pagination",
-                        clickable: true,
-                        renderBullet: function(index, className) {
-                            return `<span class="${className} w-2.5 h-2.5 bg-main opacity-30 hover:opacity-100 transition-opacity mx-1 rounded-full"></span>`;
-                        },
-                    },
-                    breakpoints: {
-                        640: {
-                            coverflowEffect: {
-                                rotate: 5,
-                                stretch: 10,
-                            }
-                        }
-                    }
-                });
-            });
-        </script>
-
-        <style>
-            .swiper-slide {
-                background: transparent;
-                border-radius: 12px;
-                transition: transform 0.3s ease;
-            }
-
-            .swiper-slide:hover {
-                transform: translateY(-5px);
-            }
-
-            .swiper-slide-active {
-                transform: scale(1.05);
-            }
-
-            .swiper-slide-active:hover {
-                transform: scale(1.05) translateY(-5px);
-            }
-
-            .hero-banner {
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-        </style>
     </div>
 </x-layout.guest>

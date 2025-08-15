@@ -1,4 +1,7 @@
-<x-layout.guest :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" :category="$category">
+<x-layout.guest :template="json_decode(\Storage::get('website.json'))->template" 
+                :title="optional(json_decode(\Storage::get('website.json'), true))['title'] ?? 'title'" 
+                :category="$category">
+
     <div class="w-full overflow-hidden bg-background">
 
         {{-- Banner --}}
@@ -6,104 +9,122 @@
             <div class="swiper mainBannerSwiper h-full w-full">
                 <div class="swiper-wrapper">
                     @foreach (array_slice($trend, 0, 4) as $item)
-                    <div class="swiper-slide relative">
-                        <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                            alt="{{ $item->judul }}"
-                            class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-center px-6 sm:px-10 text-white">
-                            <div class="flex flex-wrap justify-center gap-2 mb-2">
-                                @foreach ($item->articles->articlecategory as $category)
-                                <a href="{{ route('category', ['category' => $category->slug]) }}"
-                                    class="bg-white text-gray-700 text-xs px-3 py-1 rounded-full">
-                                    {{ $category->category }}
-                                </a>
-                                @endforeach
+                        <div class="swiper-slide relative">
+                            <img src="{{ $item->banner 
+                                        ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                        : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                alt="{{ $item->judul }}"
+                                class="w-full h-full object-cover" />
+
+                            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center text-center px-6 sm:px-10 text-white">
+                                <div class="flex flex-wrap justify-center gap-2 mb-2">
+                                    @foreach ($item->articles->articlecategory as $category)
+                                        <a href="{{ route('category', ['category' => $category->slug]) }}"
+                                           class="bg-white text-gray-700 text-xs px-3 py-1 rounded-full">
+                                            {{ $category->category }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                                <h2 class="text-xl sm:text-3xl font-bold line-clamp-2">{{ $item->judul }}</h2>
+                                <p class="mt-2 text-sm sm:text-base line-clamp-2">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
+                                <span class="mt-3 text-xs">
+                                    <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">
+                                        {{ $item->articles->user->name }}
+                                    </a>, {{ $item->date }}
+                                </span>
                             </div>
-                            <h2 class="text-xl sm:text-3xl font-bold line-clamp-2">{{ $item->judul }}</h2>
-                            <p class="mt-2 text-sm sm:text-base line-clamp-2">
-                                {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
-                            </p>
-                            <span class="mt-3 text-xs">
-                                <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">
-                                    {{ $item->articles->user->name }}
-                                </a>, {{ $item->date }}
-                            </span>
                         </div>
-                    </div>
                     @endforeach
                 </div>
                 <div class="swiper-pagination main-banner-pagination"></div>
             </div>
         </section>
 
-        {{-- Artikel Populer --}}
-        <div class="w-full max-w-[1080px] mx-auto px-3 sm:px-6 mt-4">
-                    <div class=" w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="w-full col-span-1 md:col-span-4 space-y-5 sm:space-y-8">
+        {{-- Artikel --}}
+        <div class="w-full max-w-[1080px] mx-auto mt-5 px-4 sm:px-0">
+            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+
+                {{-- Artikel Terbaru --}}
+                <div class="w-full col-span-1 md:col-span-3 space-y-6 sm:space-y-8">
                     {{-- Title --}}
-                    <div class="w-full flex justify-between items-center px-2 sm:px-0">
-                        <div class="w-full flex items-center gap-2 sm:gap-4">
-                            <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
-                            <p class="text-xl sm:text-3xl text-main font-bold">Artikel Populer</p>
-                        </div>
+                    <div class="flex items-center gap-2 sm:gap-4">
+                        <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
+                        <p class="text-xl sm:text-3xl font-bold text-gray-800">Artikel Terbaru</p>
                     </div>
 
-                    {{-- Artikel --}}
-                    <div class=" w-full overflow-hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-                        @foreach (array_slice($data, 0, 3) as $item)
-                        <div class=" w-full flex-shrink-0">
-                            @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                        </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                        @foreach(array_slice($trend, 0, 6) as $item)
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}" 
+                               class="relative group block w-full h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                                
+                                <img src="{{ $item->banner 
+                                            ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                            : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                     alt="{{ $item->judul }}"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
+                                {{-- Overlay --}}
+                                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
+
+                                <div class="absolute bottom-0 p-5 text-white">
+                                    <h3 class="text-2xl font-bold line-clamp-2">{{ $item->judul }}</h3>
+                                    <p class="mt-1 text-sm line-clamp-2">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
+                                    <p class="mt-2 text-xs italic">{{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}</p>
+                                </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
-            </div>
-        </div>
 
-        {{-- Artikel Terbaru --}}
-        <section class="py-12 md:py-16 bg-background">
-            <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
-                <div class="flex items-center gap-3 mb-8 md:mb-10">
-                    <div class="w-2 h-10 md:h-12 bg-second rounded-full"></div>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-main">Artikel Terbaru</h2>
-                </div>
+                {{-- Artikel Populer --}}
+                <div>
+                    <div class="md:sticky top-24 space-y-4 sm:space-y-6 pb-8">
+                        {{-- Title --}}
+                        <div class="flex items-center gap-2 h-7 sm:h-10">
+                            <div class="w-1 h-7 bg-second rounded-full"></div>
+                            <p class="text-xl font-bold">Artikel Populer</p>
+                        </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach (array_slice($data, 0, 3) as $item)
-                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                        @include('components.section.article.' . json_decode(\Storage::get('website.json'))->template)
+                        <div class="flex flex-col gap-4">
+                            @foreach (collect($data)->shuffle()->take(5) as $item)
+                                <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                                   class="relative group rounded-xl overflow-hidden h-32 w-full cursor-pointer">
+                                    
+                                    <img src="{{ $item->banner 
+                                                ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                                : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                         alt="{{ $item->judul }}"
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                                    <div class="absolute inset-0 bg-black/60 transition-opacity duration-300 group-hover:bg-black/30"></div>
+
+                                    <div class="absolute bottom-4 right-4 flex flex-col justify-center text-white space-y-1 max-w-[70%] text-right">
+                                        <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300 text-sm">
+                                            {{ $item->judul }}
+                                        </p>
+                                        <div class="flex items-center justify-between text-xs text-gray-200">
+                                            <span class="truncate hover:text-blue-600 duration-300">{{ $item->articles->user->name }}</span>
+                                            <span class="whitespace-nowrap">{{ $item->date }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
-                    @endforeach
                 </div>
+            </div>
 
-                @if (count($data) > 3)
-                <div class="w-full flex justify-center mt-6">
-                <a href="{{ route('article') }}">
-                    <button class="px-4 py-2 text-base font-semibold md:font-normal bg-main text-white rounded-full hover:bg-blue-900 transition duration-300">
-                        Lihat Lainnya
-                    </button>
+            {{-- Lihat Semua Artikel --}}
+            <div class="flex justify-center mb-8 pt-4">
+                <a href="{{ route('article') }}"
+                   class="inline-block px-6 py-3 text-white hover:text-main bg-second text-base rounded-full font-semibold transition-colors duration-300">
+                    Lihat Semua Artikel
                 </a>
             </div>
-                @endif
-            </div>
-        </section>
+        </div>
     </div>
 
-    <style>
-        .articleSwiper {
-            overflow: hidden;
-            margin: 0 -8px;
-        }
-
-        .articleSwiper .swiper-slide {
-            width: 280px !important;
-            height: auto;
-        }
-
-    </style>
-
     <script>
-        // Banner Swiper
         new Swiper(".mainBannerSwiper", {
             loop: true,
             autoplay: {
@@ -115,28 +136,6 @@
                 clickable: true,
             },
         });
-
-        // Artikel Populer Swiper
-        document.addEventListener('DOMContentLoaded', function() {
-            new Swiper(".articleSwiper", {
-                slidesPerView: 'auto',
-                spaceBetween: 16,
-                centeredSlides: false,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                breakpoints: {
-                    640: {
-                        slidesPerView: 'auto',
-                        spaceBetween: 16
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 16
-                    }
-                }
-            });
-        });
     </script>
+
 </x-layout.guest>
