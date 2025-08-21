@@ -25,7 +25,7 @@
           <div class="flex flex-wrap gap-2 justify-center">
             @foreach ($mainArticle->articles->articlecategory as $category)
             <a href="{{ route('category', ['category' => $category->slug]) }}"
-              class=" text-white text-lg font-semibold px-3 py-1 rounded-full">
+              class=" text-white text-sm sm:text-lg font-semibold px-3 py-1 rounded-full">
               #{{ $category->category }}
             </a>
             @endforeach
@@ -77,10 +77,10 @@
           class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-row cursor-pointer hover:shadow-2xl transition-shadow duration-300">
 
           <img src="{{ $item->banner 
-                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+              ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+              : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
             alt="{{ $item->judul }}"
-            class="w-40 h-40 object-cover flex-shrink-0" />
+            class="w-24 h-24 sm:w-40 sm:h-40 object-cover flex-shrink-0" />
 
           <div class="p-5 flex flex-col justify-between">
             <div>

@@ -5,12 +5,14 @@
             <div class="absolute left-0 top-0 h-full bg-red-600 px-4 flex items-center font-bold z-20">
                 Breaking News
             </div>
-            <div class="ml-40 text-base font-semibold whitespace-nowrap animate-marquee">
-                @foreach (array_slice($trend, 0, 10) as $item)
-                <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="mx-6 hover:underline">
-                    {{ $item->judul }}
-                </a>
-                @endforeach
+            <div class="ml-30 relative font-semibold text-base overflow-hidden">
+                <div class="flex whitespace-nowrap animate-marquee">
+                    @foreach (array_slice($trend, 0, 10) as $item)
+                    <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="mx-6 hover:underline">
+                        {{ $item->judul }}
+                    </a>
+                    @endforeach
+                </div>
             </div>
         </div>
 
@@ -61,7 +63,7 @@
                 <div class="flex items-center gap-3 mb-12">
                     <div class="w-2 h-12 bg-main rounded-full"></div>
                     <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-main">
-                        Artikel Terbaru
+                        Artikel Populer
                     </h2>
                 </div>
 
@@ -69,28 +71,54 @@
                     <div class="lg:col-span-2">
                         @if (isset($data[0]))
                         @php $item = $data[0]; @endphp
-                        <div class="bg-white border border-main/20 rounded-2xl shadow hover:shadow-xl transition overflow-hidden">
-                            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                                    alt="{{ $item->judul }}"
-                                    class="w-full h-80 object-cover">
-                            </a>
-                            <div class="p-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white border border-main/20 rounded-2xl shadow hover:shadow-xl transition overflow-hidden">
                                 <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                    <h3 class="text-2xl font-bold text-gray-800 hover:text-main transition line-clamp-2">
-                                        {{ $item->judul }}
-                                    </h3>
+                                    <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                        alt="{{ $item->judul }}"
+                                        class="w-full h-80 object-cover">
                                 </a>
-                                <div class="text-xs text-gray-500 mt-2 flex items-center gap-3">
-                                    <span>{{ $item->date }}</span>
-                                    <span>|</span>
-                                    <span>{{ $item->articles->user->name ?? 'Admin' }}</span>
+                                <div class="p-5">
+                                    <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                                        <h3 class="text-2xl font-bold text-gray-800 hover:text-main transition line-clamp-2">
+                                            {{ $item->judul }}
+                                        </h3>
+                                    </a>
+                                    <div class="text-xs text-gray-500 mt-2 flex items-center gap-3">
+                                        <span>{{ $item->date }}</span>
+                                        <span>|</span>
+                                        <span>{{ $item->articles->user->name ?? 'Admin' }}</span>
+                                    </div>
+                                    <p class="mt-3 text-sm text-gray-600">
+                                        {!! nl2br(Str::limit(strip_tags($item->article), 150)) !!}
+                                    </p>
                                 </div>
-                                <p class="mt-3 text-sm text-gray-600">
-                                    {!! nl2br(Str::limit(strip_tags($item->article), 150)) !!}
-                                </p>
+                            </div>
+
+                            <div class="bg-white border border-main/20 rounded-2xl shadow hover:shadow-xl transition overflow-hidden">
+                                <a href="#">
+                                    <img src="https://bizlink.sites.id/assets/images/placeholder.webp"
+                                        alt="Judul Artikel"
+                                        class="w-full h-80 object-cover">
+                                </a>
+                                <div class="p-5">
+                                    <a href="#">
+                                        <h3 class="text-2xl font-bold text-gray-800 hover:text-main transition line-clamp-2">
+                                            {{ $item->judul }}
+                                        </h3>
+                                    </a>
+                                    <div class="text-xs text-gray-500 mt-2 flex items-center gap-3">
+                                        <span>{{ $item->date }}</span>
+                                        <span>|</span>
+                                        <span>{{ $item->articles->user->name ?? 'Admin' }}</span>
+                                    </div>
+                                    <p class="mt-3 text-sm text-gray-600">
+                                        {!! nl2br(Str::limit(strip_tags($item->article), 150)) !!}
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
                         @endif
 
                         <div class="w-full max-w-[1080px] mx-auto bg-white rounded-xl shadow-md p-4 sm:p-6 mt-4">
@@ -99,17 +127,17 @@
                                 @foreach(array_slice($trend, 0, 3) as $item)
                                 <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="group">
                                     <div class="p-3 border border-gray-200 rounded-lg transition-colors h-full">
-                                    <div class="flex gap-3">
-                                    <img src="{{ $item->banner 
+                                        <div class="flex gap-3">
+                                            <img src="{{ $item->banner 
                                             ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
                                             : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                                            alt="{{ $item->judul }}"
-                                            class="w-20 h-20 object-cover flex-shrink-0 left-3 rounded" />
-                                        <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-1">
-                                            {{ $item->judul }}
-                                        </h3>
-                                        
-                                    </div>
+                                                alt="{{ $item->judul }}"
+                                                class="w-20 h-20 object-cover flex-shrink-0 left-3 rounded" />
+                                            <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-1">
+                                                {{ $item->judul }}
+                                            </h3>
+
+                                        </div>
                                     </div>
                                 </a>
                                 @endforeach
@@ -173,7 +201,7 @@
         </section>
 
         {{-- Artikel Terbaru --}}
-        <section class="w-full py-20">
+        <section class="w-full py-12">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="flex items-center gap-3 mb-12">
                     <div class="w-2 h-12 bg-main rounded-full"></div>
@@ -208,7 +236,7 @@
 
                 <div class="text-center mt-14">
                     <a href="{{ route('article') }}" class="inline-block px-7 py-3 bg-main text-white rounded-full font-semibold hover:opacity-90 transition">
-                        Lihat Semua Artikel
+                        Lihat Semua
                     </a>
                 </div>
             </div>
@@ -282,19 +310,30 @@
 
             @keyframes marquee {
                 0% {
-                    transform: translateX(10%);
+                    transform: translateX(0);
                 }
 
                 100% {
-                    transform: translateX(-10%);
+                    transform: translateX(-100%);
+                }
+            }
+
+            @keyframes marquee2 {
+                0% {
+                    transform: translateX(100%);
+                }
+
+                100% {
+                    transform: translateX(-0%);
                 }
             }
 
             .animate-marquee {
-                animation: marquee 5s linear infinite;
-                white-space: nowrap;
-                position: relative;
-                z-index: 10;
+                animation: marquee 20s linear infinite;
+            }
+
+            .animate-marquee2 {
+                animation: marquee2 20s linear infinite;
             }
         </style>
     </div>

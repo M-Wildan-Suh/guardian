@@ -9,12 +9,13 @@
                     loading="lazy">
             </div>
         </a>
-        <div class="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 z-10">
+
+        <div class="absolute bottom-3 left-3 flex flex-wrap gap-2 z-30 p-1 rounded">
             @foreach ($item->articles->articlecategory as $category)
-                <a href="{{ route('category', ['category' => $category->slug]) }}"
-                    class="article-badge">
-                    {{ $category->category }}
-                </a>
+            <a href="{{ route('category', ['category' => $category->slug]) }}"
+                class="article-badge px-3 py-1 bg-second text-white text-xs font-medium rounded-full shadow-sm hover:shadow-md transition">
+                {{ $category->category }}
+            </a>
             @endforeach
         </div>
     </div>
@@ -53,19 +54,19 @@
 </div>
 
 <style>
-.article-card {
-    border: 1px solid #e5e7eb;
-}
+    .article-card {
+        border: 1px solid #e5e7eb;
+    }
 
-.shadow-article {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-.shadow-article-lg {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-}
+    .shadow-article {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
 
-.article-badge {
-    @apply inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-gray-800 rounded-full shadow-sm hover:bg-white transition;
-}
+    .shadow-article-lg {
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
 
+    .article-badge {
+        @apply inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-gray-800 rounded-full shadow-sm hover:bg-white transition;
+    }
 </style>

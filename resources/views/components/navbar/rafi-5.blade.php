@@ -1,23 +1,21 @@
-<div class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
-  <div class="max-w-[1200px] mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
+<div x-data="{ open: false }" class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
     {{-- Navbar --}}
     <div class="hidden md:flex items-center space-x-8">
       <a href="{{ route('home') }}" class="text-gray-700 hover:text-main font-semibold transition duration-200">Beranda</a>
 
       {{-- Dropdown --}}
-      <div x-data="{ open: false }" class="relative">
-        <button @click="open = !open" class="flex items-center gap-1 text-gray-700 hover:text-main font-semibold transition duration-200 overflow-visible">
+      <div x-data="{ dropdown: false }" class="relative">
+        <button @click="dropdown = !dropdown" class="flex items-center gap-1 text-gray-700 hover:text-main font-semibold transition duration-200">
           Artikel
-          <i class="fas fa-chevron-down text-xs transition-transform duration-200" 
-         :class="{ 'rotate-180': open }"></i>
+          <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{ 'rotate-180': dropdown }"></i>
         </button>
-        <div x-show="open" @click.away="open = false"
+        <div x-show="dropdown" @click.away="dropdown = false"
           class="absolute left-0 mt-3 bg-white shadow-lg rounded-lg p-3 w-56 space-y-1"
           x-transition>
           <a href="{{ route('article') }}" class="block px-3 py-2 text-gray-700 hover:bg-main/10 rounded transition duration-200">Artikel Terbaru</a>
           @foreach ($category as $item)
-          <a href="{{ route('category', ['category' => $item->slug]) }}"
-            class="block px-3 py-2 text-gray-700 hover:bg-main/10 rounded transition duration-200">{{ $item->category }}</a>
+          <a href="{{ route('category', ['category' => $item->slug]) }}" class="block px-3 py-2 text-gray-700 hover:bg-main/10 rounded transition duration-200">{{ $item->category }}</a>
           @endforeach
         </div>
       </div>
@@ -27,13 +25,13 @@
 
     {{-- Logo --}}
     <a href="{{ route('home') }}" class="absolute left-1/2 transform -translate-x-1/2 flex-shrink-0">
-    @php $site = json_decode(\Storage::get('website.json'), true); @endphp
-    @if (($site['type'] ?? null) === 'teks')
-      <p class="text-2xl font-bold text-main">{{ $site['title'] }}</p>
-    @elseif (($site['type'] ?? null) === 'image')
-      <img src="{{ asset('storage/images/' . $site['image']) }}" alt="Logo" class="h-10 object-contain">
-    @endif
-  </a>
+      @php $site = json_decode(\Storage::get('website.json'), true); @endphp
+      @if (($site['type'] ?? null) === 'teks')
+        <p class="text-2xl font-bold text-main">{{ $site['title'] }}</p>
+      @elseif (($site['type'] ?? null) === 'image')
+        <img src="{{ asset('storage/images/' . $site['image']) }}" alt="Logo" class="h-10 object-contain">
+      @endif
+    </a>
 
     {{-- Search --}}
     <div class="hidden md:flex items-center space-x-4">
@@ -54,7 +52,7 @@
     </div>
 
     {{-- Mobile Menu Button --}}
-    <button @click="open = !open" class="md:hidden p-2 text-gray-700 hover:text-main" x-data="{ open: false }">
+    <button @click="open = !open" class="md:hidden p-2 text-gray-700 hover:text-main">
       <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M4 6h16M4 12h16M4 18h16" />

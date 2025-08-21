@@ -118,7 +118,7 @@
             <div class="flex justify-center mb-8 pt-4">
                 <a href="{{ route('article') }}"
                    class="inline-block px-6 py-3 text-white hover:text-main bg-second text-base rounded-full font-semibold transition-colors duration-300">
-                    Lihat Semua Artikel
+                    Lihat Lainnya
                 </a>
             </div>
         </div>

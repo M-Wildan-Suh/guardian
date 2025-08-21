@@ -1,5 +1,5 @@
 <div x-data="{ open: false, searchOpen: false }" class="relative">
-  <div class="sticky top-0 z-50 flex justify-between items-center px-6 py-4 bg-white shadow-md">
+  <div class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 sm:px-16 lg:px-24 py-4 bg-white shadow-md">
     {{-- Logo --}}
     <a href="{{ route('home') }}" class="flex items-center space-x-2">
       @php $site = json_decode(\Storage::get('website.json'), true); @endphp
@@ -10,7 +10,7 @@
       @endif
     </a>
 
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-2 sm:space-x-4">
       {{-- Search Icon --}}
       <button @click="searchOpen = !searchOpen" class="p-2 focus:outline-none">
         <svg class="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -25,7 +25,7 @@
                             alt="{{ $item->judul }}"
                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
 
-                        <div class="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+                        <div class="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
                             <p class="text-white font-bold text-lg line-clamp-1">{{ $item->judul }}</p>
                             <p class="text-sm text-white line-clamp-2 mt-1">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
                             <div class="flex items-center gap-2 text-xs text-gray-200 mt-3">

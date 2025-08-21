@@ -8,11 +8,11 @@
         @include('components.section.banner.' . json_decode(\Storage::get('website.json'))->template)
 
         {{-- Banner 2 --}}
-        <div class="w-full max-w-[1080px] mx-auto bg-white rounded-xl shadow-md p-4 sm:p-6">
+        <div class="w-full max-w-[1080px] mx-auto bg-white rounded-xl shadow-md p-4 sm:p-6 mb-4">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center gap-2">
                     <div class="w-1.5 h-6 bg-main rounded-full"></div>
-                    <h2 class="text-xl font-bold text-main">Hot News</h2>
+                    <h2 class="text-xl font-bold text-main">Trending</h2>
                 </div>
                 <a href="{{ route('article') }}" class="text-sm font-medium text-gray-500 hover:text-blue-600">
                     Lihat Lainnya &gt;
@@ -39,7 +39,7 @@
         </div>
 
         {{-- Article --}}
-        <div class="w-full max-w-[1080px] mx-auto px-5 sm:px-8 pt-2">
+        <div class="w-full max-w-[1080px] mx-auto px-5 sm:px-8 pt-6">
             <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
 
                 {{-- Main --}}

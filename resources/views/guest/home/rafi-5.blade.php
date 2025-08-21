@@ -104,10 +104,10 @@
           class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-row cursor-pointer hover:shadow-2xl transition-shadow duration-300">
 
           <img src="{{ $item->banner 
-              ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-              : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+            ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+            : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
             alt="{{ $item->judul }}"
-            class="w-40 h-40 object-cover flex-shrink-0" />
+            class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-cover flex-shrink-0 rounded-lg" />
 
           <div class="p-5 flex flex-col justify-between">
             <div>

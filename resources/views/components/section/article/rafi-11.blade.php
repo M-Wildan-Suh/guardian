@@ -24,7 +24,7 @@
     {{-- Content --}}
     <div class="p-5 flex flex-col gap-3">
         <a href="{{ route('detail', ['slug' => $item->slug]) }}" aria-label="{{ $item->judul }}">
-            <h3 class="text-xl font-semibold text-gray-900 leading-snug line-clamp-2 hover:text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 transition-colors duration-300">
+            <h3 class="text-xl font-semibold text-gray-900 leading-snug line-clamp-2 hover:text-main">
                 {{ $item->judul }}
             </h3>
         </a>
@@ -35,7 +35,7 @@
 
         <div class="flex items-center justify-between text-sm text-gray-500 mt-3">
             <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-               class="flex items-center gap-1 font-medium hover:text-pink-500 transition">
+               class="flex items-center gap-1 font-medium hover:text-main">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                      viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

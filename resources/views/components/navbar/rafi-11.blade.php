@@ -43,39 +43,39 @@
       <span x-show="open">Beranda</span>
     </a>
 
+    {{-- Dropdown Artikel --}}
+    <a @click="open = true; article = !article"
+    class="w-full flex justify-between items-center px-4 py-2 text-lg font-medium rounded-md 
+          {{ request()->routeIs('article*', 'category*', 'tag*', 'detail') ? 'bg-main/10 text-main' : 'text-gray-700 hover:text-main hover:bg-gray-100' }}">
+  <div class="flex items-center gap-3 font-semibold text-base">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" 
+        class="w-5 h-5" fill="currentColor">
+      <path d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM8 8h16v2H8V8Zm0 4h16v2H8v-2Zm0 4h16v2H8v-2Zm0 4h10v2H8v-2Z" />
+    </svg>
+    <span x-show="open">Artikel</span>
+  </div>
 
-    {{-- Dropdown --}}
-    <div>
-      <button @click="article = !article"
-        class="w-full flex justify-between items-center px-4 py-2 text-lg font-medium rounded-md 
-              {{ request()->routeIs('article*', 'category*', 'tag*', 'detail') ? 'bg-main/10 text-main' : 'text-gray-700 hover:text-main hover:bg-gray-100' }}">
-        <div class="flex items-center gap-3 font-semibold text-base">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5" fill="currentColor">
-            <path d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM8 8h16v2H8V8Zm0 4h16v2H8v-2Zm0 4h16v2H8v-2Zm0 4h10v2H8v-2Z" />
-          </svg>
-          <span x-show="open">Artikel</span>
-        </div>
-        <svg x-show="open" class="w-5 h-5 transition-transform duration-200"
-          :class="{ 'rotate-180': article }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+  <svg class="w-5 h-5 transition-transform duration-200"
+    :class="{ 'rotate-180': article }" 
+    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M19 9l-7 7-7-7" />
+  </svg>
+</a>
 
-      <div x-show="article && open" x-transition class="mt-1 space-y-1 pl-6">
-        <a href="{{ route('article') }}"
-          class="block px-4 py-2 text-base rounded-md font-semibold
-                  {{ request()->routeIs('article') ? 'bg-main/10 text-main' : 'text-gray-700 hover:bg-gray-100' }}">
-          Artikel Terbaru
-        </a>
-        @foreach ($category as $item)
-        <a href="{{ route('category', ['category' => $item->slug]) }}"
-          class="block px-4 py-2 text-base rounded-md 
-                  {{ request()->is('category/'.$item->slug) ? 'bg-main/10 text-main' : 'text-gray-700 hover:bg-gray-100' }}">
-          {{ $item->category }}
-        </a>
-        @endforeach
-      </div>
+    <div x-show="article && open" x-transition class="mt-1 space-y-1 pl-6">
+      <a href="{{ route('article') }}"
+        class="block px-4 py-2 text-base rounded-md font-semibold
+                {{ request()->routeIs('article') ? 'bg-main/10 text-main' : 'text-gray-700 hover:bg-gray-100' }}">
+        Artikel Terbaru
+      </a>
+      @foreach ($category as $item)
+      <a href="{{ route('category', ['category' => $item->slug]) }}"
+        class="block px-4 py-2 text-base rounded-md 
+                {{ request()->is('category/'.$item->slug) ? 'bg-main/10 text-main' : 'text-gray-700 hover:bg-gray-100' }}">
+        {{ $item->category }}
+      </a>
+      @endforeach
     </div>
 
     {{-- Kontak --}}
@@ -83,13 +83,14 @@
       class="flex items-center gap-3 px-4 py-2 rounded-md text-lg font-semibold 
               {{ request()->is('*#kontak') ? 'bg-main/10 text-main' : 'text-gray-700 hover:text-main hover:bg-gray-100' }}">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
       <span x-show="open">Kontak</span>
     </a>
   </nav>
 
-  {{-- Search Bawah--}}
+  {{-- Search Bawah --}}
   <div class="px-4 py-3 gap-3" x-show="open">
     <form action="{{ route('article') }}" method="get" class="flex">
       <input type="text"
@@ -110,7 +111,7 @@
 
 
 {{-- mobile --}}
-<div class="md:hidden" x-data="{ open: false, articleOpen: false }">
+<div class="md:hidden fixed top-0 left-0 right-0 z-50 bg-white" x-data="{ open: false, articleOpen: false }">
   <div class="p-4 flex justify-between items-center border-b">
     <button @click="open = !open" class="p-2 rounded-lg border">
       <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,19 +128,25 @@
   <div x-show="open" x-transition class="bg-white shadow-lg border-t">
     <div class="p-4 space-y-2">
       <a href="{{ route('home') }}" class="block hover:text-main">Beranda</a>
-      <button @click="articleOpen = !articleOpen" class="w-full flex justify-between items-center hover:text-main">
-        Artikel
-        <svg class="w-5 h-5" :class="{ 'rotate-180': articleOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+
+      <!-- Artikel dengan toggle -->
+      <div class="flex justify-between items-center">
+        <a href="{{ route('article') }}" class="block hover:text-main">Artikel</a>
+        <button @click="articleOpen = !articleOpen" type="button">
+          <svg class="w-5 h-5 transition-transform duration-200" :class="{ 'rotate-180': articleOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </div>
+
       <div x-show="articleOpen" class="pl-4 space-y-1">
         <a href="{{ route('article') }}" class="block hover:text-main">Artikel Terbaru</a>
         @foreach ($category as $item)
         <a href="{{ route('category', $item->slug) }}" class="block hover:text-main">{{ $item->category }}</a>
         @endforeach
       </div>
+
       <a href="#kontak" class="block hover:text-main">Kontak</a>
     </div>
     <div class="p-4 border-t">

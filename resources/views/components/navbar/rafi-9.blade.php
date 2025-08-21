@@ -1,5 +1,5 @@
 <div class="sticky top-0 z-40 bg-white shadow-md" x-data="{ open: false, article: false }">
-  <div class="max-w-[1080px] mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+  <div class="max-w-[1080px] mx-auto px-4 md:px-8 py-2 flex justify-between items-center">
     {{-- Logo --}}
     <a href="{{ route('home') }}" class="flex items-center space-x-2">
       <div class="h-10 sm:h-12 flex items-center overflow-hidden">
@@ -12,7 +12,7 @@
       </div>
     </a>
 
-    {{-- Search (hanya tampil di md ke atas) --}}
+    {{-- Search --}}
     <div class="hidden md:flex w-[300px] md:w-[400px]">
       <form action="{{ route('article') }}" method="get" class="flex w-full">
         <input type="text"
@@ -27,10 +27,8 @@
         </button>
       </form>
     </div>
-</div>
 
 
-  <div class="max-w-[1080px] mx-auto px-4 md:px-8 py-2 flex justify-center items-center relative">
     {{-- Menu Desktop --}}
     <div class="hidden md:flex items-center space-x-8">
       {{-- Beranda --}}
@@ -103,7 +101,7 @@
     </button>
   </div>
 
-  {{-- Mobile Menu (sama seperti sebelumnya) --}}
+  {{-- Mobile Men --}}
   <div x-show="open"
     x-transition:enter="transition ease-out duration-100"
     x-transition:enter-start="opacity-0 scale-95"
@@ -161,5 +159,4 @@
         </button>
       </form>
     </div>
-  </div>
 </div>

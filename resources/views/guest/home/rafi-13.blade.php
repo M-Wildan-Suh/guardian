@@ -27,7 +27,7 @@
                             </a>
                             <div class="p-5 flex flex-col justify-between h-[220px]">
                                 <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                    <h3 class="font-semibold text-xl text-gray-800 hover:text-pink-600 transition line-clamp-2">
+                                    <h3 class="font-semibold text-xl text-black hover:text-main line-clamp-2">
                                         {{ $item->judul }}
                                     </h3>
                                 </a>
@@ -39,6 +39,12 @@
                         </div>
                         @endforeach
                     </div>
+
+                    <div class="text-center mt-14">
+                    <a href="{{ route('article') }}" class="inline-block px-7 py-3 bg-main text-white rounded-full font-semibold hover:opacity-90 transition">
+                        Lihat Semua
+                    </a>
+                </div>
                 </div>
 
                 {{-- Popular --}}

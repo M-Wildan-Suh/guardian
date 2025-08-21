@@ -1,5 +1,5 @@
 <div class="w-screen relative">
-  <div class="w-full h-[calc(50vh-40px)] sm:h-[calc(100vh-80px)]">
+    <div class="w-full h-[50vh] sm:h-screen">
         <div class="swiper heroSwiper w-full h-full relative">
             <div class="swiper-wrapper">
                 @foreach (array_slice($trend, 0, 4) as $item)
@@ -12,7 +12,7 @@
                     </a>
 
                     {{-- Overlay --}}
-                    <div class="absolute inset-x-0 bottom-0 z-10 px-6 pb-8 sm:pb-14">
+                    <div class="absolute inset-x-0 bottom-0 z-10 px-6 pb-12 sm:pb-24">
                         <div class="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-6 text-white max-w-3xl mx-auto shadow-lg animate-fadeInUp">
                             <div class="flex flex-wrap gap-2 justify-center mb-4">
                                 @foreach ($item->articles->articlecategory as $category)
@@ -67,6 +67,7 @@
             opacity: 0;
             transform: translateY(20px);
         }
+
         100% {
             opacity: 1;
             transform: translateY(0);
@@ -90,7 +91,7 @@
             pagination: {
                 el: ".hero-banner-pagination",
                 clickable: true,
-                renderBullet: function (index, className) {
+                renderBullet: function(index, className) {
                     return `<span class="${className} w-3 h-3 bg-white opacity-50 hover:opacity-100 transition mx-1 rounded-full"></span>`;
                 },
             },

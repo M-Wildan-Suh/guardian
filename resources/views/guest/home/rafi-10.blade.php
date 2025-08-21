@@ -8,52 +8,44 @@
         </div>
 
         {{-- Artikel Populer --}}
-        <section class="w-full bg-background py-20">
-    <div class="max-w-[1200px] mx-auto px-4">
-        {{-- Header --}}
-        <div class="flex items-center gap-3 mb-10">
-            <div class="w-2 h-12 bg-second rounded-full"></div>
-            <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-main">
-                Artikel Populer
-            </h2>
-        </div>
+        <section class="w-full bg-background py-16">
+            <div class="max-w-[1200px] mx-auto px-4">
+                {{-- Header --}}
+                <div class="flex items-center gap-3 mb-10">
+                    <div class="w-2 h-12 bg-second rounded-full"></div>
+                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-main">
+                        Artikel Populer
+                    </h2>
+                </div>
 
-        {{-- Artikel populer --}}
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            @foreach (array_slice($trend, 0, 4) as $item)
-            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-all overflow-hidden flex flex-col">
-                <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                    <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                         alt="{{ $item->judul }}"
-                         class="w-full h-48 object-cover" />
-                </a>
-                <div class="p-4 flex flex-col justify-between flex-grow">
-                    <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                        <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition line-clamp-2">
-                            {{ $item->judul }}
-                        </h3>
-                    </a>
-                    <p class="text-sm text-gray-600 mt-2 line-clamp-3">
-                        {!! nl2br(Str::limit(strip_tags($item->article), 90)) !!}
-                    </p>
-                    <p class="text-xs text-gray-500 mt-4">{{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}</p>
+                {{-- Artikel populer --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    @foreach (array_slice($trend, 0, 4) as $item)
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-all overflow-hidden flex flex-col">
+                        <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                            <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                alt="{{ $item->judul }}"
+                                class="w-full h-48 object-cover" />
+                        </a>
+                        <div class="p-4 flex flex-col justify-between flex-grow">
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                                <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition line-clamp-2">
+                                    {{ $item->judul }}
+                                </h3>
+                            </a>
+                            <p class="text-sm text-gray-600 mt-2 line-clamp-3">
+                                {!! nl2br(Str::limit(strip_tags($item->article), 90)) !!}
+                            </p>
+                            <p class="text-xs text-gray-500 mt-4">{{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}</p>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
-        </div>
-
-        {{-- Tombol --}}
-        <div class="text-center mt-12">
-            <a href="{{ route('article') }}"
-               class="inline-block px-6 py-3 text-white bg-second text-base rounded-full font-semibold transition">
-                Lihat Semua Artikel
-            </a>
-        </div>
-    </div>
-</section>
+        </section>
 
         {{-- Artikel Terbaru --}}
-        <section class="w-full bg-gradient-to-b from-gray-100 to-white py-16">
+        <section class="w-full bg-gradient-to-b from-gray-100 to-white py-10">
             <div class="w-full max-w-[1200px] mx-auto px-4">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-2 h-12 bg-main rounded-full"></div>
@@ -72,7 +64,13 @@
                         </div>
                         @endforeach
                     </div>
-                    <div class="swiper-pagination duplicated-trend-pagination mt-4 flex justify-center gap-2"></div>
+                    {{-- Tombol --}}
+                    <div class="text-center mt-12">
+                        <a href="{{ route('article') }}"
+                            class="inline-block px-6 py-3 text-white bg-second text-base rounded-full font-semibold transition">
+                            Lihat Semua
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

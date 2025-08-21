@@ -1,14 +1,6 @@
 <div
   class="fixed top-0 left-0 w-full z-40 bg-white shadow-md transform transition-transform duration-300"
-  x-data="{ show: false, open: false, article: false }"
-  x-init="
-    window.addEventListener('scroll', () => {
-      let bannerHeight = document.querySelector('.heroBannerSwiper')?.offsetHeight || 200;
-      show = window.scrollY > bannerHeight - 80;
-    });
-  "
-  :class="{ '-translate-y-full': !show, 'translate-y-0': show }">
-
+  x-data="{ show: false, open: false, article: false }">
 
   <div class="max-w-[1080px] mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
     {{-- Logo --}}

@@ -86,6 +86,18 @@
                     </a>
                     @endforeach
                 </div>
+                <div class="flex justify-center mt-6">
+                    <a href="{{ route('article') }}">
+                        <button class="px-6 py-2 flex items-center gap-2 rounded-full text-sm font-medium text-white bg-main hover:bg-main/30 shadow-md duration-300">
+                            <span>Lihat Lainnya</span>
+                            <div class="w-4 aspect-square">
+                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 9a1 1 0 0 0 0 1.42l4.6 4.6H3.06a1 1 0 1 0 0 2h23.52L22 21.59A1 1 0 0 0 22 23a1 1 0 0 0 1.41 0l6.36-6.36a.88.88 0 0 0 0-1.27L23.42 9A1 1 0 0 0 22 9Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </button>
+                    </a>
+                </div>
             </div>
 
             {{-- Popular Article --}}
@@ -105,70 +117,69 @@
             </div>
         </div>
     </div>
-    
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toggleBtn = document.getElementById('popularToggle');
-                const closeBtn = document.getElementById('closePopular');
-                const popularPanel = document.getElementById('popularPanel');
 
-                if (!toggleBtn || !closeBtn || !popularPanel) return;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('popularToggle');
+            const closeBtn = document.getElementById('closePopular');
+            const popularPanel = document.getElementById('popularPanel');
 
-                function togglePanel() {
-                    popularPanel.classList.toggle('hidden');
-                    popularPanel.classList.toggle('translate-x-full');
-                    popularPanel.classList.toggle('fixed');
-                    popularPanel.classList.toggle('right-0');
-                    popularPanel.classList.toggle('top-0');
-                    popularPanel.classList.toggle('h-screen');
-                    popularPanel.classList.toggle('w-72');
-                    popularPanel.classList.toggle('z-20');
-                    popularPanel.classList.toggle('overflow-y-auto');
-                }
+            if (!toggleBtn || !closeBtn || !popularPanel) return;
 
-                toggleBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    togglePanel();
-                });
+            function togglePanel() {
+                popularPanel.classList.toggle('hidden');
+                popularPanel.classList.toggle('translate-x-full');
+                popularPanel.classList.toggle('fixed');
+                popularPanel.classList.toggle('right-0');
+                popularPanel.classList.toggle('top-0');
+                popularPanel.classList.toggle('h-screen');
+                popularPanel.classList.toggle('w-72');
+                popularPanel.classList.toggle('z-20');
+                popularPanel.classList.toggle('overflow-y-auto');
+            }
 
-                closeBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    togglePanel();
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (!popularPanel.contains(e.target) && e.target !== toggleBtn) {
-                        if (!popularPanel.classList.contains('hidden')) {
-                            togglePanel();
-                        }
-                    }
-                });
-
-                popularPanel.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePanel();
             });
-        </script>
 
-        {{-- Styles --}}
-        <style>
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePanel();
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!popularPanel.contains(e.target) && e.target !== toggleBtn) {
+                    if (!popularPanel.classList.contains('hidden')) {
+                        togglePanel();
+                    }
+                }
+            });
+
+            popularPanel.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+
+    <style>
+        #popularPanel {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            #popularToggle {
+                display: none !important;
+            }
+
             #popularPanel {
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+                transform: none !important;
+                position: static !important;
+                height: auto !important;
+                width: auto !important;
             }
-
-            @media (min-width: 768px) {
-                #popularToggle {
-                    display: none !important;
-                }
-
-                #popularPanel {
-                    transform: none !important;
-                    position: static !important;
-                    height: auto !important;
-                    width: auto !important;
-                }
-            }
-        </style>
+        }
+    </style>
 
     </div>
 </x-layout.guest>

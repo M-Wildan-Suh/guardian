@@ -10,7 +10,7 @@
                     </div>
 
                     {{-- Article --}}
-                    <div class=" w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class=" w-full grid grid-cols-1 md:grid-cols-4 gap-4">
                         @forelse ($data as $item)
                             @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
                         @empty
