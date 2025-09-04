@@ -43,17 +43,44 @@
             </div>
         </div>
         <style>
+            .article div {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .article strong,
+            .article span,
+            .article li,
+            .article p,
+            .article h1,
+            .article h2,
+            .article h3,
+            .article h4,
+            .article h5,
+            .article h6 {
+                color: inherit !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
             .article a {
                 font-weight: 700;
-                color: {{$template->desc_second_color ?? '#1d588d'}};
+                color: {{ $template->desc_second_color ?? '#1d588d' }};
             }
+
+            .article font {
+                color: inherit;
+            }
+
             .article ol {
-                padding-left: 16px;
+                color: inherit !important;
+                padding-left: 16px !important;
                 list-style-type: decimal;
             }
 
             .article ul {
-                padding-left: 16px;
+                color: inherit !important;
+                padding-left: 16px !important;
                 list-style-type: disc;
             }
 
@@ -101,16 +128,18 @@
                 font-size: 0.5rem !important;
                 line-height: 0.75rem !important;
             }
-            
+
             @media screen and (min-width: 640px) {
                 .article p {
                     font-size: 1rem !important;
                     line-height: 1.5rem !important;
                 }
+
                 .article li {
                     font-size: 1rem !important;
                     line-height: 1.5rem !important;
                 }
+
                 .article h3 {
                     font-size: 1.25rem !important;
                     line-height: 1.75rem !important;
