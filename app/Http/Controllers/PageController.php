@@ -179,6 +179,20 @@ class PageController extends Controller
     }
 
     public function notfound() {
-        return view('guest.page-not-found');
+        $data = json_decode(Storage::get('website.json'), true);
+
+        $url = 'https://bizlink.sites.id/api/article/notfound/'.$data['code'];
+
+        $response = Http::get($url);
+
+        if ($response->successful()) {
+            $api = $response->object();
+
+            $category = $api->categories;
+
+            return view('guest.page-not-found', compact('category'));
+        } else {
+            return redirect()->route('notfound');
+        }
     }
 }
