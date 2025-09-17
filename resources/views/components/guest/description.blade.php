@@ -33,7 +33,7 @@
             }
         @endphp
         <div class=" article ">
-            {!! nl2br($data->article == '' ? '' : $data->article) !!}
+            {!! $data->article == '' ? '' : $data->article !!}
             <div class=" pt-4 flex flex-wrap gap-2">
                 @foreach ($data->articles->articletag as $item)
                     <a href="{{route('tag', ['tag' => $item->slug])}}">

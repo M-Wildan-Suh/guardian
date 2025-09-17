@@ -31,24 +31,9 @@
               </a>
               @endforeach
             </div>
-
-            <a href="{{ route('article') }}" class="w-2/5 relative group">
-              <img src="https://bizlink.sites.id/assets/images/placeholder.webp"
-                alt="Featured Article" class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-
-              <div class="absolute inset-0 bg-black/60 p-2 flex flex-col justify-end 
-              transition-all duration-300 ease-in-out group-hover:bg-black/20 group-hover:scale-105">
-                <h3 class="text-white font-bold text-xs leading-tight line-clamp-2 
-                transition-all duration-300 ease-in-out group-hover:text-blue-500">
-                  Pabrik Fire Suit Bergaransi wilayah Tegalega Bandung
-                </h3>
-              </div>
-            </a>
           </div>
         </div>
       </div>
-
-
       <a href="#kontak" class="text-gray-700 hover:text-main font-semibold transition duration-200">Kontak</a>
     </div>
 
@@ -99,14 +84,6 @@
       <a href="{{ route('home') }}" class="block py-2">Beranda</a>
 
       {{-- Featured Article in Mobile --}}
-      <a href="#" class="relative block aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-        <img src="https://bizlink.sites.id/assets/images/placeholder.webp" class="w-full h-full object-cover" alt="Featured">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-3 flex flex-col justify-end">
-          <h3 class="font-bold text-white text-sm line-clamp-1">Pabrik Fire Suit Bergaransi wilayah Tegalega Bandung</h3>
-          <p class="text-xs text-gray-200 line-clamp-1">Sedangkah Anda sedang mencari baju APAR yang tahan api untuk kebutuhan tim rescue Anda di Tegalega Bandung?</p>
-        </div>
-      </a>
-
       <a href="{{ route('article') }}" class="block py-2">Artikel Terbaru</a>
       @foreach ($category as $item)
       <a href="{{ route('category', ['category' => $item->slug]) }}" class="block py-2">{{ $item->category }}</a>

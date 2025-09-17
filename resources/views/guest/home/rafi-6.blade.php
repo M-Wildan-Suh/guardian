@@ -7,8 +7,8 @@
         {{-- Artikel Terbaru --}}
         <section class="w-full max-w-[1200px] mx-auto px-4 py-16">
             <div class="flex items-center gap-3 mb-8 group">
-                <div class="w-2 h-10 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full animate-pulse"></div>
-                <h2 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                <div class="w-2 h-10 bg-main rounded-full animate-pulse"></div>
+                <h2 class="text-2xl sm:text-3xl font-bold bg-black bg-clip-text text-transparent">
                     Artikel Terbaru
                 </h2>
                 <div class="ml-auto hidden sm:block">

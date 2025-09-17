@@ -1,6 +1,6 @@
 <div class="swiper homeBannerSwiper w-full py-6">
     <div class="swiper-wrapper">
-      @foreach ($randomTrend as $item)
+      @foreach ($trend as $item)
       <div class="swiper-slide relative rounded-xl overflow-hidden">
         {{-- Gambar --}}
         <a href="{{ route('detail', ['slug' => $item->slug]) }}">

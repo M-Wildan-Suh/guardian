@@ -26,7 +26,7 @@
             <div class="mb-2">
               @foreach ($item->articles->articlecategory as $category)
               <a href="{{ route('category', ['category' => $category->slug]) }}"
-                class="bg-main text-white hover:text-blue-500 text-sm font-semibold px-3 py-1">
+                class="bg-main text-white hover:text-blue-500 text-sm font-semibold px-3 py-1 rounded-md">
                 {{ $category->category }}
               </a>
               @endforeach

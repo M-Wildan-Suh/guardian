@@ -12,8 +12,8 @@
             <div class="max-w-[1200px] mx-auto px-4">
                 {{-- Header --}}
                 <div class="flex items-center gap-3 mb-10">
-                    <div class="w-2 h-12 bg-second rounded-full"></div>
-                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-main">
+                    <div class="w-2 h-12 bg-main rounded-full"></div>
+                    <h2 class="text-3xl sm:text-4xl font-bold bg-clip-text text-second">
                         Artikel Populer
                     </h2>
                 </div>
