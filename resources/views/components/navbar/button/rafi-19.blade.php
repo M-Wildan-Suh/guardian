@@ -8,6 +8,6 @@
     </a>
 @else
     <a href="{{$route}}">
-        <button class=" {{ request()->routeIs($active) ? 'text-white bg-second' : 'text-black hover:text-white hover:bg-black'}} px-5 py-1.5 rounded-full font-semibold text-base duration-300">{{$title}}</button>
+        <button class=" {{ request()->routeIs($active) ? 'text-white bg-second' : 'text-black hover:text-white hover:bg-second'}} px-5 py-1.5 rounded-full font-semibold text-base duration-300">{{$title}}</button>
     </a>
 @endif

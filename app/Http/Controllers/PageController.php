@@ -181,4 +181,5 @@ class PageController extends Controller
     public function notfound() {
         return view('guest.page-not-found');
     }
+
 }

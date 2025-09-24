@@ -3,150 +3,135 @@
 
         {{-- Banner --}}
         <div class="relative">
-        @include('components.section.banner.' . json_decode(\Storage::get('website.json'))->template)
+            @include('components.section.banner.' . json_decode(\Storage::get('website.json'))->template)
         </div>
 
         {{-- Artikel --}}
-        <div class="w-full max-w-[1080px] mx-auto px-5 sm:px-8 pt-4 mt-4">
-            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
+        <div class="w-full max-w-[1100px] mx-auto p-4 grid grid-cols-1 md:grid-cols-4 gap-6 pb-4 mt-5">
+            <div class="md:col-span-3 space-y-12 md:border-r md:border-gray-300 md:pr-6">
+                {{-- Title --}}
+                <div class="flex items-center gap-3 sm:gap-5">
+                    <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
+                    <p class="text-2xl sm:text-3xl font-extrabold tracking-tight">Artikel Terbaru</p>
+                </div>
 
-                {{-- Main --}}
-                <div class="w-full col-span-1 md:col-span-3 space-y-4 sm:space-y-8 mb-4">
-
-                    {{-- Title --}}
-                    <div class="w-full flex justify-between items-center mt-1">
-                        <div class="w-full flex items-center gap-2 sm:gap-4">
-                            <div class="w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
-                            <p class="text-xl sm:text-3xl font-bold">Artikel Terbaru</p>
-                        </div>
-                    </div>
-
-                    {{-- Article --}}
-                    
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    @foreach(array_slice($trend, 0, 4) as $item)
+                {{-- Mosaic Layout --}}
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                    @foreach (collect($data)->shuffle()->take(5) as $i => $item)
                     <a href="{{ route('detail', ['slug' => $item->slug]) }}"
-                        class="group relative flex flex-col md:flex-row items-start cursor-pointer 
-                        p-4 md:p-6 transition-all duration-300 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1">
+                        class="relative group rounded-2xl overflow-hidden 
+                  {{ $i == 0 ? 'col-span-2 row-span-2 h-80 md:h-[500px]' : 'h-40 md:h-60' }}">
 
-                        <div class="hidden md:flex items-center w-auto mr-6 flex-shrink-0">
-                            <div class="flex flex-row items-center gap-2">
-                                <span class="text-2xl font-bold text-blue-600">
-                                    {{ date('d', strtotime($item->date)) }}
-                                </span>
-                                <span class="text-xs uppercase text-gray-500 tracking-wider">
-                                    {{ date('M', strtotime($item->date)) }}
-                                </span>
-                                <span class="text-xs text-gray-400">
-                                    {{ date('Y', strtotime($item->date)) }}
-                                </span>
-                            </div>
-                        </div>
-
-
-                        <div class="w-full md:w-50 h-48 overflow-hidden rounded-lg flex-shrink-0 mr-4">
-                            <img src="{{ $item->banner 
+                        {{-- Gambar --}}
+                        <img src="{{ $item->banner 
                                 ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
                                 : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                                alt="{{ $item->judul }}"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        </div>
+                            alt="{{ $item->judul }}"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
 
-                        <div class="flex-grow">
-                            <h3 class="font-semibold text-lg text-gray-800 group-hover:text-blue-600 transition-colors duration-300 mb-2 line-clamp-2">
+                        {{-- Overlay --}}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
+                        group-hover:from-black/50 transition-all duration-500"></div>
+
+                        {{-- Konten Overlay --}}
+                        <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                            <h3 class="text-white font-bold text-lg md:text-xl line-clamp-2 group-hover:text-blue-300 transition-colors">
                                 {{ $item->judul }}
                             </h3>
-
-                            <p class="text-gray-600 text-sm line-clamp-2 mb-3">
-                                {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
+                            <p class="text-gray-200 text-xs md:text-sm mt-1 line-clamp-2">
+                                {{ Str::limit(strip_tags($item->article), 80) }}
                             </p>
-
-                            <div class="flex items-center text-xs text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-blue-500" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                    <span>{{ $item->articles->user->name }}</span>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-blue-500" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <span>{{ $item->date }}</span>
-                                </div>
+                            <div class="flex items-center gap-2 text-xs text-gray-300 mt-2">
+                                <span>{{ $item->articles->user->name }}</span> •
+                                <span>{{ date('d M Y', strtotime($item->date)) }}</span>
                             </div>
-                        </div>
-
-                        <!-- Panah -->
-                        <div class="hidden md:flex items-center justify-center ml-4 mt-4 text-blue-500 opacity-0 
-                                    group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 
-                                    transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
                         </div>
                     </a>
                     @endforeach
                 </div>
- <div class="flex justify-center mb-8 pt-4">
-                <a href="{{ route('article') }}"
-                   class="inline-block px-6 py-3 text-white hover:text-main bg-second text-base rounded-full font-semibold transition-colors duration-300">
-                    Lihat Lainnya
-                </a>
-            </div>
-                </div>
 
-                {{-- Popular --}}
-                <div>
-                    <div class="md:sticky top-24 space-y-4 sm:space-y-6 pb-8">
-                        {{-- Title --}}
-                        <div class="w-full flex items-center gap-2 sm:gap-4 h-7 sm:h-10">
-                            <div class="w-1 h-7 bg-second rounded-full"></div>
-                            <p class="text-xl font-bold">Artikel Populer</p>
+                {{-- Artikel Utama --}}
+                @foreach (array_slice($data, 0, 1) as $item)
+                <div class="relative flex flex-col md:flex-row items-stretch rounded-3xl overflow-hidden shadow-xl bg-gradient-to-r from-white to-gray-50">
+
+                    {{-- Gambar Kiri --}}
+                    <div class="w-full md:w-1/2 relative">
+                        <img src="{{ $item->banner 
+                            ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                            : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            alt="{{ $item->judul }}"
+                            class="w-full h-72 md:h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+                            @foreach ($item->articles->articlecategory as $category)
+                            <span class="bg-white/80 backdrop-blur-sm text-gray-800 text-xs px-3 py-1 rounded-full shadow">
+                                {{ $category->category }}
+                            </span>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Konten Kanan --}}
+                    <div class="flex flex-col justify-between p-8 w-full md:w-1/2">
+                        <div>
+                            <h2 class="font-extrabold text-2xl md:text-3xl text-gray-900 leading-snug hover:text-blue-600 transition-colors">
+                                {{ $item->judul }}
+                            </h2>
+                            <p class="text-gray-600 mt-4 line-clamp-2">
+                                {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
+                            </p>
                         </div>
 
-                        {{-- Popular --}}
-                        <div>
-                            <div class="md:sticky top-24 space-y-4 sm:space-y-6 pb-8">
-
-                                {{-- Popular Artikel --}}
-                                <div class="flex flex-col gap-4 w-full md:max-w-md">
-                                    @foreach (collect($data)->shuffle()->take(5) as $item)
-                                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
-                                        class="block border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-300">
-
-                                        <p class="font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 duration-300">
-                                            {{ $item->judul }}
-                                        </p>
-                                        <p class="text-sm sm:text-base line-clamp-2">
-                                            {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
-                                        </p>
-
-                                        <div class="flex items-center justify-between text-xs text-gray-500 mt-2">
-                                            <span class="truncate hover:text-blue-600 duration-300">
-                                                {{ $item->articles->user->name }}
-                                            </span>
-                                            <span class="whitespace-nowrap">
-                                                {{ $item->date }}
-                                            </span>
-                                        </div>
-                                    </a>
-                                    @endforeach
-                                </div>
-
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+                            <div class="flex items-center gap-3 text-sm text-gray-700">
+                                <span class="font-medium">{{ $item->articles->user->name }}</span>
+                                <span>•</span>
+                                <span>{{ date('d M Y', strtotime($item->date)) }}</span>
                             </div>
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                                class="flex items-center gap-2 text-blue-600 font-semibold hover:gap-3 transition-all">
+                                Baca Selengkapnya
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
-                {{-- End popular --}}
+                @endforeach
             </div>
+
+
+            {{-- Popular Article --}}
+            <div class="md:pl-6">
+                <div class="md:sticky top-24 space-y-4 sm:space-y-6">
+                    {{-- Article --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 sm:gap-8">
+                        @include('components.section.popular')
+                    </div>
+
+                    {{-- Grid 4 Card Kecil --}}
+                    <div class="grid grid-cols-2 gap-3 mt-6">
+                        @foreach (collect($trend)->shuffle()->take(4) as $item)
+                        <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                            class="relative group rounded-xl aspect-square cursor-pointer bg-gradient-to-br from-white to-gray-50 border border-gray-200 hover:shadow-md transition-all duration-300 p-4 flex flex-col justify-between">
+
+                            <div>
+                                <p class="text-xs font-semibold text-gray-800 line-clamp-3 group-hover:text-blue-600 transition-colors">
+                                    {{ $item->judul }}
+                                </p>
+                                <p class="text-xs font-semibold text-gray-400 hover:text-blue-600 duration-300">
+                                    {{ $item->articles->user->name }}
+                                </p>
+                            </div>
+
+                        </a>
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </x-layout.guest>
