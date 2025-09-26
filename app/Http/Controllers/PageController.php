@@ -196,4 +196,29 @@ class PageController extends Controller
         }
     }
 
+    public function apiTemplate($slug)
+    {
+        // Ambil isi file website.json
+        $config = json_decode(Storage::get('website.json'), true);
+
+        if (!$config) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Config tidak ditemukan atau rusak'
+            ], 500);
+        }
+
+        if ($config['code'] !== $slug) {
+            return response()->json([
+                'success' => false,
+                'message' => 'kode tidak ditemukan'
+            ], 404);
+        }
+
+        // Return template
+        return response()->json([
+            'success' => true,
+            'template' => $config['template']
+        ]);
+    }
 }
