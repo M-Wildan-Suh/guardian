@@ -47,17 +47,6 @@
                                     {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
                                 </p>
 
-                                <div class="flex items-center justify-between border-t pt-3">
-                                    <span class="text-sm font-semibold text-gray-500 hover:text-blue-800 transition-colors">
-                                        {{ $item->articles->user->name }}
-                                    </span>
-                                    <div class="flex items-center text-xs font-semibold text-gray-500">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                        <span>{{ $item->date }}</span>
-                                    </div>
-                                </div>
                             </div>
                         </a>
                         @endforeach
@@ -80,12 +69,6 @@
                                     <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-2">
                                         {{ $item->judul }}
                                     </h3>
-                                    <div class="flex justify-between mt-1 text-gray-400 text-sm">
-                                        <p>{{ $item->date }}</p>
-                                        <p class="font-bold hover:text-blue-600 duration-300">
-                                            {{ $item->articles->user->name }}
-                                        </p>
-                                    </div>
                                 </div>
                             </a>
                             @endforeach
@@ -119,14 +102,6 @@
                                             {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                                         </p>
 
-                                        <div class="flex items-center justify-between text-xs text-gray-500 mt-2">
-                                            <span class="truncate hover:text-blue-600 duration-300">
-                                                {{ $item->articles->user->name }}
-                                            </span>
-                                            <span class="whitespace-nowrap">
-                                                {{ $item->date }}
-                                            </span>
-                                        </div>
                                     </a>
                                     @endforeach
                                 </div>

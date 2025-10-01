@@ -62,9 +62,6 @@
                                 <p class="text-lg sm:text-xl font-bold line-clamp-2">{{ $item->judul }}</p>
                             </a>
                         </div>
-                        <p class="px-4 sm:px-6 pt-2 text-xs">
-                            <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">{{ $item->articles->user->name }}</a>, {{ $item->date }}
-                        </p>
                     </div>
                 </div>
             </div>
@@ -97,9 +94,6 @@
                                 <p class="text-sm sm:text-base font-bold line-clamp-2">{{ $item->judul }}</p>
                             </a>
                         </div>
-                        <p class="px-3 sm:px-4 pt-1 text-xs">
-                            <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">{{ $item->articles->user->name }}</a>, {{ $item->date }}
-                        </p>
                     </div>
                 </div>
             </div>

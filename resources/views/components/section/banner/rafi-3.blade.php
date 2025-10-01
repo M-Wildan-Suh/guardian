@@ -29,12 +29,6 @@
             <p class="text-sm sm:text-base line-clamp-1">
               {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
             </p>
-
-            <p class="text-xs sm:text-sm font-light pt-2">
-              <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">
-                {{ $item->articles->user->name }}
-              </a>, {{ $item->date }}
-            </p>
           </div>
         </div>
         @endforeach

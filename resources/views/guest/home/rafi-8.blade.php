@@ -28,15 +28,10 @@
                         <div class="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
                             <p class="text-white font-bold text-lg line-clamp-1">{{ $item->judul }}</p>
                             <p class="text-sm text-white line-clamp-2 mt-1">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-200 mt-3">
-                                <span class="font-bold">{{ $item->articles->user->name }}</span>
-                                <span>{{ $item->date }}</span>
-                            </div>
                         </div>
                     </a>
                     @endforeach
                 </div>
-
 
                 {{-- Pagination --}}
                 @include('components.section.pagination')

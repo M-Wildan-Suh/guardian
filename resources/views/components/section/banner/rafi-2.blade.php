@@ -27,9 +27,6 @@
                                         {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
                                     </p>
                                 </div>
-                                <p class="px-4 sm:px-6 pt-2 text-sm sm:text-base">
-                                    <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">{{ $item->articles->user->name }}</a>, {{ $item->date }}
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -60,9 +57,6 @@
                                     <p class="text-base sm:text-lg font-bold line-clamp-2">{{ $item->judul }}</p>
                                 </a>
                             </div>
-                            <p class="px-4 sm:px-6 pt-2 text-xs">
-                                <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">{{ $item->articles->user->name }}</a>, {{ $item->date }}
-                            </p>
                         </div>
                     </div>
                 </div>

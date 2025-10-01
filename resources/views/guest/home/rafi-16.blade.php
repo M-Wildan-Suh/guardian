@@ -37,7 +37,7 @@
                     alt="{{ $item->judul }}" class="w-20 h-20 object-cover rounded-md">
                 <div>
                     <p class="font-semibold text-base line-clamp-1 hover:text-blue-600">{{ $item->judul }}</p>
-                    <p class="text-sm text-gray-600 line-clamp-2">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
+                    <p class="text-sm text-gray-600 line-clamp-2">{!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}</p>
                 </div>
             </a>
             @endforeach

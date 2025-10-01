@@ -15,7 +15,6 @@
                     <p class="text-2xl sm:text-3xl font-extrabold tracking-tight">Artikel Terbaru</p>
                 </div>
 
-                {{-- Mosaic Layout --}}
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                     @foreach (collect($data)->shuffle()->take(5) as $i => $item)
                     <a href="{{ route('detail', ['slug' => $item->slug]) }}"
@@ -29,22 +28,16 @@
                             alt="{{ $item->judul }}"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
 
-                        {{-- Overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
                         group-hover:from-black/50 transition-all duration-500"></div>
 
-                        {{-- Konten Overlay --}}
                         <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                             <h3 class="text-white font-bold text-lg md:text-xl line-clamp-2 group-hover:text-blue-300 transition-colors">
                                 {{ $item->judul }}
                             </h3>
                             <p class="text-gray-200 text-xs md:text-sm mt-1 line-clamp-2">
-                                {{ Str::limit(strip_tags($item->article), 80) }}
+                                {{ Str::limit(strip_tags($item->article), 100) }}
                             </p>
-                            <div class="flex items-center gap-2 text-xs text-gray-300 mt-2">
-                                <span>{{ $item->articles->user->name }}</span> •
-                                <span>{{ date('d M Y', strtotime($item->date)) }}</span>
-                            </div>
                         </div>
                     </a>
                     @endforeach
@@ -82,11 +75,6 @@
                         </div>
 
                         <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
-                            <div class="flex items-center gap-3 text-sm text-gray-700">
-                                <span class="font-medium">{{ $item->articles->user->name }}</span>
-                                <span>•</span>
-                                <span>{{ date('d M Y', strtotime($item->date)) }}</span>
-                            </div>
                             <a href="{{ route('detail', ['slug' => $item->slug]) }}"
                                 class="flex items-center gap-2 text-blue-600 font-semibold hover:gap-3 transition-all">
                                 Baca Selengkapnya
@@ -119,9 +107,6 @@
                             <div>
                                 <p class="text-xs font-semibold text-gray-800 line-clamp-3 group-hover:text-blue-600 transition-colors">
                                     {{ $item->judul }}
-                                </p>
-                                <p class="text-xs font-semibold text-gray-400 hover:text-blue-600 duration-300">
-                                    {{ $item->articles->user->name }}
                                 </p>
                             </div>
 

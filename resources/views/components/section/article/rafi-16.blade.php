@@ -29,8 +29,7 @@
             </h3>
         </a>
 
-        {{-- Footer --}}
-        <div class="flex items-center justify-between text-sm text-gray-600">
+        <!-- <div class="flex items-center justify-between text-sm text-gray-600">
             <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
                 class="font-medium hover:text-blue-600 transition-colors flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,6 +43,6 @@
                 </svg>
                 {{ $item->date }}
             </span>
-        </div>
+        </div> -->
     </div>
 </div>

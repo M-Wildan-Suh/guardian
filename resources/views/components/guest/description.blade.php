@@ -9,7 +9,7 @@
             @endforeach
         </div>
         <p class="text-lg sm:text-3xl font-bold">{{$data->judul}}</p>
-        <div class=" flex gap-4 sm:gap-6 items-center text-opacity-60 text-sm sm:text-base">
+        <!-- <div class=" flex gap-4 sm:gap-6 items-center text-opacity-60 text-sm sm:text-base">
             <a href="{{ route('author', ['username' => $data->articles->user->slug]) }}" class=" flex gap-1.5 sm:gap-2 items-center">
                 <div style="color: {{$template->desc_second_color ?? '#1d588d'}}" class=" w-4 aspect-square">
                     <svg class="feather feather-user" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -22,7 +22,7 @@
                 </div>
                 <p>{{$data->date}}</p>
             </div>
-        </div>
+        </div> -->
         @php
             function hexToRgba($hex, $opacity = 0.6) {
                 $hex = str_replace('#', '', $hex);

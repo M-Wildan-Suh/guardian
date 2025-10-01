@@ -29,14 +29,6 @@
 
                         <div class="absolute bottom-4 right-4 text-white flex flex-col space-y-1 max-w-[70%] text-right">
                             <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
-                            <div class="flex items-center justify-between text-xs text-gray-200">
-                                <span class="truncate hover:text-blue-600 duration-300">
-                                    {{ $item->articles->user->name }}
-                                </span>
-                                <span class="whitespace-nowrap">
-                                    {{ $item->date }}
-                                </span>
-                            </div>
 
                         </div>
                     </a>
@@ -69,12 +61,8 @@
                                 {{ $item->judul }}
                             </h2>
                             <p class="text-sm text-gray-200 line-clamp-3">
-                                {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
+                                {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                             </p>
-                            <div class="flex items-center gap-3 text-xs text-gray-300">
-                                <span class="font-semibold hover:text-blue-400">{{ $item->articles->user->name }}</span>
-                                <span>{{ $item->date }}</span>
-                            </div>
                         </div>
                     </a>
                     @endforeach

@@ -28,12 +28,6 @@
                                 <p class="line-clamp-3 text-sm md:text-base text-gray-200">
                                     {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
                                 </p>
-                                <p class="text-xs md:text-sm text-gray-300">
-                                    <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                                        class="font-semibold">
-                                        {{ $item->articles->user->name }}
-                                    </a>, {{ $item->date }}
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -74,12 +68,6 @@
                                     {{ $item->judul }}
                                 </h4>
                             </a>
-                            <p class="text-xs md:text-sm text-black hover:text-blue-600">
-                                    <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                                        class="font-semibold">
-                                        {{ $item->articles->user->name }}
-                                    </a>, {{ $item->date }}
-                                </p>
                         </div>
                     </div>
                     @endforeach

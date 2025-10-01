@@ -4,57 +4,89 @@
         @include('components.section.banner.'.json_decode(\Storage::get('website.json'))->template)
 
         {{-- Article --}}
-        <div class=" w-full max-w-[1080px] mx-auto">
-            <div class=" w-full grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
-                {{-- Main --}}
-                <div class=" w-full col-span-1 md:col-span-3 space-y-4 sm:space-y-8">
-                    {{-- Title --}}
-                    <div class=" w-full flex justify-between items-center">
-                        <div class=" w-full flex items-center gap-2 sm:gap-4">
-                            <div class=" w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
-                            <p class=" text-xl sm:text-3xl font-bold text-center">Artikel Terbaru</p>
-                        </div>
-                        <a href="{{route('article')}}">
-                            <button class=" px-4 py-2 flex items-center gap-1 border rounded-full text-nowrap text-xs text-neutral-600 border-neutral-600 hover:text-main hover:border-main duration-300">
-                                <p>Lihat Lainnya</p>
-                                <div class=" w-3 aspect-square">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M22 9a1 1 0 0 0 0 1.42l4.6 4.6H3.06a1 1 0 1 0 0 2h23.52L22 21.59A1 1 0 0 0 22 23a1 1 0 0 0 1.41 0l6.36-6.36a.88.88 0 0 0 0-1.27L23.42 9A1 1 0 0 0 22 9Z" data-name="Layer 2" fill="currentColor" class="fill-000000"></path></svg>
+        <div class="w-full max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {{-- Kiri --}}
+                <aside class="md:col-span-1">
+                    <div class="md:sticky top-24 space-y-4">
+                        <h2 class="text-lg font-bold">Artikel</h2>
+                        @foreach ($trend as $item)
+                        <div class="grid grid-cols-5 sm:grid-cols-4 gap-2">
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                                <div class="w-full aspect-square rounded-md bg-white overflow-hidden">
+                                    <img src="{{ $item->banner 
+                                ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                        class="w-full h-full object-cover" alt="">
                                 </div>
-                            </button>
-                        </a>
-                    </div>
-
-                    {{-- Article --}}
-                    <div class=" w-full grid grid-cols-2 md:grid-cols-3 gap-4">
-                        @forelse ($data as $item)
-                            @include('components.section.article.'.json_decode(\Storage::get('website.json'))->template)
-                        @empty
-                            <div class=" col-span-2 md:col-span-4 w-full flex justify-center text-center">
-                                <p class=" text-neutral-600">Article tidak ditemukan</p>
+                            </a>
+                            <div class="col-span-4 sm:col-span-3 flex flex-col justify-between">
+                                <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                                    <p class="line-clamp-2 text-sm h-10">{{ $item->judul }}</p>
+                                </a>
                             </div>
-                        @endforelse
+                        </div>
+                        @endforeach
                     </div>
+                </aside>
+
+                {{-- Tengah --}}
+                <main class="md:col-span-2 space-y-6">
+                    <h2 class="text-lg font-bold">Artikel Utama</h2>
+                    @foreach ($data as $item)
+                    <div class="bg-white p-4 rounded-lg shadow hover:shadow-md duration-300">
+                        <div class="relative">
+                            <img src="{{ $item->banner 
+                        ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                        : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                alt="{{ $item->judul }}" class="w-full h-56 object-cover mx-auto" />
+                            <span class="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                {{ $item->articles->articlecategory[0]->category ?? 'Artikel' }}
+                            </span>
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
+                                <h3 class="text-xl font-semibold line-clamp-2 mt-2">{{ $item->judul }}</h3>
+                            </a>
+                            <p class="text-sm font-semibold text-gray-500 mt-2 line-clamp-2">{!! Str::limit(strip_tags($item->article), 80) !!}</p>
+                        </div>
+                    </div>
+                    @endforeach
 
                     {{-- Pagination --}}
                     @include('components.section.pagination')
-                </div>
+                </main>
 
-                {{-- Popular --}}
-                <div class="">
-                    <div class=" md:sticky top-24 space-y-4 sm:space-y-6">
-                        {{-- Title --}}
-                        <div class=" w-full flex items-center gap-2 sm:gap-4 h-7 sm:h-10">
-                            <div class=" w-1 h-7 bg-second rounded-full"></div>
-                            <p class=" text-xl font-bold text-center">Artikel Populer</p>
-                        </div>
+                {{-- Kanan --}}
+                <aside class="md:col-span-1">
+                    <div class="md:sticky top-24 space-y-4">
+                        <h2 class="text-lg font-bold">Artikel Populer</h2>
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-4">
+                                @foreach (collect($data)->shuffle()->take(4) as $item)
+                                <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                                    class="relative group rounded-xl overflow-hidden h-32 w-full cursor-pointer">
 
-                        {{-- Article --}}
-                        <div class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 sm:gap-8">
-                            @include('components.section.popular')
+                                    <img src="{{ $item->banner 
+                                        ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                        : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                        alt="{{ $item->judul }}"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                                    <div class="absolute inset-0 bg-black/60 transition-opacity duration-300 group-hover:bg-black/30"></div>
+
+                                    <div class="absolute bottom-4 right-4 flex flex-col justify-center text-white space-y-1 max-w-[70%] text-right">
+                                        <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300 text-sm">
+                                            {{ $item->judul }}
+                                        </p>
+                                    </div>
+                                </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
+                </aside>
             </div>
         </div>
+
+
     </div>
 </x-layout.guest>

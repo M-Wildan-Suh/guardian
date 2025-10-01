@@ -35,7 +35,7 @@
 
 
     <!-- Scripts -->
-    <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet" />
 
     @php

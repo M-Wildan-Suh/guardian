@@ -26,12 +26,6 @@
             class="text-white hover:text-blue-500 text-lg font-bold line-clamp-2">
             {{ Str::limit($item->judul, 80) }}
           </a>
-          <div class="text-gray-200  hover:text-blue-500 text-xs mt-1">
-              <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                class="font-semibold">
-                {{ $item->articles->user->name }}
-              </a>, {{ $item->date }}
-          </div>
         </div>
       </div>
       @endforeach

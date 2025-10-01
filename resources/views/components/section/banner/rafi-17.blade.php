@@ -38,12 +38,6 @@
                             {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                         </p>
 
-                        <p class="text-xs sm:text-sm mt-3 text-gray-300 italic">
-                            <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" 
-                               class="font-semibold hover:text-blue-400 hover:underline">
-                                {{ $item->articles->user->name }}
-                            </a> • {{ $item->date }}
-                        </p>
                     </div>
                 </div>
                 @endforeach

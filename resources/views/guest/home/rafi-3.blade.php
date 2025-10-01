@@ -26,12 +26,6 @@
                         <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-2">
                             {{ $item->judul }}
                         </h3>
-                        <div class="flex justify-between mt-1 text-gray-400 text-sm">
-                            <p>{{ $item->date }}</p>
-                            <p class="font-bold hover:text-blue-600 duration-300">
-                                {{ $item->articles->user->name }}
-                            </p>
-                        </div>
                     </div>
                 </a>
                 @endforeach
@@ -74,10 +68,6 @@
                                         {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
                                     </p>
                                 </div>
-                                <div class="flex items-center gap-2 text-xs text-gray-400 mt-3">
-                                    <span class="hover:text-blue-600 font-bold">{{ $item->articles->user->name }}</span>
-                                    <span>{{ $item->date }}</span>
-                                </div>
                             </div>
                         </a>
                         @endforeach
@@ -115,14 +105,6 @@
                                     <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300 text-sm">
                                         {{ $item->judul }}
                                     </p>
-                                    <div class="flex items-center justify-between text-xs text-gray-200">
-                                        <span class="truncate hover:text-blue-600 duration-300">
-                                            {{ $item->articles->user->name }}
-                                        </span>
-                                        <span class="whitespace-nowrap">
-                                            {{ $item->date }}
-                                        </span>
-                                    </div>
                                 </div>
                             </a>
                             @endforeach

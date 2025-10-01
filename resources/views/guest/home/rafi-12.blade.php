@@ -45,9 +45,6 @@
                                 <p class="text-sm mt-2 line-clamp-2">
                                     {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                                 </p>
-                                <p class="text-xs mt-2 font-light italic">
-                                    {{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}
-                                </p>
                             </div>
                         </div>
                         @endforeach
@@ -84,11 +81,6 @@
                                             {{ $item->judul }}
                                         </h3>
                                     </a>
-                                    <div class="text-xs text-gray-500 mt-2 flex items-center gap-3">
-                                        <span>{{ $item->date }}</span>
-                                        <span>|</span>
-                                        <span>{{ $item->articles->user->name ?? 'Admin' }}</span>
-                                    </div>
                                     <p class="mt-3 text-sm text-gray-600">
                                         {!! nl2br(Str::limit(strip_tags($item->article), 150)) !!}
                                     </p>
@@ -107,11 +99,6 @@
                                             {{ $item->judul }}
                                         </h3>
                                     </a>
-                                    <div class="text-xs text-gray-500 mt-2 flex items-center gap-3">
-                                        <span>{{ $item->date }}</span>
-                                        <span>|</span>
-                                        <span>{{ $item->articles->user->name ?? 'Admin' }}</span>
-                                    </div>
                                     <p class="mt-3 text-sm text-gray-600">
                                         {!! nl2br(Str::limit(strip_tags($item->article), 150)) !!}
                                     </p>
@@ -160,12 +147,9 @@
                                         {{ $item->judul }}
                                     </h4>
                                 </a>
-                                <p class="mt-3 text-sm text-gray-600 line-clamp-1">
+                                <p class="text-sm text-gray-600 line-clamp-1">
                                     {!! nl2br(Str::limit(strip_tags($item->article), 90)) !!}
                                 </p>
-                                <div class="text-xs text-gray-500">
-                                    {{ $item->date }} | {{ $item->articles->user->name}}
-                                </div>
                             </div>
                         </div>
                         @endforeach
@@ -183,12 +167,12 @@
                                     <i class="fab fa-tiktok"></i>
                                 </a>
 
-                                <a href="https://wa.me/+6285798765798" target="_blank"
+                                <a href="https://wa.me/+6285173315798" target="_blank"
                                     class="w-12 h-12 flex items-center justify-center rounded bg-green-500 text-white text-3xl">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
 
-                                <a href="tel:+6285798765798" target="_blank"
+                                <a href="tel:+6285173315798" target="_blank"
                                     class="w-12 h-12 flex items-center justify-center rounded bg-green-400 text-white text-2xl">
                                     <i class="fa-solid fa-phone"></i>
                                 </a>
@@ -218,17 +202,13 @@
                         </a>
                         <div class="p-5 flex flex-col flex-grow">
                             <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                <h3 class="text-lg font-semibold text-gray-800 group-hover:text-main line-clamp-2">
+                                <h3 class="text-lg font-semibold text-gray-800 hover:text-main line-clamp-2">
                                     {{ $item->judul }}
                                 </h3>
                             </a>
                             <p class="text-sm text-gray-600 mt-2 line-clamp-3 flex-grow">
                                 {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                             </p>
-                            <div class="mt-4 text-xs text-gray-500 flex items-center justify-between">
-                                <span class="italic">{{ $item->articles->user->name ?? 'Admin' }}</span>
-                                <span>{{ $item->date }}</span>
-                            </div>
                         </div>
                     </div>
                     @endforeach

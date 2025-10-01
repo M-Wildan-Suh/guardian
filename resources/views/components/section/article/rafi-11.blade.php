@@ -33,7 +33,7 @@
             {!! Str::limit(strip_tags($item->article), 70) !!}
         </p>
 
-        <div class="flex items-center justify-between text-sm text-gray-500 mt-3">
+        <!-- <div class="flex items-center justify-between text-sm text-gray-500 mt-3">
             <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
                class="flex items-center gap-1 font-medium hover:text-main">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
@@ -51,7 +51,7 @@
                 </svg>
                 {{ $item->date }}
             </span>
-        </div>
+        </div> -->
     </div>
 </div>
 

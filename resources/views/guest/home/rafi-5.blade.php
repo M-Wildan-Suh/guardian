@@ -36,12 +36,6 @@
               class="text-white hover:text-blue-500 text-lg font-bold line-clamp-2">
               {{ Str::limit($item->judul, 80) }}
             </a>
-            <div class="text-gray-200 hover:text-blue-500 text-xs mt-1">
-              <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                class="font-semibold">
-                {{ $item->articles->user->name }}
-              </a>, {{ $item->date }}
-            </div>
           </div>
         </div>
         @endforeach
@@ -83,10 +77,6 @@
                   {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
                 </p>
               </div>
-              <div class="flex items-center gap-3 text-xs text-gray-500 mt-4">
-                <span class="hover:text-blue-600 font-semibold">{{ $item->articles->user->name }}</span>
-                <span>{{ $item->date }}</span>
-              </div>
             </div>
           </a>
         </div>
@@ -118,10 +108,6 @@
                 {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
               </p>
             </div>
-            <div class="flex items-center gap-2 text-xs text-gray-400 mt-3">
-              <span class="hover:text-blue-600 font-bold">{{ $item->articles->user->name }}</span>
-              <span>{{ $item->date }}</span>
-            </div>
           </div>
         </a>
         @endforeach
@@ -148,16 +134,16 @@
             <span>www.webz.biz</span>
           </a>
 
-          <a href="https://wa.me/+6285798765798" target="_blank"
+          <a href="https://wa.me/+6285173315798" target="_blank"
             class="flex items-center gap-3 bg-green-500 text-white font-semibold text-sm px-4 py-2 rounded">
             <i class="fa-brands fa-whatsapp"></i>
-            <span>+62 857 9876 5798</span>
+            <span>+62 851-7331-5798</span>
           </a>
 
-          <a href="tel:+6285798765798" target="_blank"
+          <a href="tel:+6285173315798" target="_blank"
             class="flex items-center gap-3 bg-green-400 text-white font-semibold text-sm px-4 py-2 rounded">
             <i class="fa-solid fa-phone"></i>
-            <span>+62 857 98765 798</span>
+            <span>+62 851-7331-5798</span>
           </a>
         </div>
 

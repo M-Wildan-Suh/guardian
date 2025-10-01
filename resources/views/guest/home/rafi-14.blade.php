@@ -17,8 +17,8 @@
                         class="relative group rounded-xl overflow-hidden h-64 cursor-pointer">
 
                         <img src="{{ $item->banner 
-                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                            ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                            : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
                             alt="{{ $item->judul }}"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 
@@ -28,14 +28,6 @@
                             <p class="text-white font-bold text-sm line-clamp-2 mb-2 group-hover:text-blue-200 transition-colors">
                                 {{ $item->judul }}
                             </p>
-                            <div class="flex items-center justify-between text-xs text-white/80">
-                                <span class="truncate max-w-[50%]">
-                                    {{ $item->articles->user->name }}
-                                </span>
-                                <span class="whitespace-nowrap">
-                                    {{ $item->date }}
-                                </span>
-                            </div>
                         </div>
 
                     </a>
@@ -73,11 +65,6 @@
                             </p>
 
                             <div class="flex items-center justify-between border-t border-gray-100 pt-4">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-sm font-medium text-gray-900">{{ $item->articles->user->name }}</span>
-                                    <span class="text-sm text-gray-500">•</span>
-                                    <span class="text-sm text-gray-500">{{ $item->date }}</span>
-                                </div>
 
                                 <a href="{{ route('detail', ['slug' => $item->slug]) }}"
                                     class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
@@ -119,11 +106,6 @@
                                     {{ $item->judul }}
                                 </p>
 
-                                <div class="mt-2">
-                                    <span class="inline-block px-2 py-1 text-xs text-gray-500 bg-white rounded-full border border-gray-200">
-                                        {{ $item->category->name ?? 'Artikel' }}
-                                    </span>
-                                </div>
                             </div>
 
                             <div class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">

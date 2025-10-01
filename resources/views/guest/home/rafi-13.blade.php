@@ -17,34 +17,39 @@
                     </div>
 
                     {{-- Article --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
                         @foreach (array_slice($trend, 0, 4) as $item)
-                        <div class="bg-white rounded-2xl hover:shadow-xl transition-all overflow-hidden relative">
-                            <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                <img src="{{ $item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                        <div class="flex gap-4 items-start">
+                            {{-- Thumbnail --}}
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="flex-shrink-0">
+                                <img src="{{ $item->banner 
+                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
                                     alt="{{ $item->judul }}"
-                                    class="w-full h-56 object-cover rounded-t-2xl" />
+                                    class="w-32 h-24 md:w-48 md:h-32 object-cover rounded-lg" />
                             </a>
-                            <div class="p-5 flex flex-col justify-between h-[220px]">
+
+                            {{-- Konten --}}
+                            <div class="flex flex-col justify-between flex-1">
                                 <a href="{{ route('detail', ['slug' => $item->slug]) }}">
-                                    <h3 class="font-semibold text-xl text-black hover:text-main line-clamp-2">
+                                    <h3 class="font-semibold text-base md:text-lg text-black hover:text-main line-clamp-2">
                                         {{ $item->judul }}
                                     </h3>
                                 </a>
-                                <p class="text-sm text-gray-600 mt-2 line-clamp-2">
+
+                                <p class="text-sm text-gray-600 mt-1 line-clamp-2 hidden md:block">
                                     {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
                                 </p>
-                                <p class="text-xs text-gray-400 mt-4 italic">{{ $item->articles->user->name }}, {{ $item->date }}</p>
                             </div>
                         </div>
                         @endforeach
                     </div>
 
                     <div class="text-center mt-14">
-                    <a href="{{ route('article') }}" class="inline-block px-7 py-3 bg-main text-white rounded-full font-semibold hover:opacity-90 transition">
-                        Lihat Semua
-                    </a>
-                </div>
+                        <a href="{{ route('article') }}" class="inline-block px-7 py-3 bg-main text-white rounded-full font-semibold hover:opacity-90 transition">
+                            Lihat Semua
+                        </a>
+                    </div>
                 </div>
 
                 {{-- Popular --}}
@@ -72,78 +77,79 @@
 
             </div>
         </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const toggleBtn = document.getElementById('popularToggle');
-                        const closeBtn = document.getElementById('closePopular');
-                        const popularPanel = document.getElementById('popularPanel');
 
-                        // Check if elements exist
-                        if (!toggleBtn || !closeBtn || !popularPanel) {
-                            console.error("One or more elements not found!");
-                            return;
-                        }
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggleBtn = document.getElementById('popularToggle');
+                const closeBtn = document.getElementById('closePopular');
+                const popularPanel = document.getElementById('popularPanel');
 
-                        // Toggle panel visibility
-                        function togglePanel() {
-                            popularPanel.classList.toggle('hidden');
-                            popularPanel.classList.toggle('translate-x-full');
-                            popularPanel.classList.toggle('fixed');
-                            popularPanel.classList.toggle('right-0');
-                            popularPanel.classList.toggle('top-0');
-                            popularPanel.classList.toggle('h-screen');
-                            popularPanel.classList.toggle('w-72');
-                            popularPanel.classList.toggle('z-20');
-                            popularPanel.classList.toggle('overflow-y-auto');
-                        }
+                // Check if elements exist
+                if (!toggleBtn || !closeBtn || !popularPanel) {
+                    console.error("One or more elements not found!");
+                    return;
+                }
 
-                        // Toggle panel on button click
-                        toggleBtn.addEventListener('click', function(e) {
-                            e.stopPropagation();
+                // Toggle panel visibility
+                function togglePanel() {
+                    popularPanel.classList.toggle('hidden');
+                    popularPanel.classList.toggle('translate-x-full');
+                    popularPanel.classList.toggle('fixed');
+                    popularPanel.classList.toggle('right-0');
+                    popularPanel.classList.toggle('top-0');
+                    popularPanel.classList.toggle('h-screen');
+                    popularPanel.classList.toggle('w-72');
+                    popularPanel.classList.toggle('z-20');
+                    popularPanel.classList.toggle('overflow-y-auto');
+                }
+
+                // Toggle panel on button click
+                toggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    togglePanel();
+                });
+
+                // Close panel on close button click
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    togglePanel();
+                });
+
+                // Close panel when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!popularPanel.contains(e.target) && e.target !== toggleBtn) {
+                        if (!popularPanel.classList.contains('hidden')) {
                             togglePanel();
-                        });
-
-                        // Close panel on close button click
-                        closeBtn.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            togglePanel();
-                        });
-
-                        // Close panel when clicking outside
-                        document.addEventListener('click', function(e) {
-                            if (!popularPanel.contains(e.target) && e.target !== toggleBtn) {
-                                if (!popularPanel.classList.contains('hidden')) {
-                                    togglePanel();
-                                }
-                            }
-                        });
-
-                        // Prevent panel click from closing
-                        popularPanel.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                        });
-                    });
-                </script>
-
-                <style>
-                    /* Smooth transitions */
-                    #popularPanel {
-                        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-                    }
-
-                    /* Desktop styles */
-                    @media (min-width: 768px) {
-                        #popularToggle {
-                            display: none !important;
-                        }
-
-                        #popularPanel {
-                            transform: none !important;
-                            position: static !important;
-                            height: auto !important;
-                            width: auto !important;
                         }
                     }
-                </style>
+                });
+
+                // Prevent panel click from closing
+                popularPanel.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        </script>
+
+        <style>
+            /* Smooth transitions */
+            #popularPanel {
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            }
+
+            /* Desktop styles */
+            @media (min-width: 768px) {
+                #popularToggle {
+                    display: none !important;
+                }
+
+                #popularPanel {
+                    transform: none !important;
+                    position: static !important;
+                    height: auto !important;
+                    width: auto !important;
+                }
+            }
+        </style>
     </div>
 </x-layout.guest>

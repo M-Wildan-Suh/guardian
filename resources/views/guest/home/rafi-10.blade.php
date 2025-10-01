@@ -36,7 +36,6 @@
                             <p class="text-sm text-gray-600 mt-2 line-clamp-3">
                                 {!! nl2br(Str::limit(strip_tags($item->article), 90)) !!}
                             </p>
-                            <p class="text-xs text-gray-500 mt-4">{{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}</p>
                         </div>
                     </div>
                     @endforeach

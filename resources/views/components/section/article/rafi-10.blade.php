@@ -32,8 +32,7 @@
             {!! Str::limit(strip_tags($item->article), 50) !!}
         </p>
 
-        {{-- Footer --}}
-        <div class="flex items-center justify-between text-sm text-gray-500 article-meta">
+        <!-- <div class="flex items-center justify-between text-sm text-gray-500 article-meta">
             <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
                 class="font-medium hover:text-blue-600 flex items-center gap-1 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +48,7 @@
                 </svg>
                 {{ $item->date }}
             </span>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -64,9 +63,5 @@
 
     .shadow-article-lg {
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    }
-
-    .article-badge {
-        @apply inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-gray-800 rounded-full shadow-sm hover:bg-white transition;
     }
 </style>

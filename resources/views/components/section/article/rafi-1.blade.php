@@ -21,7 +21,7 @@
         <a href="{{ route('detail', ['slug' => $item->slug]) }}" aria-label="{{ $item->judul }}">
             <p class=" line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
         </a>
-        <div class=" grid text-xs sm:text-sm sm:grid-cols-2 gap-2">
+        <!-- <div class=" grid text-xs sm:text-sm sm:grid-cols-2 gap-2">
             <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
                 aria-label="{{ $item->judul }}">
                 <p class="font-bold text-neutral-600 hover:text-blue-600 duration-300">
@@ -29,7 +29,7 @@
             </a>
 
             <p class=" text-right text-neutral-600">{{ $item->date }}</p>
-        </div>
+        </div> -->
     </div>
 </div>
 

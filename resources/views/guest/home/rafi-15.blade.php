@@ -40,12 +40,6 @@
                                     <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-2">
                                         {{ $item->judul }}
                                     </h3>
-                                    <div class="flex justify-between mt-1 text-gray-400 text-sm">
-                                        <p>{{ $item->date }}</p>
-                                        <p class="font-bold hover:text-blue-600 duration-300">
-                                            {{ $item->articles->user->name }}
-                                        </p>
-                                    </div>
                                 </div>
                             </a>
                             @endforeach
@@ -66,10 +60,6 @@
                         <div class="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
                             <p class="text-white font-bold text-lg hover:text-blue-500 line-clamp-1">{{ $item->judul }}</p>
                             <p class="text-sm text-white line-clamp-2 mt-1">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-200 mt-3">
-                                <span class="font-bold hover:text-blue-500">{{ $item->articles->user->name }}</span>
-                                <span>{{ $item->date }}</span>
-                            </div>
                         </div>
                     </a>
                     @endforeach
@@ -102,14 +92,6 @@
                                             {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                                         </p>
 
-                                        <div class="flex items-center justify-between text-xs text-gray-500 mt-2">
-                                            <span class="truncate hover:text-blue-600 duration-300">
-                                                {{ $item->articles->user->name }}
-                                            </span>
-                                            <span class="whitespace-nowrap">
-                                                {{ $item->date }}
-                                            </span>
-                                        </div>
                                     </a>
                                     @endforeach
                                 </div>

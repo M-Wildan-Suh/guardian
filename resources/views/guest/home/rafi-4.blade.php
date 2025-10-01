@@ -91,10 +91,6 @@
                 {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
               </p>
             </div>
-            <div class="flex items-center gap-2 text-xs text-gray-400 mt-3">
-              <span class="hover:text-blue-600 font-bold">{{ $item->articles->user->name }}</span>
-              <span>{{ $item->date }}</span>
-            </div>
           </div>
         </a>
         @endforeach

@@ -27,11 +27,6 @@
                                 </div>
                                 <h2 class="text-xl sm:text-3xl font-bold line-clamp-2">{{ $item->judul }}</h2>
                                 <p class="mt-2 text-sm sm:text-base line-clamp-2">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
-                                <span class="mt-3 text-xs">
-                                    <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold">
-                                        {{ $item->articles->user->name }}
-                                    </a>, {{ $item->date }}
-                                </span>
                             </div>
                         </div>
                     @endforeach
@@ -69,7 +64,6 @@
                                 <div class="absolute bottom-0 p-5 text-white">
                                     <h3 class="text-2xl font-bold line-clamp-2">{{ $item->judul }}</h3>
                                     <p class="mt-1 text-sm line-clamp-2">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
-                                    <p class="mt-2 text-xs italic">{{ $item->articles->user->name ?? 'Admin' }}, {{ $item->date }}</p>
                                 </div>
                             </a>
                         @endforeach
@@ -102,10 +96,6 @@
                                         <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300 text-sm">
                                             {{ $item->judul }}
                                         </p>
-                                        <div class="flex items-center justify-between text-xs text-gray-200">
-                                            <span class="truncate hover:text-blue-600 duration-300">{{ $item->articles->user->name }}</span>
-                                            <span class="whitespace-nowrap">{{ $item->date }}</span>
-                                        </div>
                                     </div>
                                 </a>
                             @endforeach

@@ -21,14 +21,6 @@
 
                         <div class="absolute bottom-4 right-4 text-white flex flex-col space-y-1 max-w-[70%] text-right">
                             <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
-                            <div class="flex items-center justify-between text-xs text-gray-200">
-                                <span class="truncate hover:text-blue-600 duration-300">
-                                    {{ $item->articles->user->name }}
-                                </span>
-                                <span class="whitespace-nowrap">
-                                    {{ $item->date }}
-                                </span>
-                            </div>
 
                         </div>
                     </a>
@@ -48,19 +40,12 @@
 
                         <div class="p-4 flex flex-col flex-grow">
                             <p class=" line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
-                            <div class="flex justify-between mt-1">
-                                <p class=" text-right text-gray-400">{{ $item->date }}</p>
-                                <p class="font-bold text-gray-400 hover:text-blue-600 duration-300">
-                                    {{ $item->articles->user->name }}
-                                </p>
-                            </div>
                         </div>
                     </a>
                     @endforeach
                 </div>
 
                 {{-- Article --}}
-                {{-- Title --}}
                 <div class=" w-full flex items-center gap-2 sm:gap-4">
                     <div class=" w-1 sm:w-1.5 h-7 sm:h-10 bg-second rounded-full"></div>
                     <p class=" text-xl sm:text-3xl font-bold text-center">Artikel Terbaru</p>
@@ -78,10 +63,6 @@
 
                         <div class="p-5 flex flex-col flex-grow">
                             <p class=" line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
-                            <p class=" text-right text-gray-400">{{ $item->date }}</p>
-                            <p class="font-bold text-gray-400 hover:text-blue-600 duration-300">
-                                {{ $item->articles->user->name }}
-                            </p>
                         </div>
                     </a>
                     @endforeach

@@ -21,14 +21,6 @@
 
                         <div class="absolute bottom-4 right-4 text-white flex flex-col space-y-1 max-w-[70%] text-right">
                             <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300">{{ $item->judul }}</p>
-                            <div class="flex items-center justify-between text-xs text-gray-200">
-                                <span class="truncate hover:text-blue-600 duration-300">
-                                    {{ $item->articles->user->name }}
-                                </span>
-                                <span class="whitespace-nowrap">
-                                    {{ $item->date }}
-                                </span>
-                            </div>
 
                         </div>
                     </a>
@@ -52,12 +44,6 @@
                             <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300">
                                 {{ $item->judul }}
                             </p>
-                            <div class="flex justify-between mt-1">
-                                <p class="text-right text-gray-400">{{ $item->date }}</p>
-                                <p class="font-bold text-gray-400 hover:text-blue-600 duration-300">
-                                    {{ $item->articles->user->name }}
-                                </p>
-                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -76,8 +62,8 @@
                         {{-- Image --}}
                         <div class="relative">
                             <img src="{{ $item->banner 
-                        ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-                        : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
                                 alt="{{ $item->judul }}"
                                 class="w-full h-56 object-cover" />
                             <span class="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
@@ -89,17 +75,6 @@
                         <div class="p-5 flex flex-col flex-grow">
                             <p class="line-clamp-2 font-bold text-gray-800 hover:text-blue-600 duration-300">{{ $item->judul }}</p>
                             <p class="text-sm text-gray-500 mt-2 line-clamp-2">{!! Str::limit(strip_tags($item->article), 80) !!}</p>
-
-                            {{-- Footer --}}
-                            <div class="mt-auto flex items-center gap-3 pt-4">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-                                    {{ substr($item->articles->user->name, 0, 1) }}
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold">{{ $item->articles->user->name }}</p>
-                                    <p class="text-xs text-gray-400">{{ $item->date }}</p>
-                                </div>
-                            </div>
                         </div>
                     </a>
                     @endforeach

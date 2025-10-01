@@ -1,4 +1,4 @@
-<div class="w-full flex justify-center bg-gradient-to-br from-slate-50 to-blue-50 py-8">
+<div class="w-full flex justify-center bg-gradient-to-br from-slate-50 to-blue-50 py-6">
     <div class="w-full max-w-7xl px-4">
         <div class="swiper relative w-full h-[60vh] sm:h-[80vh] lg:h-[85vh] rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 group">
             <div class="swiper-wrapper">
@@ -9,72 +9,59 @@
                         <img src="{{$item->banner ? 'https://bizlink.sites.id/storage/images/article/banner/'. $item->banner : 'https://bizlink.sites.id/assets/images/placeholder.webp'}}"
                             class="w-full h-full object-cover opacity-85" alt="{{$item->judul}}">
                     </div>
-                    
+
                     <!-- Advanced Gradient Overlays -->
-                    <div class="absolute inset-0 bg-black/40"></div>
-                    <div class="absolute inset-0 bg-black/40 to-transparent"></div>
-                    <div class="absolute inset-0 bg-black/40"></div>
-                    
+                    <div class="absolute inset-0 bg-black/30"></div>
+                    <div class="absolute inset-0 bg-black/30 to-transparent"></div>
+                    <div class="absolute inset-0 bg-black/30"></div>
+
                     <!-- Content Container -->
                     <div class="relative w-full h-full flex items-end z-20">
                         <div class="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12 lg:py-16 text-white">
-                            
-                            <!-- Animated Content Wrapper -->
-                            <div class="space-y-6 sm:space-y-8 transform transition-all duration-1000 translate-y-8 opacity-0 swiper-slide-active:translate-y-0 swiper-slide-active:opacity-100">
-                                
-                                <!-- Category Tags with Modern Design -->
-                                <div class="flex flex-wrap gap-3 animate-fade-in-up">
+
+                            <div
+                                class="space-y-3 sm:space-y-4 transform transition-all duration-1000 translate-y-8 opacity-0 swiper-slide-active:translate-y-0 swiper-slide-active:opacity-100">
+
+                                {{-- Category --}}
+                                <div class="flex flex-wrap gap-2 animate-fade-in-up">
                                     @foreach ($item->articles->articlecategory as $category)
-                                    <a href="{{route('category', ['category' => $category->slug])}}" 
-                                       class="group/tag relative overflow-hidden">
-                                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transform scale-0 group-hover/tag:scale-100 transition-transform duration-300"></div>
-                                        <div class="relative px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 text-sm font-bold rounded-full shadow-lg hover:text-white transition-colors duration-300 border border-white/20">
-                                            {{$category->category}}
+                                    <a href="{{ route('category', ['category' => $category->slug]) }}" class="group/tag relative overflow-hidden">
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transform scale-0 group-hover/tag:scale-100 transition-transform duration-300">
+                                        </div>
+                                        <div
+                                            class="relative px-3 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-sm font-bold rounded-full shadow-lg hover:text-blue-400 transition-colors duration-300 border border-white/20">
+                                            {{ $category->category }}
                                         </div>
                                     </a>
                                     @endforeach
                                 </div>
 
-                                <!-- Title with Stunning Typography -->
-                                <a href="{{route('detail', ['slug' => $item->slug])}}" class="block group/title">
-                                    <h1 class="text-3xl sm:text-5xl lg:text-7xl xl:text-8xl font-black leading-[0.9] max-w-5xl">
-                                        <span class="bg-black/50 transition-all duration-700 drop-shadow-2xl line-clamp-3">
-                                            {{$item->judul}}
+                                {{-- Judul --}}
+                                <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="block group/title">
+                                    <h1 class="text-3xl sm:text-5xl lg:text-7xl xl:text-8xl font-black leading-tight max-w-5xl">
+                                        <span class="transition-all duration-700 drop-shadow-2xl line-clamp-3">
+                                            {{ $item->judul }}
                                         </span>
                                     </h1>
                                 </a>
 
-                                <!-- Description with Enhanced Styling -->
+                                {{-- Deskripsi --}}
                                 <div class="max-w-3xl">
-                                    <p class="text-lg sm:text-xl lg:text-2xl font-light text-gray-200 leading-relaxed line-clamp-2 sm:line-clamp-3 drop-shadow-lg">
+                                    <p
+                                        class="text-lg sm:text-xl lg:text-2xl font-light text-gray-200 leading-snug line-clamp-2 sm:line-clamp-3 drop-shadow-lg mb-6">
                                         {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
                                     </p>
                                 </div>
 
-                                <!-- Author Section with Modern Card Design -->
-                                <div class="flex items-center space-x-4 pt-6 border-t border-white/20">
-                                    <div class="flex items-center space-x-4">
-
-                                        <!-- Author Info -->
-                                        <div class="space-y-1">
-                                            <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" 
-                                               class="block text-xl sm:text-2xl font-bold text-white hover:text-cyan-300 transition-colors duration-300 drop-shadow-md">
-                                                {{$item->articles->user->name}}
-                                            </a>
-                                            <p class="text-sm sm:text-base text-gray-300 font-medium">
-                                                {{$item->date}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
 
-            <!-- Enhanced Navigation Arrows -->
             <div class="absolute top-1/2 left-4 sm:left-8 transform -translate-y-1/2 z-30">
                 <button class="swiper-button-prev group/nav w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-2xl">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white transform group-hover/nav:-translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +69,7 @@
                     </svg>
                 </button>
             </div>
-            
+
             <div class="absolute top-1/2 right-4 sm:right-8 transform -translate-y-1/2 z-30">
                 <button class="swiper-button-next group/nav w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-2xl">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white transform group-hover/nav:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,27 +78,18 @@
                 </button>
             </div>
 
-            <!-- Premium Pagination -->
             <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30">
                 <div class="pagination flex items-center space-x-3 px-4 py-2 bg-black/20 backdrop-blur-md rounded-full border border-white/20"></div>
             </div>
 
-            <!-- Decorative Elements -->
             <div class="absolute top-8 left-8 w-20 h-20 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 rounded-full blur-xl"></div>
             <div class="absolute bottom-8 right-8 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-2xl"></div>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="mt-6 relative">
-            <div class="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="swiper-progress h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-300 ease-out" style="width: 33.33%"></div>
-            </div>
-        </div>
     </div>
 </div>
 
 <style>
-    /* Enhanced Swiper Pagination */
     .swiper-pagination-bullet {
         width: 12px;
         height: 12px;
@@ -150,11 +128,19 @@
     }
 
     @keyframes pulse-glow {
-        0%, 100% { transform: scale(1); opacity: 0.3; }
-        50% { transform: scale(1.2); opacity: 0.1; }
+
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 0.3;
+        }
+
+        50% {
+            transform: scale(1.2);
+            opacity: 0.1;
+        }
     }
 
-    /* Custom button reset for Swiper */
     .swiper-button-prev,
     .swiper-button-next {
         width: auto !important;
@@ -167,7 +153,6 @@
         display: none;
     }
 
-    /* Slide content animations */
     .swiper-slide-active .swiper-slide-active\:translate-y-0 {
         transform: translateY(0) !important;
         transition-delay: 0.3s;
@@ -178,12 +163,12 @@
         transition-delay: 0.3s;
     }
 
-    /* Custom animations */
     @keyframes fade-in-up {
         from {
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -210,6 +195,7 @@
 
     /* Responsive font scaling */
     @media (max-width: 640px) {
+
         .swiper-slide-active .swiper-slide-active\:translate-y-0,
         .swiper-slide-active .swiper-slide-active\:opacity-100 {
             transition-delay: 0.1s;
@@ -361,7 +347,7 @@
         document.querySelector('.swiper').addEventListener('touchend', (e) => {
             const touchEndY = e.changedTouches[0].clientY;
             const diff = touchStartY - touchEndY;
-            
+
             if (Math.abs(diff) > 50) {
                 if (diff > 0) {
                     swiper.slideNext();

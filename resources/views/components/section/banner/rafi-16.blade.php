@@ -31,15 +31,6 @@
                                 {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                             </p>
 
-                            <div class="flex items-center justify-between pt-2 sm:pt-4">
-                                <div class="flex items-center space-x-2 sm:space-x-3">
-                                    <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}"
-                                        class="text-xs sm:text-sm font-semibold text-white hover:text-main transition-colors">
-                                        {{$item->articles->user->name}}
-                                    </a>
-                                    <span class="text-xs sm:text-sm text-white">{{$item->date}}</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

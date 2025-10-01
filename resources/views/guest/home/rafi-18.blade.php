@@ -28,14 +28,6 @@
                         <p class="line-clamp-2 font-bold hover:text-blue-600 duration-300 text-sm">
                             {{ $item->judul }}
                         </p>
-                        <div class="flex items-center justify-between text-xs text-gray-200">
-                            <span class="truncate hover:text-blue-600 duration-300">
-                                {{ $item->articles->user->name }}
-                            </span>
-                            <span class="whitespace-nowrap">
-                                {{ $item->date }}
-                            </span>
-                        </div>
                     </div>
                 </a>
                 @endforeach
@@ -70,10 +62,6 @@
                             <p class="mt-2 text-sm sm:text-base text-gray-200 line-clamp-3">
                                 {!! nl2br(Str::limit(strip_tags($trend[0]->article), 180)) !!}
                             </p>
-                            <div class="flex items-center gap-3 text-xs mt-3 text-gray-300">
-                                <span class="font-semibold">{{ $trend[0]->articles->user->name }}</span>
-                                <span>{{ $trend[0]->date }}</span>
-                            </div>
                         </div>
                     </a>
                     @endif
@@ -106,10 +94,6 @@
                                         <p class="mt-1 text-sm text-gray-200 line-clamp-2">
                                             {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
                                         </p>
-                                        <div class="flex items-center gap-2 text-xs text-gray-300 mt-2">
-                                            <span class="font-semibold">{{ $item->articles->user->name }}</span>
-                                            <span>{{ $item->date }}</span>
-                                        </div>
                                     </div>
                                 </a>
                             </div>
@@ -139,10 +123,6 @@
                                         <p class="mt-1 text-sm text-gray-200 line-clamp-2">
                                             {!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}
                                         </p>
-                                        <div class="flex items-center gap-2 text-xs text-gray-300 mt-2">
-                                            <span class="font-semibold">{{ $item->articles->user->name }}</span>
-                                            <span>{{ $item->date }}</span>
-                                        </div>
                                     </div>
                                 </a>
                             </div>

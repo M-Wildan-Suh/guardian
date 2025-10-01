@@ -11,7 +11,6 @@
                             class="w-full h-full object-cover brightness-[0.6]" />
                     </a>
 
-                    {{-- Judul --}}
                     <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-white">
                             <div class="flex flex-wrap gap-2 justify-center mb-4">
                                 @foreach ($item->articles->articlecategory as $category)
@@ -31,11 +30,6 @@
                                 {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
                             </p>
 
-                            <p class="text-xs sm:text-sm font-light mt-4 text-center italic">
-                                <a href="{{ route('author', ['username' => $item->articles->user->slug]) }}" class="font-semibold hover:text-blue-600 hover:underline">
-                                    {{ $item->articles->user->name }}
-                                </a>, {{ $item->date }}
-                            </p>
                     </div>
                 </div>
                 @endforeach
