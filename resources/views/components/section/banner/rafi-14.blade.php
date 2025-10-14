@@ -14,7 +14,7 @@
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($item->articles->articlecategory as $category)
                                     <a href="{{route('category', ['category' => $category->slug])}}">
-                                        <span class="py-0.5 px-3 bg-main text-gray-700 text-xs rounded-full">
+                                        <span class="py-0.5 px-3 bg-main text-white text-xs rounded-full">
                                             {{ $category->category }}
                                         </span>
                                     </a>

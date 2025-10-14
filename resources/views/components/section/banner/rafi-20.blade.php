@@ -17,7 +17,7 @@
 
                     <!-- Content Container -->
                     <div class="relative w-full h-full flex items-end z-20">
-                        <div class="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12 lg:py-16 text-white">
+                        <div class="w-full max-w-6xl mx-auto px-6 sm:px-8 md:px-12 py-8 sm:py-12 md:py-16 text-white">
 
                             <div
                                 class="space-y-3 sm:space-y-4 transform transition-all duration-1000 translate-y-8 opacity-0 swiper-slide-active:translate-y-0 swiper-slide-active:opacity-100">
@@ -25,21 +25,21 @@
                                 {{-- Category --}}
                                 <div class="flex flex-wrap gap-2 animate-fade-in-up">
                                     @foreach ($item->articles->articlecategory as $category)
-                                    <a href="{{ route('category', ['category' => $category->slug]) }}" class="group/tag relative overflow-hidden">
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transform scale-0 group-hover/tag:scale-100 transition-transform duration-300">
-                                        </div>
-                                        <div
-                                            class="relative px-3 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-sm font-bold rounded-full shadow-lg hover:text-blue-400 transition-colors duration-300 border border-white/20">
-                                            {{ $category->category }}
-                                        </div>
-                                    </a>
+                                        <a href="{{ route('category', ['category' => $category->slug]) }}" class="group/tag relative overflow-hidden">
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transform scale-0 group-hover/tag:scale-100 transition-transform duration-300">
+                                            </div>
+                                            <div
+                                                class="relative px-3 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs md:text-sm font-bold rounded-full shadow-lg hover:text-blue-400 transition-colors duration-300 border border-white/20">
+                                                {{ $category->category }}
+                                            </div>
+                                        </a>
                                     @endforeach
                                 </div>
 
                                 {{-- Judul --}}
                                 <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="block group/title">
-                                    <h1 class="text-3xl sm:text-5xl lg:text-7xl xl:text-8xl font-black leading-tight max-w-5xl">
+                                    <h1 class="text-xl md:text-4xl font-black leading-tight max-w-4xl">
                                         <span class="transition-all duration-700 drop-shadow-2xl line-clamp-3">
                                             {{ $item->judul }}
                                         </span>
@@ -47,9 +47,9 @@
                                 </a>
 
                                 {{-- Deskripsi --}}
-                                <div class="max-w-3xl">
+                                <div class="max-w-2xl">
                                     <p
-                                        class="text-lg sm:text-xl lg:text-2xl font-light text-gray-200 leading-snug line-clamp-2 sm:line-clamp-3 drop-shadow-lg mb-6">
+                                        class="text-sm md:text-base font-light text-gray-200 leading-snug line-clamp-2 md:line-clamp-3 drop-shadow-lg mb-6">
                                         {!! nl2br(Str::limit(strip_tags($item->article), 200)) !!}
                                     </p>
                                 </div>
@@ -57,7 +57,8 @@
                             </div>
 
                         </div>
-                    </div>
+                </div>
+
                 </div>
                 @endforeach
             </div>

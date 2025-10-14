@@ -23,8 +23,8 @@
                             {{-- Thumbnail --}}
                             <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="flex-shrink-0">
                                 <img src="{{ $item->banner 
-                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
                                     alt="{{ $item->judul }}"
                                     class="w-32 h-24 md:w-48 md:h-32 object-cover rounded-lg" />
                             </a>

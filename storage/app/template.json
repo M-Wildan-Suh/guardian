@@ -100,7 +100,7 @@
     {
         "name" : "rafi-14",
         "background" : "#f5f5f5",
-        "main" : "#476EAE",
+        "main" : "#000fff",
         "second" : "#1A2A80",
         "third" : "#37353E"
     },
@@ -145,5 +145,33 @@
         "main" : "#1F6E8C",
         "second" : "#102C57",
         "third" : "#000B58"
+    },
+    {
+        "name" : "rafi-20",
+        "background" : "#f5f5f5",
+        "main" : "#1F6E8C",
+        "second" : "#102C57",
+        "third" : "#000B58"
+    },
+    {
+        "name" : "rafi-21",
+        "background" : "#f5f5f5",
+        "main" : "#59AC77",
+        "second" : "#3A6F43",
+        "third" : "#006A67"
+    },
+    {
+        "name" : "rafi-22",
+        "background" : "#f5f5f5",
+        "main" : "#59AC77",
+        "second" : "#3A6F43",
+        "third" : "#1B3C53"
+    },
+    {
+        "name" : "rafi-23",
+        "background" : "#f5f5f5",
+        "main" : "#212121",
+        "second" : "#DD0303",
+        "third" : "#660B05"
     }
 ]
