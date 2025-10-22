@@ -1,4 +1,11 @@
-@props(['title' => null, 'template' => 'type-a', 'desc' => null, 'tags' => null, 'footer' => true, 'category' => null,])
+@props([
+    'title' => null,
+    'template' => 'type-a',
+    'desc' => null,
+    'tags' => null,
+    'footer' => true,
+    'category' => null,
+])
 <!DOCTYPE html>
 <html class=" scroll-smooth" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -46,120 +53,119 @@
     @endphp
 
     @if (isset($theme))
-    <style>
-        :root {
-            --background: {{ $theme['background'] ?? '#f5f5f5' }};
-            --main: {{ $theme['main'] ?? '#0D5EA6' }};
-            --second: {{ $theme['second'] ?? '#19282F' }};
-            --third: {{ $theme['third'] ?? '#093FB5' }};
-        }
+        <style>
+            :root {
+                --background: {{ $theme['background'] ?? '#f5f5f5' }};
+                --main: {{ $theme['main'] ?? '#0D5EA6' }};
+                --second: {{ $theme['second'] ?? '#19282F' }};
+                --third: {{ $theme['third'] ?? '#093FB5' }};
+            }
 
-        /* Backgroudn */
+            /* Backgroudn */
 
-        .bg-background {
-            background-color: var(--background) !important;
-        }
+            .bg-background {
+                background-color: var(--background) !important;
+            }
 
-        .hover\:bg-background {
-            background-color: var(--background) !important;
-        }        
-        
-        .text-background {
-            color: var(--second) !important;
-        }
+            .hover\:bg-background {
+                background-color: var(--background) !important;
+            }
 
-        .hover\:text-background:hover {
-            color: var(--second) !important;
-        }
+            .text-background {
+                color: var(--second) !important;
+            }
 
-        .border-background {
-            border-color: var(--second) !important;
-        }
+            .hover\:text-background:hover {
+                color: var(--second) !important;
+            }
 
-        .hover\:border-background:hover {
-            border-color: var(--second) !important;
-        }
+            .border-background {
+                border-color: var(--second) !important;
+            }
+
+            .hover\:border-background:hover {
+                border-color: var(--second) !important;
+            }
 
 
-        /* Main */
+            /* Main */
 
-        .bg-main {
-            background-color: var(--main) !important;
-        }
+            .bg-main {
+                background-color: var(--main) !important;
+            }
 
-        .hover\:bg-main:hover {
-            background-color: var(--main) !important;
-        }
+            .hover\:bg-main:hover {
+                background-color: var(--main) !important;
+            }
 
-        .text-main {
-            color: var(--main) !important;
-        }
+            .text-main {
+                color: var(--main) !important;
+            }
 
-        .hover\:text-main:hover {
-            color: var(--main) !important;
-        }
+            .hover\:text-main:hover {
+                color: var(--main) !important;
+            }
 
-        .border-main {
-            border-color: var(--main) !important;
-        }
+            .border-main {
+                border-color: var(--main) !important;
+            }
 
-        .hover\:border-main:hover {
-            border-color: var(--main) !important;
-        }
+            .hover\:border-main:hover {
+                border-color: var(--main) !important;
+            }
 
-        /* Second */
+            /* Second */
 
-        .bg-second {
-            background-color: var(--second) !important;
-        }
+            .bg-second {
+                background-color: var(--second) !important;
+            }
 
-        .hover\:bg-second:hover {
-            background-color: var(--second) !important;
-        }
+            .hover\:bg-second:hover {
+                background-color: var(--second) !important;
+            }
 
-        .text-second {
-            color: var(--second) !important;
-        }
+            .text-second {
+                color: var(--second) !important;
+            }
 
-        .hover\:text-second:hover {
-            color: var(--second) !important;
-        }
+            .hover\:text-second:hover {
+                color: var(--second) !important;
+            }
 
-        .border-second {
-            border-color: var(--second) !important;
-        }
+            .border-second {
+                border-color: var(--second) !important;
+            }
 
-        .hover\:border-second:hover {
-            border-color: var(--second) !important;
-        }
+            .hover\:border-second:hover {
+                border-color: var(--second) !important;
+            }
 
-        /* Third */
+            /* Third */
 
-        .bg-third {
-            background-color: var(--third) !important;
-        }
-        
-        .hover\:bg-third:hover {
-            background-color: var(--third) !important;
-        }
+            .bg-third {
+                background-color: var(--third) !important;
+            }
 
-        .text-third {
-            color: var(--third) !important;
-        }
+            .hover\:bg-third:hover {
+                background-color: var(--third) !important;
+            }
 
-        .hover\:text-third:hover {
-            color: var(--third) !important;
-        }
+            .text-third {
+                color: var(--third) !important;
+            }
 
-        .border-third {
-            border-color: var(--third) !important;
-        }
+            .hover\:text-third:hover {
+                color: var(--third) !important;
+            }
 
-        .hover\:border-third:hover {
-            border-color: var(--third) !important;
-        }
-    </style>
+            .border-third {
+                border-color: var(--third) !important;
+            }
 
+            .hover\:border-third:hover {
+                border-color: var(--third) !important;
+            }
+        </style>
     @endif
 
 </head>
@@ -179,7 +185,7 @@
             <div class="dot w-4 h-4 bg-third rounded-full animate-bounce delay-400"></div>
         </div>
     </div>
-    
+
 
     <style>
         /* Menambahkan delay pada animasi */

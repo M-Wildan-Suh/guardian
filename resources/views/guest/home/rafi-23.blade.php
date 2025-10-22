@@ -57,8 +57,8 @@
                             {{-- Gambar --}}
                             <div class="relative w-full h-28 sm:h-32 md:h-36">
                                 <img src="{{ $item->banner 
-                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
                                     alt="{{ $item->judul }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             </div>

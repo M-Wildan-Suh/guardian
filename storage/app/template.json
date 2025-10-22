@@ -170,8 +170,15 @@
     {
         "name" : "rafi-23",
         "background" : "#f5f5f5",
-        "main" : "#212121",
-        "second" : "#DD0303",
+        "main" : "#0046FF",
+        "second" : "#212121",
+        "third" : "#660B05"
+    },
+    {
+        "name" : "rafi-24",
+        "background" : "#f5f5f5",
+        "main" : "#0046FF",
+        "second" : "#212121",
         "third" : "#660B05"
     }
 ]
