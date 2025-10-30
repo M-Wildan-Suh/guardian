@@ -11,9 +11,9 @@
                     </div>
 
                     <!-- Advanced Gradient Overlays -->
-                    <div class="absolute inset-0 bg-black/30"></div>
-                    <div class="absolute inset-0 bg-black/30 to-transparent"></div>
-                    <div class="absolute inset-0 bg-black/30"></div>
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute inset-0 bg-black/20 to-transparent"></div>
+                    <div class="absolute inset-0 bg-black/20"></div>
 
                     <!-- Content Container -->
                     <div class="relative w-full h-full flex items-end z-20">
