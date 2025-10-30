@@ -135,9 +135,9 @@
     {
         "name" : "rafi-19",
         "background" : "#f5f5f5",
-        "main" : "#0A400C",
-        "second" : "#08CB00",
-        "third" : "#253900"
+        "main" : "#0046FF",
+        "second" : "#234C6A",
+        "third" : "#1B3C53"
     },
     {
         "name" : "rafi-20",
@@ -156,8 +156,8 @@
     {
         "name" : "rafi-22",
         "background" : "#f5f5f5",
-        "main" : "#59AC77",
-        "second" : "#3A6F43",
+        "main" : "#1055C9",
+        "second" : "#1A2A4F",
         "third" : "#1B3C53"
     },
     {
