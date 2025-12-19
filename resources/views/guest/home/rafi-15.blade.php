@@ -27,43 +27,46 @@
                             <a href="{{ route('article') }}"
                                 class="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors">
                                 Lihat Semua Artikel
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
                                 </svg>
                             </a>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            @foreach(array_slice($data, 0, 3) as $item)
-                            <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="group">
-                                <div class="p-3 border border-gray-200 rounded-lg transition-colors h-full">
-                                    <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-2">
-                                        {{ $item->judul }}
-                                    </h3>
-                                </div>
-                            </a>
+                            @foreach (array_slice($data, 0, 3) as $item)
+                                <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="group">
+                                    <div class="p-3 border border-gray-200 rounded-lg transition-colors h-full">
+                                        <h3 class="font-bold text-lg group-hover:text-blue-600 line-clamp-2">
+                                            {{ $item->judul }}
+                                        </h3>
+                                    </div>
+                                </a>
                             @endforeach
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach(array_slice($data, 0, 6) as $item)
-                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
-                        class="relative group overflow-hidden rounded-xl shadow-lg cursor-pointer transition-transform duration-300 hover:scale-105">
+                        @foreach (array_slice($data, 0, 6) as $item)
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                                class="relative group overflow-hidden rounded-xl shadow-lg cursor-pointer transition-transform duration-300 hover:scale-105">
 
-                        <img src="{{ $item->banner 
-                        ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner 
-                        : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
-                            alt="{{ $item->judul }}"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
+                                <img src="{{ $item->banner
+                                    ? 'https://bizlink.sites.id/storage/images/article/banner/' . $item->banner
+                                    : 'https://bizlink.sites.id/assets/images/placeholder.webp' }}"
+                                    alt="{{ $item->judul }}"
+                                    class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
 
-                        <div class="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
-                            <p class="text-white font-bold text-lg hover:text-blue-500 line-clamp-1">{{ $item->judul }}</p>
-                            <p class="text-sm text-white line-clamp-2 mt-1">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
-                        </div>
-                    </a>
-                    @endforeach
-                </div>
+                                <div class="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
+                                    <p class="text-white font-bold text-lg hover:text-blue-500 line-clamp-1">
+                                        {{ $item->judul }}</p>
+                                    <p class="text-sm text-white line-clamp-2 mt-1">{!! nl2br(Str::limit(strip_tags($item->article), 100)) !!}</p>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
 
                 {{-- Popular --}}
@@ -82,17 +85,18 @@
                                 {{-- Popular Artikel --}}
                                 <div class="flex flex-col gap-4 w-full md:max-w-md">
                                     @foreach (collect($data)->shuffle()->take(5) as $item)
-                                    <a href="{{ route('detail', ['slug' => $item->slug]) }}"
-                                        class="block border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-300">
+                                        <a href="{{ route('detail', ['slug' => $item->slug]) }}"
+                                            class="block border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-300">
 
-                                        <p class="font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 duration-300">
-                                            {{ $item->judul }}
-                                        </p>
-                                        <p class="text-sm sm:text-base line-clamp-2">
-                                            {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
-                                        </p>
+                                            <p
+                                                class="font-semibold text-gray-800 line-clamp-2 hover:text-blue-600 duration-300">
+                                                {{ $item->judul }}
+                                            </p>
+                                            <p class="text-sm sm:text-base line-clamp-2">
+                                                {!! nl2br(Str::limit(strip_tags($item->article), 120)) !!}
+                                            </p>
 
-                                    </a>
+                                        </a>
                                     @endforeach
                                 </div>
 
