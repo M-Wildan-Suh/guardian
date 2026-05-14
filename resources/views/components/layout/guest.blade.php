@@ -13,6 +13,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
     <link rel="icon"
         href="{{ optional(json_decode(\Storage::get('website.json'), true))['icon'] ? asset('/storage/images/' . json_decode(\Storage::get('website.json'), true)['icon']) : null }}"
